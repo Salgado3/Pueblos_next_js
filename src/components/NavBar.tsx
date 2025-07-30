@@ -1,6 +1,7 @@
+import { signOut } from "@/app/login/actions";
 import Link from "next/link";
 import React from "react";
-
+//TODO set logout only when logged in
 const NavBar = () => {
   return (
     <nav>
@@ -14,6 +15,14 @@ const NavBar = () => {
         <li>
           <Link href={"/profile"}>Profile</Link>
         </li>
+        <form action={signOut}>
+          <button
+            type="submit"
+            className="text-sm text-gray-500 hover:text-black"
+          >
+            Log out
+          </button>
+        </form>
       </ul>
     </nav>
   );

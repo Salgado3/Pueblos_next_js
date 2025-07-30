@@ -39,7 +39,13 @@ export async function signup(formData: FormData) {
   if (error) {
     redirect("/error");
   }
-
+  
   revalidatePath("/", "layout");
   redirect("/");
+}
+
+export async function signOut() {
+  const supabase = await createClient();
+  await supabase.auth.signOut();
+  redirect("/login"); // or wherever you want to go after logout
 }

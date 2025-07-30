@@ -1,6 +1,6 @@
 // components/CloudinaryImage.jsx
 "use client"; // if you're using App Router (Next.js 13+)
-
+import { useState } from "react";
 import { Cloudinary } from "@cloudinary/url-gen";
 import {
   AdvancedImage,
@@ -11,6 +11,7 @@ import {
 } from "@cloudinary/react";
 
 const CloudinaryImage = ({ publicId }: { publicId: string }) => {
+  const [hasError, setHasError] = useState(false);
   const cld = new Cloudinary({
     cloud: {
       cloudName: process.env.NEXT_PUBLIC_CLOUD_NAME,
@@ -19,6 +20,15 @@ const CloudinaryImage = ({ publicId }: { publicId: string }) => {
 
   const cldImg = cld.image(publicId); // e.g. "sample" or "folder/image"
 
+  if (hasError) {
+    return (
+      <img
+        src="/imageNotFound.png" // Replace with your fallback image path
+        alt="image not available"
+        style={{ maxWidth: "90%", maxHeight: "90%" }}
+      />
+    );
+  }
   return (
     <AdvancedImage
       cldImg={cldImg}
@@ -28,6 +38,7 @@ const CloudinaryImage = ({ publicId }: { publicId: string }) => {
         responsive(),
         placeholder({ mode: "blur" }),
       ]}
+      onError={() => setHasError(true)}
     />
   );
 };
