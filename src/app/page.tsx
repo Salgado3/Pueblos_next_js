@@ -1,12 +1,17 @@
+import LoginPage from "./login/page";
+import { createClient } from "@/lib/supabase/utils/server";
+import Page from "./home/page";
+
 import styles from "./page.module.css";
 
-const page = () => {
-  return (
-    <div className={styles.page}>
-      <main className={styles.main}> Hello world. Welcome to the pueblos</main>
-      <footer className={styles.footer}></footer>
-    </div>
-  );
+const page = async () => {
+  const supabase = await createClient();
+  const { data: authData, error: authError } = await supabase.auth.getUser();
+  if (authError || !authData?.user) {
+    return <LoginPage />;
+  }
+
+  return <Page />;
 };
 
 export default page;

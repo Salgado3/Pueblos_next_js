@@ -11,8 +11,23 @@
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
     "jsx": "preserve",
     "incremental": true,
+    // ======================================================================
+    // Type Safety - Advanced
+    // Additional checks for higher code quality
+    // ======================================================================
+    // "noUncheckedIndexedAccess": true,
+    // "noImplicitReturns": true,
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "noFallthroughCasesInSwitch": true,
+    // "allowUnreachableCode": false,
+    // "useUnknownInCatchVariables": true,
+    // "noImplicitOverride": true,
+
     "plugins": [
       {
         "name": "next"
@@ -22,6 +37,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "updateCoordinates.js"
+  ],
   "exclude": ["node_modules"]
 }
