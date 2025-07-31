@@ -1,0 +1,51 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: white;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.darkMode {
+  background-color: #111827; /* dark:bg-gray-900 */
+  color: white;
+}
+
+.leftLinks,
+.rightLinks {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.link {
+  text-decoration: none;
+  color: #2563eb; /* Tailwind blue-600 */
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.logoutButton {
+  background: none;
+  border: none;
+  color: #dc2626; /* Tailwind red-600 */
+  cursor: pointer;
+  font: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.logoutButton:hover {
+  text-decoration: underline;
+}

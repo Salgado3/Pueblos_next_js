@@ -1,12 +1,15 @@
-import MapClient from "./MapClient";
 import MapClientWrapper from "./MapClientWrapper";
-import fetchImages from "@/lib/supabase/fetchImages";
+import { createClient } from "@/lib/supabase/utils/server";
 
 export default async function MapPage() {
-  const { data: pueblos, error } = await fetchImages();
+  const supabase = await createClient();
+  const { data: pueblos, error } = await supabase
+    .from("pueblos_magicos")
+    .select("*")
+    .order("title", { ascending: false });
 
   if (error) {
-    return <div>Error loading pueblos: {error.message}</div>;
+    return <div>`Error loading pueblos: ${error}`</div>;
   }
   return (
     <div style={{ height: "100vh", width: "100%" }}>

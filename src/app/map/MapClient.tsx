@@ -62,7 +62,6 @@ export default function MapClient({ pueblos }: { pueblos: Pueblo[] }) {
                 <Link
                   //TODO set up dynamic links
                   href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
-                  target="_blank"
                   rel="noopener noreferrer"
                 >
                   see more
