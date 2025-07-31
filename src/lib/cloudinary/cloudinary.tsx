@@ -10,7 +10,13 @@ import {
   placeholder,
 } from "@cloudinary/react";
 
-const CloudinaryImage = ({ publicId }: { publicId: string }) => {
+const CloudinaryImage = ({
+  publicId,
+  className,
+}: {
+  publicId: string;
+  className?: string;
+}) => {
   const [hasError, setHasError] = useState(false);
   const cld = new Cloudinary({
     cloud: {
@@ -32,6 +38,7 @@ const CloudinaryImage = ({ publicId }: { publicId: string }) => {
   return (
     <AdvancedImage
       cldImg={cldImg}
+      className={className || ""}
       style={{ maxWidth: "90%", maxHeight: "90%" }}
       plugins={[
         lazyload({ threshold: 0, rootMargin: "0px" }),

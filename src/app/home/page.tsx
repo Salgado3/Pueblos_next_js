@@ -1,12 +1,16 @@
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
-import fetchImages from "@/lib/supabase/fetchImages";
 
 import styles from "./page.module.css";
 import Link from "next/link";
 import MapClient from "../map/MapClient";
+import { createClient } from "@/lib/supabase/utils/server";
 
 const page = async () => {
-  const { data, error } = await fetchImages();
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("pueblos_magicos")
+    .select("*")
+    .order("title", { ascending: false });
 
   if (error) return <div>error...</div>;
 
