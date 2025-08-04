@@ -39,7 +39,7 @@ const CloudinaryImage = ({
     <AdvancedImage
       cldImg={cldImg}
       className={className || ""}
-      style={{ maxWidth: "90%", maxHeight: "90%" }}
+      style={{ maxWidth: "100%", maxHeight: "100%" }}
       plugins={[
         lazyload({ threshold: 0, rootMargin: "0px" }),
         responsive(),

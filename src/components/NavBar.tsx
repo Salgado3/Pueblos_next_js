@@ -29,8 +29,14 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.leftLinks}>
+        <img
+          src="/Axolotl.png"
+          alt="Axolotl"
+          aria-hidden
+          className={styles.logoImg}
+        />
         <Link href="/" className={styles.logo}>
-          🗺️ PuebloMagico
+          Pueblo Magicos
         </Link>
 
         {pathname !== "/map" && (

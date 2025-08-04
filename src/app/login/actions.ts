@@ -14,6 +14,7 @@ export async function login(formData: FormData) {
     password: formData.get("password") as string,
   };
 
+
   const { error } = await supabase.auth.signInWithPassword(data);
 
   if (error) {
@@ -49,3 +50,4 @@ export async function signOut() {
   await supabase.auth.signOut();
   redirect("/login"); // or wherever you want to go after logout
 }
+

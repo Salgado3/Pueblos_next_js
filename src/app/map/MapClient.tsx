@@ -34,7 +34,7 @@ export default function MapClient({ pueblos }: { pueblos: Pueblo[] }) {
     <MapContainer
       key={"mapContainer"}
       center={[23.0, -104.0]}
-      zoom={5}
+      zoom={6}
       style={{ height: "100%", width: "100%" }}
     >
       <TileLayer
@@ -61,6 +61,7 @@ export default function MapClient({ pueblos }: { pueblos: Pueblo[] }) {
                 <h3>{item.title}</h3>
                 <Link
                   //TODO set up dynamic links
+                  style={{fontSize:'large',}}
                   href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
                   rel="noopener noreferrer"
                 >

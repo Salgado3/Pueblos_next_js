@@ -1,0 +1,25 @@
+.cardContainer {
+  display: flex;
+  width: 60vw;
+  margin: auto;
+  margin-top: 1.5rem;
+}
+
+.cardTitleContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  align-self: center;
+}
+
+.text {
+  width: 100%;
+  text-align: justify;
+}
+
+.logoImg {
+  height: 3.5rem;
+  width: 3.5rem;
+}

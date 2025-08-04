@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-
 import NavBar from "@/components/NavBar";
 import { QueryProvider } from "./query-provider";
+import type { AppProps } from "next/app";
+import { createTheme, MantineProvider } from "@mantine/core";
+
+import "./globals.css";
+import "@mantine/core/styles.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,6 +23,10 @@ export const metadata: Metadata = {
   description: "The Magical Towns of Mexico",
 };
 
+const theme = createTheme({
+  /** Put your mantine theme override here */
+});
+
 const RootLayout = ({
   children,
 }: Readonly<{
@@ -28,8 +35,10 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NavBar />
-        <QueryProvider>{children}</QueryProvider>
+        <MantineProvider theme={theme}>
+          <NavBar />
+          <QueryProvider>{children}</QueryProvider>
+        </MantineProvider>
       </body>
     </html>
   );
