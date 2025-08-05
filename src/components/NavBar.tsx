@@ -1,16 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { Title, useComputedColorScheme } from "@mantine/core";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/utils/client";
 import styles from "./navbar.module.css";
+import ColorSchemeToggle from "./ColorSchemeToggle";
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
-
+  const computedColorScheme = useComputedColorScheme("light", {
+    getInitialValueInEffect: true,
+  });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -30,21 +34,18 @@ export default function Navbar() {
     <nav className={styles.navbar}>
       <div className={styles.leftLinks}>
         <img
-          src="/Axolotl.png"
+          src={
+            computedColorScheme === "dark"
+              ? "/axolotl.png"
+              : "/axolotlSunglasses.png"
+          }
           alt="Axolotl"
           aria-hidden
           className={styles.logoImg}
         />
-        <Link href="/" className={styles.logo}>
+        <Title order={2} className={styles.logo}>
           Pueblo Magicos
-        </Link>
-
-        {pathname !== "/map" && (
-          <Link href="/map" className={styles.link}>
-            Map
-          </Link>
-        )}
-
+        </Title>
         <Link href="/about" className={styles.link}>
           About
         </Link>
@@ -69,6 +70,7 @@ export default function Navbar() {
             Login
           </Link>
         )}
+        <ColorSchemeToggle />
       </div>
     </nav>
   );

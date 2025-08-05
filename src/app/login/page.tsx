@@ -1,44 +1,32 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Button, PasswordInput, TextInput, Card } from "@mantine/core";
+import {
+  Button,
+  PasswordInput,
+  TextInput,
+  Card,
+  useComputedColorScheme,
+} from "@mantine/core";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/utils/client"; // Adjust path
 import styles from "./page.module.css";
+import { login, signup } from "./actions";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const router = useRouter();
-  const supabase = createClient();
-
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-    if (error) {
-      console.error("Login error:", error.message);
-      return;
-    }
-    router.push("/about");
-  };
-
-  const handleSignup = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const { error } = await supabase.auth.signUp({ email, password });
-    if (error) {
-      console.error("Signup error:", error.message);
-      return;
-    }
-    router.push("/about");
-  };
-
+  const computedColorScheme = useComputedColorScheme("light", {
+    getInitialValueInEffect: true,
+  });
   return (
     <div className={styles.container}>
       <img
-        src="/AxolotlPeakPlain.png"
+        src={
+          computedColorScheme === "dark"
+            ? "/AxolotlPeakPlain.png"
+            : "/AxolotlPeakSunglasses.png"
+        }
         alt="Axolotl"
         aria-hidden
         className={styles.logoImg}
@@ -52,6 +40,7 @@ export default function LoginPage() {
       >
         <form>
           <TextInput
+            id="email"
             mt="md"
             label="Email"
             placeholder="Enter email"
@@ -61,6 +50,7 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.currentTarget.value)}
           />
           <PasswordInput
+            id="password"
             label="Password"
             description="Create a password"
             placeholder="Please enter password"
@@ -69,22 +59,12 @@ export default function LoginPage() {
             value={password}
             onChange={(e) => setPassword(e.currentTarget.value)}
           />
-          <Button
-            className={styles.button}
-            variant="filled"
-            radius="lg"
-            onClick={handleLogin}
-          >
+          <button className={styles.button} formAction={login}>
             Log in
-          </Button>
-          <Button
-            className={styles.button}
-            variant="filled"
-            radius="lg"
-            onClick={handleSignup}
-          >
+          </button>
+          <button className={styles.button} formAction={signup}>
             Sign up
-          </Button>
+          </button>
         </form>
       </Card>
     </div>

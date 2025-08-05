@@ -1,9 +1,10 @@
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
-
+import { Text } from "@mantine/core";
 import styles from "./page.module.css";
 import Link from "next/link";
 import MapClient from "../map/MapClient";
 import { createClient } from "@/lib/supabase/utils/server";
+import { Card } from "@mantine/core";
 
 const page = async () => {
   const supabase = await createClient();
@@ -19,7 +20,10 @@ const page = async () => {
       <div className={styles.cardContainer} key={item.title + i}>
         <h2 className={styles.titleHeader}>{item.title}</h2>
         <div className={styles.imageContainer}>
-          <CloudinaryImage publicId={item.cloudinary_id} />
+          <CloudinaryImage
+            className={styles.cloudinaryImg}
+            publicId={item.cloudinary_id}
+          />
           <p>
             photo by{" "}
             <Link
@@ -31,7 +35,9 @@ const page = async () => {
             </Link>
           </p>
         </div>
-        <p className={styles.description}>{item.description}</p>
+        <Text lineClamp={3} className={styles.description}>
+          {item.description}
+        </Text>
         <Link
           href={item.description_url}
           target="_blank"

@@ -4,6 +4,7 @@ import NavBar from "@/components/NavBar";
 import { QueryProvider } from "./query-provider";
 import type { AppProps } from "next/app";
 import { createTheme, MantineProvider } from "@mantine/core";
+import { ChangeViewMenu } from "@/components/ChangeViewMenu";
 
 import "./globals.css";
 import "@mantine/core/styles.css";
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
 };
 
 const theme = createTheme({
-  /** Put your mantine theme override here */
+  /** Put your mantine theme override here */ defaultColorScheme: "dark",
 });
 
 const RootLayout = ({
@@ -35,8 +36,9 @@ const RootLayout = ({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <MantineProvider theme={theme}>
+        <MantineProvider defaultColorScheme="auto">
           <NavBar />
+          <ChangeViewMenu />
           <QueryProvider>{children}</QueryProvider>
         </MantineProvider>
       </body>
