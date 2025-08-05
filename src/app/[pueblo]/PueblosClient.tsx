@@ -51,30 +51,32 @@ export default function PueblosClient() {
           </Link>
         </p>
 
-        <MapContainer
-          key={"mapContainer"}
-          center={[pueblo.latitude, pueblo.longitude]}
-          zoom={12}
-          className={styles.map}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker
-            key={pueblo?.id}
-            title={pueblo.title}
-            zIndexOffset={1000}
-            position={[pueblo.latitude, pueblo.longitude]}
-            icon={
-              new L.Icon({
-                iconUrl: "/pueblosMagicos64px.png",
-                iconSize: [30, 30],
-                iconAnchor: [15, 15],
-              })
-            }
-          ></Marker>
-        </MapContainer>
+        {pueblo.lattitude && pueblo.longitude && (
+          <MapContainer
+            key={"mapContainer"}
+            center={[pueblo.latitude, pueblo.longitude]}
+            zoom={12}
+            className={styles.map}
+          >
+            <TileLayer
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+            <Marker
+              key={pueblo?.id}
+              title={pueblo.title}
+              zIndexOffset={1000}
+              position={[pueblo.latitude, pueblo.longitude]}
+              icon={
+                new L.Icon({
+                  iconUrl: "/pueblosMagicos64px.png",
+                  iconSize: [30, 30],
+                  iconAnchor: [15, 15],
+                })
+              }
+            ></Marker>
+          </MapContainer>
+        )}
         <Link
           href={`https://www.google.com/maps/place/${pueblo.title}`}
           target="_blank"
@@ -86,7 +88,10 @@ export default function PueblosClient() {
         <p>{`Airport ${pueblo.airport_id}`}</p>
       </div>
       <p className={styles.description}>{pueblo.description}</p>
+
+      <h3 className={styles.thingsToDoListTitle}>Things to Do</h3>
       <List
+        className={styles.thingsToDoList}
         spacing="xs"
         size="sm"
         center

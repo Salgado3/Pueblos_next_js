@@ -5,6 +5,7 @@ import { QueryProvider } from "./query-provider";
 import type { AppProps } from "next/app";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { ChangeViewMenu } from "@/components/ChangeViewMenu";
+import { PueblosProvider } from "./hooks/PueblosContext";
 
 import "./globals.css";
 import "@mantine/core/styles.css";
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
 };
 
 const theme = createTheme({
-  /** Put your mantine theme override here */ defaultColorScheme: "dark",
+  /** Put your mantine theme override here */
 });
 
 const RootLayout = ({
@@ -37,9 +38,13 @@ const RootLayout = ({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <MantineProvider defaultColorScheme="auto">
-          <NavBar />
-          <ChangeViewMenu />
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <PueblosProvider>
+              <NavBar />
+              <ChangeViewMenu />
+              {children}
+            </PueblosProvider>
+          </QueryProvider>
         </MantineProvider>
       </body>
     </html>

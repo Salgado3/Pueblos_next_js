@@ -3,6 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
+  flex-wrap: wrap;
 }
 
 .leftLinks,
@@ -20,6 +21,11 @@
 
 .logoImg {
   height: 2.5rem;
+  transition: opacity 0.3s ease;
+}
+
+.logoImgSunglasses {
+  height: 2.75rem;
 }
 
 .link {

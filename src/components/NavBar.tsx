@@ -16,14 +16,18 @@ export default function Navbar() {
     getInitialValueInEffect: true,
   });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
+    setHasMounted(true);
     const getUser = async () => {
       const { data } = await supabase.auth.getUser();
       setIsLoggedIn(!!data.user);
     };
     getUser();
   }, []);
+
+  if (!hasMounted) return null;
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
@@ -41,7 +45,11 @@ export default function Navbar() {
           }
           alt="Axolotl"
           aria-hidden
-          className={styles.logoImg}
+          className={
+            computedColorScheme === "dark"
+              ? styles.logoImg
+              : styles.logoImgSunglasses
+          }
         />
         <Title order={2} className={styles.logo}>
           Pueblo Magicos
