@@ -16,8 +16,8 @@ type Pueblo = {
   longitude: number;
 };
 
-export default function MapClient({ pueblos }: { pueblos: Pueblo[] }) {
-  const { filteredPueblos, isLoading } = usePueblosContext();
+export default function MapClient() {
+  const { filteredPueblos } = usePueblosContext();
   // useEffect(() => {
   //   // delete (L.Icon.Default.prototype as any)._getIconUrl;
   //   // L.Icon.Default.mergeOptions({

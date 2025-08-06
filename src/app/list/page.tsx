@@ -1,6 +1,6 @@
 import ListClientWrapper from "./ListClientWrapper";
 
-const page = async () => {
+const page = () => {
   return <ListClientWrapper />;
 };
 
