@@ -10,6 +10,8 @@ const page = () => {
         <Image
           src="/axolotlSuitcase.png"
           alt="axolotlSuitcase"
+          width={50}
+          height={50}
           aria-hidden
           className={styles.logoImg}
         />
@@ -19,6 +21,8 @@ const page = () => {
         <Image
           src="/axolotlSuitcase.png"
           alt="axolotlSuitcase"
+          width={50}
+          height={50}
           aria-hidden
           className={styles.logoImg}
         />
