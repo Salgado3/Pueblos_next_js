@@ -37,6 +37,7 @@ export default function PueblosClient() {
       <h2 className={styles.titleHeader}>{pueblo.title}</h2>
       <div className={styles.imageContainer}>
         <CloudinaryImage
+          puebloTitle={pueblo.title}
           className={styles.image}
           publicId={pueblo.cloudinary_id}
         />

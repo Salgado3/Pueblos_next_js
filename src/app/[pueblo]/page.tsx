@@ -3,7 +3,6 @@
 import PuebloClientWrapper from "./PuebloClientWrapper";
 import PueblosClient from "./PueblosClient";
 
-export default function Page({ params }: { params: { slug: string } }) {
-  console.log("jaimes params", params);
+export default function Page() {
   return <PuebloClientWrapper />;
 }
