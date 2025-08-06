@@ -1,0 +1,7 @@
+.container {
+  /* width: auto; */
+  display: flex;
+  align-items: self-end;
+  padding-bottom: 1rem;
+  flex-wrap: wrap;
+}

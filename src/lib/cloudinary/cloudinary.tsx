@@ -11,9 +11,11 @@ import {
 } from "@cloudinary/react";
 
 const CloudinaryImage = ({
+  puebloTitle,
   publicId,
   className,
 }: {
+  puebloTitle: string;
   publicId: string;
   className?: string;
 }) => {
@@ -39,7 +41,8 @@ const CloudinaryImage = ({
     <AdvancedImage
       cldImg={cldImg}
       className={className || ""}
-      style={{ maxWidth: "90%", maxHeight: "90%" }}
+      style={{ maxWidth: "100%", maxHeight: "100%" }}
+      alt={puebloTitle}
       plugins={[
         lazyload({ threshold: 0, rootMargin: "0px" }),
         responsive(),

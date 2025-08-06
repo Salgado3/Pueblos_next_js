@@ -5,6 +5,7 @@ import { createClient } from "../supabase/utils/client";
 
 export function usePueblos() {
   const supabase = createClient();
+  
   return useQuery({
     queryKey: ["pueblos"],
     queryFn: async () => {

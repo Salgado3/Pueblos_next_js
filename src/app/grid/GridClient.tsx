@@ -1,25 +1,25 @@
+"use client";
+import React from "react";
+import { Text } from "@mantine/core";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
-
-import styles from "./page.module.css";
 import Link from "next/link";
-import MapClient from "../map/MapClient";
-import { createClient } from "@/lib/supabase/utils/server";
+import { usePueblosContext } from "../hooks/PueblosContext";
 
-const page = async () => {
-  const supabase = await createClient();
-  const { data, error } = await supabase
-    .from("pueblos_magicos")
-    .select("*")
-    .order("title", { ascending: false });
+import styles from "./gridClient.module.css";
 
-  if (error) return <div>error...</div>;
-
-  const puebloData = data?.map((item, i) => {
+const GridClient = () => {
+  const { filteredPueblos, isLoading } = usePueblosContext();
+  console.log("Jaimes filtered Pueblos", filteredPueblos);
+  const puebloData = filteredPueblos?.map((item, i) => {
     return (
-      <div className={styles.cardContainer} key={item.title + i}>
+      <li className={styles.cardContainer} key={item.title + i}>
         <h2 className={styles.titleHeader}>{item.title}</h2>
         <div className={styles.imageContainer}>
-          <CloudinaryImage publicId={item.cloudinary_id} />
+          <CloudinaryImage
+            puebloTitle={item.title}
+            className={styles.cloudinaryImg}
+            publicId={item.cloudinary_id}
+          />
           <p>
             photo by{" "}
             <Link
@@ -31,7 +31,9 @@ const page = async () => {
             </Link>
           </p>
         </div>
-        <p className={styles.description}>{item.description}</p>
+        <Text lineClamp={3} className={styles.description}>
+          {item.description}
+        </Text>
         <Link
           href={item.description_url}
           target="_blank"
@@ -41,7 +43,7 @@ const page = async () => {
           <p>Learn More </p>
         </Link>
         <p>{`Airport ${item.airport_id}`}</p>
-      </div>
+      </li>
     );
   });
 
@@ -55,4 +57,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default GridClient;

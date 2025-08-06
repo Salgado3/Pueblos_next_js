@@ -3,13 +3,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: white;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-}
-
-.darkMode {
-  background-color: #111827; /* dark:bg-gray-900 */
-  color: white;
+  flex-wrap: wrap;
 }
 
 .leftLinks,
@@ -23,7 +17,15 @@
   font-weight: bold;
   font-size: 1.25rem;
   text-decoration: none;
-  color: inherit;
+}
+
+.logoImg {
+  height: 2.5rem;
+  transition: opacity 0.3s ease;
+}
+
+.logoImgSunglasses {
+  height: 2.75rem;
 }
 
 .link {
