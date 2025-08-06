@@ -52,7 +52,7 @@ export default function Navbar() {
           }
         />
         <Title order={2} className={styles.logo}>
-          Pueblo Magicos
+          Querido Pueblo
         </Title>
         <Link href="/about" className={styles.link}>
           About
