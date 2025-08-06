@@ -23,11 +23,9 @@ export default function LoginPage() {
   return (
     <div className={styles.container}>
       <Image
-        src={
-          computedColorScheme === "dark"
-            ? "/AxolotlPeakPlain.png"
-            : "/AxolotlPeakSunglasses.png"
-        }
+        src={"/AxolotlPeakPlain.png"}
+        width={50}
+        height={50}
         alt="Axolotl"
         aria-hidden
         className={styles.logoImg}

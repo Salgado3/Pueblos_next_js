@@ -1,22 +1,28 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { type DefinedUseQueryResult, type UseQueryResult, useQuery } from "@tanstack/react-query";
 import { createClient } from "../supabase/utils/client";
+import { type Pueblo } from "../../../database.types";
 
-export function usePueblos() {
+
+const usePueblos= ():UseQueryResult<Pueblo[], Error> => {
   const supabase = createClient();
-  
-  return useQuery({
+  //@ts-ignore
+  return useQuery<Pueblo[], Error>({
     queryKey: ["pueblos"],
-    queryFn: async () => {
+    queryFn: async ()=> {
       const { data, error } = await supabase
         .from("pueblos_magicos")
         .select("*")
         .order("title", { ascending: false });
       if (error) throw error;
-      return data;
+
+      return data ?? [];
     },
-    staleTime: 1000 * 60 * 60, // 1 hour
+    staleTime: Infinity, // 1 hour
+    //@ts-ignore
     cacheTime: 1000 * 60 * 60 * 2, // 2 hours
   });
 }
+
+export default usePueblos

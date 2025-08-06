@@ -3,7 +3,7 @@ import L from "leaflet";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
 import { List, ThemeIcon } from "@mantine/core";
 import { useParams } from "next/navigation";
-import { usePueblos } from "@/lib/reactQuery/usePueblos";
+import usePueblos from "@/lib/reactQuery/usePueblos";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
 
@@ -14,7 +14,6 @@ import { IconCircleCheck, IconCircleDashed } from "@tabler/icons-react";
 export default function PueblosClient() {
   const params = useParams();
   const selectedPueblo = params?.pueblo as string;
-  console.log("jaimes params", params);
   const { data, isLoading, error } = usePueblos();
 
   if (isLoading) return <p>Loading...</p>;
@@ -37,14 +36,14 @@ export default function PueblosClient() {
       <h2 className={styles.titleHeader}>{pueblo.title}</h2>
       <div className={styles.imageContainer}>
         <CloudinaryImage
-          puebloTitle={pueblo.title}
+          puebloTitle={pueblo.title || ""}
           className={styles.image}
-          publicId={pueblo.cloudinary_id}
+          publicId={pueblo.cloudinary_id || ""}
         />
         <p>
           photo by{" "}
           <Link
-            href={pueblo.photo_by_url}
+            href={pueblo.photo_by_url ?? ""}
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -52,7 +51,7 @@ export default function PueblosClient() {
           </Link>
         </p>
 
-        {pueblo.lattitude && pueblo.longitude && (
+        {pueblo.latitude && pueblo.longitude && (
           <MapContainer
             key={"mapContainer"}
             center={[pueblo.latitude, pueblo.longitude]}
@@ -65,7 +64,7 @@ export default function PueblosClient() {
             />
             <Marker
               key={pueblo?.id}
-              title={pueblo.title}
+              title={pueblo.title || ""}
               zIndexOffset={1000}
               position={[pueblo.latitude, pueblo.longitude]}
               icon={
