@@ -9,9 +9,9 @@ export default async function MapPage() {
     .order("title", { ascending: false });
 
   if (error) {
-    return <div>`Error loading pueblos: ${error}`</div>;
+    return <div>Error loading pueblos</div>;
   }
-  
+
   return (
     <div style={{ height: "100vh", width: "100%" }}>
       <MapClientWrapper pueblos={pueblos} />
