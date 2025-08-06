@@ -12,6 +12,7 @@ import { useState } from "react";
 import { createClient } from "@/lib/supabase/utils/client"; // Adjust path
 import styles from "./page.module.css";
 import { login, signup } from "./actions";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -21,7 +22,7 @@ export default function LoginPage() {
   });
   return (
     <div className={styles.container}>
-      <img
+      <Image
         src={
           computedColorScheme === "dark"
             ? "/AxolotlPeakPlain.png"

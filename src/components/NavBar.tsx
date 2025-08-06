@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/utils/client";
 import styles from "./navbar.module.css";
 import ColorSchemeToggle from "./ColorSchemeToggle";
+import Image from "next/image";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -37,7 +38,7 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.leftLinks}>
-        <img
+        <Image
           src={
             computedColorScheme === "dark"
               ? "/axolotl.png"

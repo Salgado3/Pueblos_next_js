@@ -1,6 +1,7 @@
 // components/CloudinaryImage.jsx
 "use client"; // if you're using App Router (Next.js 13+)
 import { useState } from "react";
+import Image from "next/image";
 import { Cloudinary } from "@cloudinary/url-gen";
 import {
   AdvancedImage,
@@ -30,7 +31,7 @@ const CloudinaryImage = ({
 
   if (hasError) {
     return (
-      <img
+      <Image
         src="/imageNotFound.png" // Replace with your fallback image path
         alt="image not available"
         style={{ maxWidth: "90%", maxHeight: "90%" }}
