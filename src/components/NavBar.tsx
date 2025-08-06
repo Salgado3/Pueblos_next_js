@@ -25,7 +25,7 @@ export default function Navbar() {
       setIsLoggedIn(!!data.user);
     };
     getUser();
-  }, []);
+  }, [supabase.auth]);
 
   if (!hasMounted) return null;
 

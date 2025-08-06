@@ -17,20 +17,16 @@ type Pueblo = {
 };
 
 export default function MapClient({ pueblos }: { pueblos: Pueblo[] }) {
-  if (!pueblos) {
-    console.log(`${pueblos} pueblos are empty sadly`);
-    return;
-  }
   const { filteredPueblos, isLoading } = usePueblosContext();
-  useEffect(() => {
-    // delete (L.Icon.Default.prototype as any)._getIconUrl;
-    // L.Icon.Default.mergeOptions({
-    //   iconRetinaUrl: "/pueblosMagicos256px.png",
-    //   iconUrl: "/pueblosMagicos64px.png",
-    //   shadowUrl:
-    //     "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-    // });
-  }, []);
+  // useEffect(() => {
+  //   // delete (L.Icon.Default.prototype as any)._getIconUrl;
+  //   // L.Icon.Default.mergeOptions({
+  //   //   iconRetinaUrl: "/pueblosMagicos256px.png",
+  //   //   iconUrl: "/pueblosMagicos64px.png",
+  //   //   shadowUrl:
+  //   //     "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+  //   // });
+  // }, []);
 
   return (
     <MapContainer
