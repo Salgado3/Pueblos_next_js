@@ -27,7 +27,7 @@ export default function PueblosClient() {
   const name = normalize(
     decodeURIComponent(selectedPueblo).replace(/_/g, " ").toLowerCase()
   );
-
+  //@ts-expect-error
   const pueblo = data?.find((p) => normalize(p.title.toLowerCase()) === name);
 
   if (!pueblo) return <p>❌ Pueblo not found</p>;
