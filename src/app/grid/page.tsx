@@ -1,7 +1,9 @@
-import GridClient from "./GridClient";
+
+import GridClientWrapper from "./GridClientWrapper";
 
 const page = async () => {
-  return <GridClient />;
+ 
+  return <GridClientWrapper  />;
 };
 
 export default page;
