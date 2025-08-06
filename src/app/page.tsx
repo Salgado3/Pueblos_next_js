@@ -4,6 +4,7 @@ import Page from "./grid/page";
 
 import styles from "./page.module.css";
 
+
 const page = async () => {
   const supabase = await createClient();
   const { data: authData, error: authError } = await supabase.auth.getUser();

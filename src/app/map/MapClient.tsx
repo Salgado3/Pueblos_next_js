@@ -39,8 +39,8 @@ export default function MapClient({ pueblos }: { pueblos: Pueblo[] }) {
         attribution="&copy; OpenStreetMap contributors"
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      {filteredPueblos?.map((item, i) => {
-        return item?.latitude && item?.longitude ? (
+      {filteredPueblos?.map((item) => {
+        return item?.latitude && item?.longitude && item.title ? (
           <Marker
             key={item?.id}
             title={item.title}

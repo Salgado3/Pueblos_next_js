@@ -35,6 +35,8 @@ const CloudinaryImage = ({
         src="/imageNotFound.png" // Replace with your fallback image path
         alt="image not available"
         style={{ maxWidth: "90%", maxHeight: "90%" }}
+        width={400}
+        height={400}
       />
     );
   }

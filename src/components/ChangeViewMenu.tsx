@@ -19,7 +19,6 @@ export const ChangeViewMenu = () => {
     path: string;
   }) => {
     event.preventDefault();
-    console.log("jaime's e target", path);
     setIsDesabled(path);
     router.push(path);
   };

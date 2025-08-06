@@ -46,6 +46,8 @@ export default function Navbar() {
           }
           alt="Axolotl"
           aria-hidden
+          width={50}
+          height={50}
           className={
             computedColorScheme === "dark"
               ? styles.logoImg
