@@ -1,15 +1,11 @@
 "use client";
-
-import { useRouter } from "next/navigation";
 import {
-  Button,
   PasswordInput,
   TextInput,
   Card,
   useComputedColorScheme,
 } from "@mantine/core";
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/utils/client"; // Adjust path
 import styles from "./page.module.css";
 import { login, signup } from "./actions";
 import Image from "next/image";
