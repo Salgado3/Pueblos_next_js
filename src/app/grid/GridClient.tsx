@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { Text } from "@mantine/core";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";

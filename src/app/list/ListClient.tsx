@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { usePueblosContext } from "../hooks/PueblosContext";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
