@@ -1,25 +1,53 @@
 "use client";
-import {
-  PasswordInput,
-  TextInput,
-  Card,
-  useComputedColorScheme,
-} from "@mantine/core";
+import { PasswordInput, TextInput, Card } from "@mantine/core";
 import { useState } from "react";
-import styles from "./page.module.css";
-import { login, signup } from "./actions";
 import Image from "next/image";
+import { createClient } from "@/lib/supabase/utils/client";
+import { useRouter } from "next/navigation";
+
+import styles from "./page.module.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const computedColorScheme = useComputedColorScheme("light", {
-    getInitialValueInEffect: true,
-  });
+  const [error, setError] = useState("");
+  const router = useRouter();
+  const supabase = createClient();
+
+  const handleLogin = async () => {
+    setError(""); // Clear previous errors
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
+    } else {
+      router.push("/");
+    }
+  };
+
+  const handleSignup = async () => {
+    setError(""); // Clear previous errors
+
+    const { error } = await supabase.auth.signUp({
+      email,
+      password,
+    });
+
+    if (error) {
+      setError(error.message);
+    } else {
+      router.push("/");
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Image
-        src={"/AxolotlPeakPlain.png"}
+        src={"/axolotlPeakPlain.png"}
         width={50}
         height={50}
         alt="Axolotl"
@@ -33,34 +61,39 @@ export default function LoginPage() {
         withBorder
         className={styles.cardContainer}
       >
-        <form>
-          <TextInput
-            id="email"
-            mt="md"
-            label="Email"
-            placeholder="Enter email"
-            name="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.currentTarget.value)}
-          />
-          <PasswordInput
-            id="password"
-            label="Password"
-            description="Create a password"
-            placeholder="Please enter password"
-            name="password"
-            required
-            value={password}
-            onChange={(e) => setPassword(e.currentTarget.value)}
-          />
-          <button className={styles.button} formAction={login}>
+        <TextInput
+          id="email"
+          mt="md"
+          label="Email"
+          placeholder="Enter email"
+          name="email"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.currentTarget.value)}
+        />
+        <PasswordInput
+          id="password"
+          label="Password"
+          description="Create a password"
+          placeholder="Please enter password"
+          name="password"
+          required
+          value={password}
+          onChange={(e) => setPassword(e.currentTarget.value)}
+        />
+        {error && <p className={styles.error}>{error}</p>}
+        <div className={styles.buttonGroup}>
+          <button type="button" className={styles.button} onClick={handleLogin}>
             Log in
           </button>
-          <button className={styles.button} formAction={signup}>
+          <button
+            type="button"
+            className={styles.button}
+            onClick={handleSignup}
+          >
             Sign up
           </button>
-        </form>
+        </div>
       </Card>
     </div>
   );

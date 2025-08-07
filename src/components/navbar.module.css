@@ -8,8 +8,6 @@
 
 .titleContainer {
   display: flex;
-  border: 3px solid purple;
-  border-radius: 50%;
   padding: 1rem;
 }
 
@@ -32,7 +30,10 @@
 }
 
 .logoImgSunglasses {
-  height: 2.75rem;
+  height: 1.8rem;
+  width: 1.8rem;
+  align-self: end;
+  margin: 0 0.5rem;
 }
 
 .link {
