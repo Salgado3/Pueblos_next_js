@@ -15,16 +15,25 @@ const GridClient = () => {
   const puebloData = filteredPueblos?.map((item, i) => {
     if (!item.title) return;
     return (
-      <li className={styles.cardContainer} key={item.title + i}>
-        <h2 className={styles.titleHeader}>{item.title}</h2>
-        <div className={styles.imageContainer}>
-          {item.title && item.cloudinary_id && (
-            <CloudinaryImage
-              puebloTitle={item.title}
-              className={styles.cloudinaryImg}
-              publicId={item.cloudinary_id}
-            />
-          )}
+      <li className={styles.cardContainerList} key={item.title + i}>
+        <Link
+          //TODO set up dynamic links
+          style={{ fontSize: "large" }}
+          href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
+          rel="noopener noreferrer"
+        >
+          <h2 className={styles.titleHeader}>{item.title}</h2>
+          <div className={styles.imageContainer}>
+            {item.title && item.cloudinary_id && (
+              <CloudinaryImage
+                puebloTitle={item.title}
+                className={styles.cloudinaryImg}
+                publicId={item.cloudinary_id}
+              />
+            )}
+          </div>
+        </Link>
+        <div className={styles.textContainer}>
           <p>
             photo by{" "}
             <Link
@@ -35,19 +44,12 @@ const GridClient = () => {
               {item.photo_by}
             </Link>
           </p>
+          <p>{`Closest Airport: ${item.airport_id}`}</p>
+
+          <Text lineClamp={3} className={styles.description}>
+            {item.description}
+          </Text>
         </div>
-        <Text lineClamp={3} className={styles.description}>
-          {item.description}
-        </Text>
-        <Link
-          href={item.description_url || ""}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {" "}
-          <p>Learn More </p>
-        </Link>
-        <p>{`Airport ${item.airport_id}`}</p>
       </li>
     );
   });

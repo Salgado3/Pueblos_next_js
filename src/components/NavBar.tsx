@@ -38,25 +38,28 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.leftLinks}>
-        <Image
-          src={
-            computedColorScheme === "dark"
-              ? "/axolotl.png"
-              : "/axolotlSunglasses.png"
-          }
-          alt="Axolotl"
-          aria-hidden
-          width={50}
-          height={50}
-          className={
-            computedColorScheme === "dark"
-              ? styles.logoImg
-              : styles.logoImgSunglasses
-          }
-        />
-        <Title order={2} className={styles.logo}>
-          Querido Pueblo
-        </Title>
+        <div className={styles.titleContainer}>
+          <Image
+            src={
+              computedColorScheme === "dark"
+                ? "/axolotl.png"
+                : "/axolotlSunglasses.png"
+            }
+            alt="Axolotl"
+            aria-hidden
+            width={50}
+            height={50}
+            className={
+              computedColorScheme === "dark"
+                ? styles.logoImg
+                : styles.logoImgSunglasses
+            }
+          />
+          <Title order={2} className={styles.logo}>
+            Querido Pueblos
+          </Title>
+        </div>
+
         <Link href="/about" className={styles.link}>
           About
         </Link>

@@ -14,22 +14,24 @@ const ListClient = () => {
     if (!item?.title) return;
     return (
       <li className={styles.cardContainer} key={item.title + i}>
-        <div className={styles.imageContainer}>
-          <CloudinaryImage
-            puebloTitle={item.title}
-            publicId={item.cloudinary_id || ""}
-            className={styles.cloudinaryImage}
-          />
-        </div>
-        <div className={styles.titleContainer}>
-          <Link
-            href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
-            rel="noopener noreferrer"
-          >
+        <Link
+        className={styles.cardContainerLink}
+          href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
+          rel="noopener noreferrer"
+        >
+          <div className={styles.imageContainer}>
+            <CloudinaryImage
+              puebloTitle={item.title}
+              publicId={item.cloudinary_id || ""}
+              className={styles.cloudinaryImage}
+            />
+          </div>
+          <div className={styles.titleContainer}>
             <h2 className={styles.titleHeader}>{item.title}</h2>
-          </Link>
-          <p className={styles.description}>{item.description}</p>
-        </div>
+
+            <p className={styles.description}>{item.description}</p>
+          </div>
+        </Link>
       </li>
     );
   });

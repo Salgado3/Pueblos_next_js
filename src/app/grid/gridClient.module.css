@@ -1,12 +1,13 @@
-@media (prefers-color-scheme: dark) {
-  .logo {
-    filter: invert();
-  }
-  .cardContainer {
-    border: 1px solid #f2f2f2;
-  }
+.cardContainerList {
+  border: 1px solid #f2f2f2;
+  list-style: none;
 }
-
+.cardContainerList:hover {
+  box-shadow: 2.5px 2.5px 2.5px 2.5px rgba(97, 72, 219, 0.911);
+  transition-duration: 0.5s;
+  transition-property: transform;
+  transform: scale(1.005);
+}
 .unOrderedListContainer {
   display: grid;
   gap: 1rem;
@@ -14,6 +15,13 @@
 }
 
 .imageContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.textContainer {
+  margin-top: 0.75rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,6 +35,12 @@
 .titleHeader {
   display: flex;
   justify-content: center;
+  padding: 1rem 0;
+}
+
+.description {
+  padding: 0 1rem;
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 600px) {

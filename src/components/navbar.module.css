@@ -6,6 +6,13 @@
   flex-wrap: wrap;
 }
 
+.titleContainer {
+  display: flex;
+  border: 3px solid purple;
+  border-radius: 50%;
+  padding: 1rem;
+}
+
 .leftLinks,
 .rightLinks {
   display: flex;
