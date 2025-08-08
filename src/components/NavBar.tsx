@@ -45,7 +45,7 @@ export default function Navbar() {
                 ? "/axolotl.png"
                 : "/axolotlSunglasses.png"
             }
-            alt="Axolotl"
+            alt="axolotl"
             aria-hidden
             width={40}
             height={40}
