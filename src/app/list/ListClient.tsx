@@ -5,17 +5,23 @@ import Link from "next/link";
 
 import styles from "./listClient.module.css";
 import { Pueblo } from "../../../database.types";
+import NotFoundOverlay from "@/components/NotFoundOverlay";
+import { useMediaQuery } from "@mantine/hooks";
+import LoadingOverlay from "@/components/LoadingOverlay";
 
 const ListClient = () => {
   const { filteredPueblos, isLoading } = usePueblosContext();
-  if (isLoading) return <div>Loading</div>;
+  const isMobile = useMediaQuery("(max-width: 500px)");
+
+  if (isLoading) return <LoadingOverlay />;
+  if (filteredPueblos.length === 0) return <NotFoundOverlay />;
 
   const puebloData = filteredPueblos?.map((item: Pueblo, i: number) => {
     if (!item?.title) return;
     return (
       <li className={styles.cardContainer} key={item.title + i}>
         <Link
-        className={styles.cardContainerLink}
+          className={styles.cardContainerLink}
           href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
           rel="noopener noreferrer"
         >
@@ -29,7 +35,9 @@ const ListClient = () => {
           <div className={styles.titleContainer}>
             <h2 className={styles.titleHeader}>{item.title}</h2>
 
-            <p className={styles.description}>{item.description}</p>
+            {!isMobile && (
+              <p className={styles.description}>{item.description}</p>
+            )}
           </div>
         </Link>
       </li>

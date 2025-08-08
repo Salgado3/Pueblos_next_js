@@ -1,7 +1,8 @@
-import React from "react";
+"use client";
+import LoadingOverlay from "@/components/LoadingOverlay";
 
 const loading = () => {
-  return <div>loading</div>;
+  return <LoadingOverlay />;
 };
 
 export default loading;

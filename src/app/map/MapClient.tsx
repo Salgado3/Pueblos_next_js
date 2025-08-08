@@ -9,6 +9,8 @@ import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
 import { usePueblosContext } from "../hooks/PueblosContext";
+import LoadingOverlay from "@/components/LoadingOverlay";
+import NotFoundOverlay from "@/components/NotFoundOverlay";
 
 type Pueblo = {
   title: string;
@@ -17,7 +19,7 @@ type Pueblo = {
 };
 
 export default function MapClient() {
-  const { filteredPueblos } = usePueblosContext();
+  const { filteredPueblos, isLoading } = usePueblosContext();
   // useEffect(() => {
   //   // delete (L.Icon.Default.prototype as any)._getIconUrl;
   //   // L.Icon.Default.mergeOptions({
@@ -27,7 +29,8 @@ export default function MapClient() {
   //   //     "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
   //   // });
   // }, []);
-
+  if (isLoading) return <LoadingOverlay />;
+  if (filteredPueblos.length === 0) return <NotFoundOverlay />;
   return (
     <MapContainer
       key={"mapContainer"}

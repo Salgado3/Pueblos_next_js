@@ -3,14 +3,19 @@ import { Text } from "@mantine/core";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
 import { usePueblosContext } from "../hooks/PueblosContext";
+import LoadingOverlay from "@/components/LoadingOverlay";
 
 import styles from "./gridClient.module.css";
+import NotFoundOverlay from "@/components/NotFoundOverlay";
 
 const GridClient = () => {
   const { filteredPueblos, isLoading } = usePueblosContext();
+
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingOverlay />;
   }
+
+  if (filteredPueblos.length === 0) return <NotFoundOverlay />;
 
   const puebloData = filteredPueblos?.map((item, i) => {
     if (!item.title) return;

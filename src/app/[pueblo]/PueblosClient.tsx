@@ -6,19 +6,20 @@ import { useParams } from "next/navigation";
 import usePueblos from "@/lib/reactQuery/usePueblos";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
-
-import styles from "./pueblosClient.module.css";
-import "leaflet/dist/leaflet.css";
 import { IconCircleCheck, IconCircleDashed } from "@tabler/icons-react";
+import LoadingOverlay from "@/components/LoadingOverlay";
+import NotFoundOverlay from "@/components/NotFoundOverlay";
+
+import "leaflet/dist/leaflet.css";
+import styles from "./pueblosClient.module.css";
 
 export default function PueblosClient() {
   const params = useParams();
   const selectedPueblo = params?.pueblo as string;
   const { data, isLoading, error } = usePueblos();
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>❌ Error loading data</p>;
-  if (!selectedPueblo) return <p>❌ Missing slug</p>;
+  if (isLoading) return <LoadingOverlay />;
+  if (error) return <NotFoundOverlay />;
 
   const normalize = (str: string) =>
     str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -29,7 +30,7 @@ export default function PueblosClient() {
   //@ts-expect-error
   const pueblo = data?.find((p) => normalize(p.title.toLowerCase()) === name);
 
-  if (!pueblo) return <p>❌ Pueblo not found</p>;
+  if (!pueblo) return <NotFoundOverlay />;
 
   return (
     <main className={styles.cardContainer} key={pueblo.title}>
