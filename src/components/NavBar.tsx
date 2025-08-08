@@ -63,10 +63,6 @@ export default function Navbar() {
         <Link href="/about" className={styles.link}>
           About
         </Link>
-
-        <Link href="/" className={styles.link}>
-          Home
-        </Link>
       </div>
 
       <div className={styles.rightLinks}>

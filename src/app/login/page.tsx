@@ -1,5 +1,5 @@
 "use client";
-import { PasswordInput, TextInput, Card } from "@mantine/core";
+import { PasswordInput, TextInput, Card, Title } from "@mantine/core";
 import { useState } from "react";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/utils/client";
@@ -11,11 +11,12 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
   const supabase = createClient();
 
   const handleLogin = async () => {
-    setError(""); // Clear previous errors
+    setError("");
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -61,6 +62,7 @@ export default function LoginPage() {
         withBorder
         className={styles.cardContainer}
       >
+        {successMessage && <Title>{successMessage}</Title>}
         <TextInput
           id="email"
           mt="md"

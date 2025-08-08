@@ -1,3 +1,17 @@
+@media only screen and (max-width: 500px) {
+  .image {
+    height: fit-content;
+  }
+
+  .titleHeader,
+  .imageContainer,
+  .description {
+    align-self: center;
+    margin: 1rem 0;
+    width: 80vw;
+  }
+}
+
 .cardContainer {
   display: flex;
   flex-direction: column;

@@ -31,7 +31,7 @@ export const ChangeViewMenu = () => {
         mt="md"
         className={styles.button}
         onClick={(e) => handleOnClick({ event: e, path: "/map" })}
-        title="map"
+        title="map view"
         disabled={isDisabled.includes("/map")}
       >
         <IconMap2 />
@@ -42,7 +42,7 @@ export const ChangeViewMenu = () => {
         mt="md"
         className={styles.button}
         onClick={(e) => handleOnClick({ event: e, path: "/grid" })}
-        title="grid"
+        title="grid view"
         disabled={isDisabled.includes("/grid")}
       >
         <IconLayoutGrid />
@@ -53,7 +53,7 @@ export const ChangeViewMenu = () => {
         mt="md"
         className={styles.button}
         onClick={(e) => handleOnClick({ event: e, path: "/list" })}
-        title="list"
+        title="list view"
         disabled={isDisabled.includes("/list")}
       >
         <IconListDetails />

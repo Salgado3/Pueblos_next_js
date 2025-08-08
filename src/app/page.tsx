@@ -1,6 +1,6 @@
 import LoginPage from "./login/page";
 import { createClient } from "@/lib/supabase/utils/server";
-import Page from "./grid/page";
+import Page from "./about/page";
 
 const page = async () => {
   const supabase = await createClient();
