@@ -6,6 +6,8 @@ import type { AppProps } from "next/app";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { ChangeViewMenu } from "@/components/ChangeViewMenu";
 import { PueblosProvider } from "./hooks/PueblosContext";
+import MobileNavBar from "@/components/MobileNavBar";
+import isMobileRequest from "@/components/isMobileRequest";
 
 import "./globals.css";
 import "@mantine/core/styles.css";
@@ -29,18 +31,20 @@ const theme = createTheme({
   /** Put your mantine theme override here */
 });
 
-const RootLayout = ({
+const RootLayout = async ({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
+  const isMobile = await isMobileRequest();
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <MantineProvider defaultColorScheme="auto">
           <QueryProvider>
             <PueblosProvider>
-              <NavBar />
+              {isMobile ? <MobileNavBar /> : <NavBar />}
               <ChangeViewMenu />
               {children}
             </PueblosProvider>
