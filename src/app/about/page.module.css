@@ -8,6 +8,7 @@
 .cardTitleContainer {
   display: flex;
   justify-content: center;
+  padding: 0 1rem;
 }
 
 .title {
@@ -22,4 +23,13 @@
 .logoImg {
   height: 3.5rem;
   width: 3.5rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .cardContainer {
+    width: 80vw;
+  }
+  .title {
+    font-size: 1rem;
+  }
 }

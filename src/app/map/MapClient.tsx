@@ -11,6 +11,7 @@ import Link from "next/link";
 import { usePueblosContext } from "../hooks/PueblosContext";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
+import { useMediaQuery } from "@mantine/hooks";
 
 type Pueblo = {
   title: string;
@@ -20,6 +21,8 @@ type Pueblo = {
 
 export default function MapClient() {
   const { filteredPueblos, isLoading } = usePueblosContext();
+  const isMobile = useMediaQuery("(max-width: 500px)");
+  const mapHeight = isMobile ? "60vh" : "100%";
   // useEffect(() => {
   //   // delete (L.Icon.Default.prototype as any)._getIconUrl;
   //   // L.Icon.Default.mergeOptions({
@@ -33,10 +36,11 @@ export default function MapClient() {
   if (filteredPueblos.length === 0) return <NotFoundOverlay />;
   return (
     <MapContainer
+      className=""
       key={"mapContainer"}
       center={[23.0, -104.0]}
       zoom={6}
-      style={{ height: "100%", width: "100%" }}
+      style={{ height: mapHeight, width: "100%" }}
     >
       <TileLayer
         attribution="&copy; OpenStreetMap contributors"

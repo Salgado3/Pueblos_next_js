@@ -1,26 +1,3 @@
-@media only screen and (max-width: 500px) {
-  .cardContainerLink {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .titleContainer,
-  .cardContainerLink {
-    width: 100%;
-  }
-
-  .imageContainer {
-    width: 30%;
-  }
-
-  .cardContainerLink:hover {
-    transition-duration: 0.5s;
-    transition-property: transform;
-    transform: scale(1.015);
-    border: 1px solid yellow;
-  }
-}
-
 .cardContainer {
   display: flex;
   margin: 0.5rem 0;
@@ -47,4 +24,24 @@
 
 .titleContainer {
   width: 80%;
+}
+
+@media only screen and (max-width: 500px) {
+  .cardContainerLink {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .titleContainer,
+  .cardContainerLink {
+    width: 100%;
+  }
+
+  .imageContainer {
+    width: 30%;
+  }
+
+  .cardContainer:hover {
+    border: 1px solid yellow;
+  }
 }

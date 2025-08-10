@@ -27,7 +27,13 @@ const page = () => {
           className={styles.logoImg}
         />
       </div>
-      <p className={styles.text}>WELCOME. Work in progress.</p>
+      <p className={styles.text}>Every pluebo has a story. </p>
+      <p>
+        It can be the cobble streets linking the the town square, the endless
+        alleys, the homemade food and winding markets. Regardless of where you
+        are, you get to meet new people, learn their story and appreciate the
+        place they call home...
+      </p>
     </Card>
   );
 };
