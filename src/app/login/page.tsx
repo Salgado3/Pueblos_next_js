@@ -1,11 +1,15 @@
 "use client";
-import { PasswordInput, TextInput, Card, Title } from "@mantine/core";
+import { PasswordInput, TextInput, Card, Title, Button } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+
+import { IconCheck } from "@tabler/icons-react";
 import { useState } from "react";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/utils/client";
 import { useRouter } from "next/navigation";
 
 import styles from "./page.module.css";
+import { position } from "@cloudinary/url-gen/qualifiers/timeline";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -26,7 +30,27 @@ export default function LoginPage() {
     if (error) {
       setError(error.message);
     } else {
-      router.push("/");
+      const id = notifications.show({
+        loading: true,
+        title: "Loading your data",
+        message: "Data will be loaded in 3 seconds, you cannot close this yet",
+        autoClose: false,
+        withCloseButton: false,
+      });
+
+      setTimeout(() => {
+        notifications.update({
+          id,
+          color: "teal",
+          title: "Data was loaded",
+          message:
+            "Notification will close in 2 seconds, you can close this notification now",
+          icon: <IconCheck size={18} />,
+          loading: false,
+          autoClose: 2000,
+        });
+        router.push("/");
+      }, 3000);
     }
   };
 
@@ -62,7 +86,6 @@ export default function LoginPage() {
         withBorder
         className={styles.cardContainer}
       >
-        {successMessage && <Title>{successMessage}</Title>}
         <TextInput
           id="email"
           mt="md"
@@ -85,16 +108,16 @@ export default function LoginPage() {
         />
         {error && <p className={styles.error}>{error}</p>}
         <div className={styles.buttonGroup}>
-          <button type="button" className={styles.button} onClick={handleLogin}>
+          <Button type="button" className={styles.button} onClick={handleLogin}>
             Log in
-          </button>
-          <button
+          </Button>
+          <Button
             type="button"
             className={styles.button}
             onClick={handleSignup}
           >
             Sign up
-          </button>
+          </Button>
         </div>
       </Card>
     </div>

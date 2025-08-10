@@ -38,6 +38,11 @@ const ListClient = () => {
             {!isMobile && (
               <p className={styles.description}>{item.description}</p>
             )}
+            {isMobile && (
+              <p
+                className={styles.description}
+              >{`Nearest Airport: ${item.airport_id}`}</p>
+            )}
           </div>
         </Link>
       </li>

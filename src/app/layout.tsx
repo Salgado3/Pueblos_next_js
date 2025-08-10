@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import { QueryProvider } from "./query-provider";
-import type { AppProps } from "next/app";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { ChangeViewMenu } from "@/components/ChangeViewMenu";
 import { PueblosProvider } from "./hooks/PueblosContext";
