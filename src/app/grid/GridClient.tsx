@@ -4,9 +4,9 @@ import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
 import { usePueblosContext } from "../hooks/PueblosContext";
 import LoadingOverlay from "@/components/LoadingOverlay";
+import NotFoundOverlay from "@/components/NotFoundOverlay";
 
 import styles from "./gridClient.module.css";
-import NotFoundOverlay from "@/components/NotFoundOverlay";
 
 const GridClient = () => {
   const { filteredPueblos, isLoading } = usePueblosContext();

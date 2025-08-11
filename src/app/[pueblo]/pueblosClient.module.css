@@ -1,17 +1,3 @@
-@media only screen and (max-width: 500px) {
-  .image {
-    height: fit-content;
-  }
-
-  .titleHeader,
-  .imageContainer,
-  .description {
-    align-self: center;
-    margin: 1rem 0;
-    width: 80vw;
-  }
-}
-
 .cardContainer {
   display: flex;
   flex-direction: column;
@@ -28,7 +14,6 @@
 
 .image {
   width: inherit;
-  height: 60vh;
   border-radius: 12px;
 }
 
@@ -44,4 +29,20 @@
   margin-bottom: 0.5rem;
   align-self: center;
   width: 60vw;
+}
+
+@media only screen and (max-width: 500px) {
+  .image {
+    height: fit-content;
+  }
+
+  .titleHeader,
+  .imageContainer,
+  .description,
+  .thingsToDoListTitle,
+  .thingsToDoList {
+    align-self: center;
+    margin: 1rem 0;
+    width: 80vw;
+  }
 }

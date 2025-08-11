@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import NavBar from "@/components/NavBar";
 import { QueryProvider } from "./query-provider";
 import { createTheme, MantineProvider } from "@mantine/core";
+import { Notifications } from "@mantine/notifications";
 import { ChangeViewMenu } from "@/components/ChangeViewMenu";
 import { PueblosProvider } from "./hooks/PueblosContext";
 import MobileNavBar from "@/components/MobileNavBar";
@@ -10,6 +11,8 @@ import isMobileRequest from "@/components/isMobileRequest";
 
 import "./globals.css";
 import "@mantine/core/styles.css";
+// ‼️ import notifications styles after core package styles
+import "@mantine/notifications/styles.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,6 +44,7 @@ const RootLayout = async ({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <MantineProvider defaultColorScheme="auto">
+          <Notifications />
           <QueryProvider>
             <PueblosProvider>
               {isMobile ? <MobileNavBar /> : <NavBar />}

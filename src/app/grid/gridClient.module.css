@@ -12,6 +12,8 @@
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr; /* default: 1 column on mobile */
+  width: 95vw;
+  margin: auto;
 }
 
 .imageContainer {

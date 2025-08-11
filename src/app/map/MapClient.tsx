@@ -13,25 +13,20 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
 import { useMediaQuery } from "@mantine/hooks";
 
-type Pueblo = {
-  title: string;
-  latitude: number;
-  longitude: number;
-};
-
 export default function MapClient() {
   const { filteredPueblos, isLoading } = usePueblosContext();
   const isMobile = useMediaQuery("(max-width: 500px)");
-  const mapHeight = isMobile ? "60vh" : "100%";
-  // useEffect(() => {
-  //   // delete (L.Icon.Default.prototype as any)._getIconUrl;
-  //   // L.Icon.Default.mergeOptions({
-  //   //   iconRetinaUrl: "/pueblosMagicos256px.png",
-  //   //   iconUrl: "/pueblosMagicos64px.png",
-  //   //   shadowUrl:
-  //   //     "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-  //   // });
-  // }, []);
+  const mapHeight = isMobile ? "50vh" : "100%";
+  
+  useEffect(() => {
+    delete (L.Icon.Default.prototype as any)._getIconUrl;
+    L.Icon.Default.mergeOptions({
+      iconRetinaUrl: "/pueblosMagicos256px.png",
+      iconUrl: "/pueblosMagicos64px.png",
+      shadowUrl:
+        "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+    });
+  }, []);
   if (isLoading) return <LoadingOverlay />;
   if (filteredPueblos.length === 0) return <NotFoundOverlay />;
   return (
@@ -65,7 +60,6 @@ export default function MapClient() {
               <>
                 <h3>{item.title}</h3>
                 <Link
-                  //TODO set up dynamic links
                   style={{ fontSize: "large" }}
                   href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
                   rel="noopener noreferrer"

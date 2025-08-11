@@ -9,18 +9,55 @@ import { createClient } from "@/lib/supabase/utils/client";
 import { useRouter } from "next/navigation";
 
 import styles from "./page.module.css";
-import { position } from "@cloudinary/url-gen/qualifiers/timeline";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
   const router = useRouter();
   const supabase = createClient();
 
+  const showLoadingNotification = () => {
+    return notifications.show({
+      loading: true,
+      title: "Processing request",
+      message: "Please wait...",
+      autoClose: false,
+      withCloseButton: false,
+      position: "top-center",
+    });
+  };
+
+  const updateSuccessNotification = (
+    id: string,
+    title: string,
+    message: string
+  ) => {
+    notifications.update({
+      id,
+      color: "teal",
+      title: title,
+      message: message,
+      icon: <IconCheck size={18} />,
+      loading: false,
+      autoClose: 2000,
+      position: "top-center",
+    });
+  };
+
+  const updateErrorNotification = (id: string, message: string) => {
+    notifications.update({
+      id,
+      loading: false,
+      color: "red",
+      title: "Something went wrong",
+      message: message,
+      autoClose: 2000,
+      position: "top-center",
+    });
+  };
+
   const handleLogin = async () => {
-    setError("");
+    const id = showLoadingNotification();
 
     const { error } = await supabase.auth.signInWithPassword({
       email,
@@ -28,34 +65,19 @@ export default function LoginPage() {
     });
 
     if (error) {
-      setError(error.message);
+      updateErrorNotification(id, "Invalid email or password.");
     } else {
-      const id = notifications.show({
-        loading: true,
-        title: "Loading your data",
-        message: "Data will be loaded in 3 seconds, you cannot close this yet",
-        autoClose: false,
-        withCloseButton: false,
-      });
-
-      setTimeout(() => {
-        notifications.update({
-          id,
-          color: "teal",
-          title: "Data was loaded",
-          message:
-            "Notification will close in 2 seconds, you can close this notification now",
-          icon: <IconCheck size={18} />,
-          loading: false,
-          autoClose: 2000,
-        });
-        router.push("/");
-      }, 3000);
+      updateSuccessNotification(
+        id,
+        "Login successful!",
+        "Redirecting to your dashboard."
+      );
+      router.push("/");
     }
   };
 
   const handleSignup = async () => {
-    setError(""); // Clear previous errors
+    const id = showLoadingNotification();
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -63,9 +85,15 @@ export default function LoginPage() {
     });
 
     if (error) {
-      setError(error.message);
+      updateErrorNotification(id, "An error occurred during sign up. Please try again.");
     } else {
-      router.push("/");
+      // The user is NOT logged in after sign-up, so we don't redirect.
+      // Instead, we show a success message and prompt them to check their email.
+      updateSuccessNotification(
+        id,
+        "Sign up successful!",
+        "Please check your email to confirm your account."
+      );
     }
   };
 
@@ -86,7 +114,7 @@ export default function LoginPage() {
         withBorder
         className={styles.cardContainer}
       >
-        {successMessage && <Title>{successMessage}</Title>}
+        <Title>Welcome!</Title>
         <TextInput
           id="email"
           mt="md"
@@ -107,7 +135,6 @@ export default function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
-        {error && <p className={styles.error}>{error}</p>}
         <div className={styles.buttonGroup}>
           <Button type="button" className={styles.button} onClick={handleLogin}>
             Log in

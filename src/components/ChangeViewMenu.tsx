@@ -2,15 +2,16 @@
 import { Button } from "@mantine/core";
 import { IconMap2, IconLayoutGrid, IconListDetails } from "@tabler/icons-react";
 import { MouseEvent, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { PueblosSearch } from "./PueblosSearch";
 
 import styles from "./changeViewMenu.module.css";
 
 export const ChangeViewMenu = () => {
   const router = useRouter();
-  const [isDisabled, setIsDesabled] = useState("");
-
+  const pathname = usePathname();
+  const [isDisabled, setIsDisabled] = useState("");
+  const params = useParams<{ tag: string; item: string }>();
   const handleOnClick = ({
     event,
     path,
@@ -19,10 +20,10 @@ export const ChangeViewMenu = () => {
     path: string;
   }) => {
     event.preventDefault();
-    setIsDesabled(path);
+    setIsDisabled(path);
     router.push(path);
   };
-
+  if (pathname === "/login") return;
   return (
     <div className={styles.container}>
       <Button
@@ -58,7 +59,7 @@ export const ChangeViewMenu = () => {
       >
         <IconListDetails />
       </Button>
-      <PueblosSearch />
+      {["/map", "/list", "/grid"].includes(pathname) && <PueblosSearch />}
     </div>
   );
 };
