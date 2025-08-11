@@ -6,7 +6,13 @@ import styles from "./notFoundOverlay.module.css";
 
 const NotFoundOverlay = () => {
   const router = useRouter();
-  const { setAirportId } = usePueblosContext();
+  const { airportId, setAirportId } = usePueblosContext();
+  const handleClick = () => {
+    if (airportId) {
+      setAirportId("");
+    }
+    router.back();
+  };
   return (
     <div className={styles.container}>
       <Image
@@ -18,7 +24,7 @@ const NotFoundOverlay = () => {
         aria-hidden
       />
       <p className={styles.notFoundtext}>Looks like nothing is here</p>
-      <button onClick={() => setAirportId("")}>Go Back</button>
+      <button onClick={handleClick}>Go Back</button>
     </div>
   );
 };

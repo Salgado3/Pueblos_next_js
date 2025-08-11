@@ -1,9 +1,6 @@
 "use client";
 import L from "leaflet";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-
-import markerIcon from "leaflet/dist/images/marker-icon.png";
-import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import { useEffect } from "react";
 
 import "leaflet/dist/leaflet.css";
@@ -11,13 +8,10 @@ import Link from "next/link";
 import { usePueblosContext } from "../hooks/PueblosContext";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
-import { useMediaQuery } from "@mantine/hooks";
 
-export default function MapClient() {
+const MapClient = () => {
   const { filteredPueblos, isLoading } = usePueblosContext();
-  const isMobile = useMediaQuery("(max-width: 500px)");
-  const mapHeight = isMobile ? "50vh" : "100%";
-  
+
   useEffect(() => {
     delete (L.Icon.Default.prototype as any)._getIconUrl;
     L.Icon.Default.mergeOptions({
@@ -31,11 +25,10 @@ export default function MapClient() {
   if (filteredPueblos.length === 0) return <NotFoundOverlay />;
   return (
     <MapContainer
-      className=""
       key={"mapContainer"}
       center={[23.0, -104.0]}
       zoom={6}
-      style={{ height: mapHeight, width: "100%" }}
+      style={{ height: "60%", width: "100%", marginTop: "10rem" }}
     >
       <TileLayer
         attribution="&copy; OpenStreetMap contributors"
@@ -46,7 +39,7 @@ export default function MapClient() {
           <Marker
             key={item?.id}
             title={item.title}
-            zIndexOffset={1000}
+            zIndexOffset={999}
             position={[item.latitude, item.longitude]}
             icon={
               new L.Icon({
@@ -73,4 +66,6 @@ export default function MapClient() {
       })}
     </MapContainer>
   );
-}
+};
+
+export default MapClient;

@@ -22,3 +22,18 @@
   align-items: center;
   margin: 0 0.5rem;
 }
+
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    position: fixed;
+    margin: 0;
+    top: 0;
+    z-index: 1001;
+    background: inherit;
+  }
+  .titleContainer {
+    width: 95%;
+    margin: auto;
+  }
+}

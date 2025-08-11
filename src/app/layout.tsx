@@ -6,13 +6,13 @@ import { createTheme, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { ChangeViewMenu } from "@/components/ChangeViewMenu";
 import { PueblosProvider } from "./hooks/PueblosContext";
-import MobileNavBar from "@/components/MobileNavBar";
 import isMobileRequest from "@/components/isMobileRequest";
 
 import "./globals.css";
 import "@mantine/core/styles.css";
 // ‼️ import notifications styles after core package styles
 import "@mantine/notifications/styles.css";
+import NavBarWrapper from "@/components/NavBarWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,7 +39,6 @@ const RootLayout = async ({
   children: React.ReactNode;
 }>) => {
   const isMobile = await isMobileRequest();
-
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
@@ -47,7 +46,7 @@ const RootLayout = async ({
           <Notifications />
           <QueryProvider>
             <PueblosProvider>
-              {isMobile ? <MobileNavBar /> : <NavBar />}
+              <NavBarWrapper />
               <ChangeViewMenu />
               {children}
             </PueblosProvider>

@@ -3,18 +3,30 @@ import { createClient } from "@/lib/supabase/utils/client";
 import { Burger, NavLink, Title, useComputedColorScheme } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ColorSchemeToggle from "./ColorSchemeToggle";
 
 import styles from "./mobileNavBar.module.css";
 
 const MobileNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [navBarImg, setNavBarImg] = useState("/axolotl.png");
+  const [logoClass, setLogoClass] = useState(styles.logoImg);
   const supabase = createClient();
   const router = useRouter();
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });
+
+  useEffect(() => {
+    if (computedColorScheme === "dark") {
+      setNavBarImg("/axolotl.png");
+      setLogoClass(styles.logoImg);
+    } else {
+      setNavBarImg("/axolotlSunglasses.png");
+      setLogoClass(styles.logoImgSunglasses);
+    }
+  }, [computedColorScheme]);
 
   const handleClick = () => {
     setIsOpen((e) => !e);
@@ -25,24 +37,17 @@ const MobileNavBar = () => {
   };
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.titleContainer}>
         <Image
-          src={
-            computedColorScheme === "dark"
-              ? "/axolotl.png"
-              : "/axolotlSunglasses.png"
-          }
+          src={navBarImg}
           alt="axolotl"
           aria-hidden
           width={40}
           height={40}
-          className={
-            computedColorScheme === "dark"
-              ? styles.logoImg
-              : styles.logoImgSunglasses
-          }
+          className={logoClass}
         />
+
         <Title order={2} className={styles.logo}>
           Querido Pueblos
         </Title>
