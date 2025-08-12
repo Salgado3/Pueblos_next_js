@@ -1,5 +1,4 @@
-// components/CloudinaryImage.jsx
-"use client"; // if you're using App Router (Next.js 13+)
+"use client";
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import cloudinaryLoader from "./cloudinaryLoader";
@@ -18,13 +17,7 @@ const CloudinaryImage = ({
   height?: number;
 }) => {
   const [hasError, setHasError] = useState(false);
-  // const cld = new Cloudinary({
-  //   cloud: {
-  //     cloudName: process.env.NEXT_PUBLIC_CLOUD_NAME,
-  //   },
-  // });
 
-  // const cldImg = cld.image(publicId); // e.g. "sample" or "folder/image"
   // Generate a super low-res placeholder based on aspect ratio
   const blurDataURL = useMemo(() => {
     const aspectRatio = width / height;
@@ -34,7 +27,7 @@ const CloudinaryImage = ({
     return `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload/w_${blurWidth},h_${blurHeight},c_fill,q_10/${publicId}`;
   }, [width, height, publicId]);
 
-  if (!hasError) {
+  if (hasError) {
     return (
       <Image
         className={className || ""}
@@ -47,33 +40,19 @@ const CloudinaryImage = ({
     );
   }
   return (
-    <>
-      {/* <AdvancedImage
-        cldImg={cldImg}
-        className={className || ""}
-        style={{ maxWidth: "100%", maxHeight: "100%" }}
-        alt={puebloTitle}
-        plugins={[
-          lazyload({ threshold: 0, rootMargin: "0px" }),
-          responsive(),
-          placeholder({ mode: "blur" }),
-        ]}
-        onError={() => setHasError(true)}
-      /> */}
-      <Image
-        className={className || ""}
-        loader={cloudinaryLoader}
-        src={publicId} // e.g. "folder/image.jpg"
-        alt={puebloTitle}
-        width={width}
-        height={height}
-        placeholder="blur"
-        blurDataURL={blurDataURL}
-        onError={() => setHasError(true)}
-        loading="lazy"
-        style={{ maxWidth: "100%", maxHeight: "100%" }}
-      />
-    </>
+    <Image
+      className={className || ""}
+      loader={cloudinaryLoader}
+      src={publicId} // e.g. "folder/image.jpg"
+      alt={puebloTitle}
+      width={width}
+      height={height}
+      placeholder="blur"
+      blurDataURL={blurDataURL}
+      onError={() => setHasError(true)}
+      loading="lazy"
+      style={{ maxWidth: "100%", maxHeight: "100%" }}
+    />
   );
 };
 
