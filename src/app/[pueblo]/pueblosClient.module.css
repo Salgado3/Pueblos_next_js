@@ -32,6 +32,9 @@
 }
 
 @media only screen and (max-width: 500px) {
+  .cardContainer {
+    margin-top: 6rem;
+  }
   .image {
     height: fit-content;
   }

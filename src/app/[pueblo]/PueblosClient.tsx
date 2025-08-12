@@ -1,36 +1,79 @@
 "use client";
 import L from "leaflet";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
-import { List, ThemeIcon } from "@mantine/core";
+import { Button, List, ThemeIcon } from "@mantine/core";
 import { useParams } from "next/navigation";
 import usePueblos from "@/lib/reactQuery/usePueblos";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
-import { IconCircleCheck, IconCircleDashed } from "@tabler/icons-react";
+import {
+  IconCircleCheck,
+  IconCircleDashed,
+  IconHeartPlus,
+  IconMapStar,
+} from "@tabler/icons-react";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
 
 import "leaflet/dist/leaflet.css";
 import styles from "./pueblosClient.module.css";
+import { createClient } from "@/lib/supabase/utils/client";
+import { useEffect, useState } from "react";
+import useUserLikedPueblos from "@/lib/reactQuery/useUserLikedPueblos";
+import useUserVisitedPueblos from "@/lib/reactQuery/useUserVisitedPueblos";
+import updateUserLikedPueblos from "@/lib/reactQuery/useUpdateUserLikedPueblos";
+import updateUserVisitedPueblos from "@/lib/reactQuery/useUpdateUserVisitedPueblos";
 
 export default function PueblosClient() {
+  const [userId, setUserId] = useState<string>("");
+  const [loading, setLoading] = useState(true);
   const params = useParams();
   const selectedPueblo = params?.pueblo as string;
-  const { data, isLoading, error } = usePueblos();
-
-  if (isLoading) return <LoadingOverlay />;
-  if (error) return <NotFoundOverlay />;
-
+  const { data, isLoading, error: pueblosError } = usePueblos();
   const normalize = (str: string) =>
     str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
   const name = normalize(
     decodeURIComponent(selectedPueblo).replace(/_/g, " ").toLowerCase()
   );
-  //@ts-expect-error
   const pueblo = data?.find((p) => normalize(p.title.toLowerCase()) === name);
+  if (pueblosError || !pueblo?.id)
+    return <NotFoundOverlay title="Looks like nothing is here" />;
+  // const { data: authData, error: authError } = await supabase.auth.getUser();
+  const { data: isLiked, isLoading: likedStatusLoading } = useUserLikedPueblos(
+    userId,
+    pueblo.id
+  );
+  const { data: isVisited, isLoading: visitedStatusLoading } =
+    useUserVisitedPueblos(userId, pueblo.id);
 
-  if (!pueblo) return <NotFoundOverlay />;
+  const { mutate: toggleLike } = updateUserLikedPueblos(userId, pueblo.id);
+  const { mutate: toggleVisited } = updateUserVisitedPueblos(userId, pueblo.id);
+  console.log("Jaimes isVisited", isVisited);
+  useEffect(() => {
+    setLoading(true);
+    const fetchUserId = async () => {
+      const supabase = createClient();
+      const { data: authData, error } = await supabase.auth.getUser();
+      if (error) {
+        setUserId("");
+      }
+      if (authData.user) {
+        setUserId(authData.user.id);
+      }
+      setLoading(false);
+    };
+    fetchUserId();
+  }, []);
+
+  if (isLoading || likedStatusLoading || visitedStatusLoading || loading)
+    return <LoadingOverlay />;
+
+  const handleLikeButton = async () => {
+    if (typeof isLiked === "boolean") toggleLike(isLiked);
+  };
+  const handleVisitedButton = () => {
+    if (typeof isVisited === "boolean") toggleVisited(isVisited);
+  };
 
   return (
     <main className={styles.cardContainer} key={pueblo.title}>
@@ -41,16 +84,33 @@ export default function PueblosClient() {
           className={styles.image}
           publicId={pueblo.cloudinary_id || ""}
         />
-        <p>
-          photo by{" "}
-          <Link
-            href={pueblo.photo_by_url ?? ""}
-            target="_blank"
-            rel="noopener noreferrer"
+        <div>
+          <Button
+            variant={isLiked ? "filled" : "subtle"}
+            color="pink"
+            title={isLiked ? "Liked" : "Like"}
+            onClick={handleLikeButton}
           >
-            {pueblo.photo_by}
-          </Link>
-        </p>
+            <IconHeartPlus />
+          </Button>
+          <Button
+            variant={isVisited ? "filled" : "subtle"}
+            color="pink"
+            title={isVisited ? "Visited" : "Visit"}
+            onClick={handleVisitedButton}
+          >
+            <IconMapStar />
+          </Button>
+          <div>
+            <Link
+              href={pueblo.photo_by_url ?? ""}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              photo by: {pueblo.photo_by}
+            </Link>
+          </div>
+        </div>
 
         {pueblo.latitude && pueblo.longitude && (
           <MapContainer
@@ -83,7 +143,6 @@ export default function PueblosClient() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {" "}
           <p>View on Google Maps</p>
         </Link>
         <p>{`Airport ${pueblo.airport_id}`}</p>

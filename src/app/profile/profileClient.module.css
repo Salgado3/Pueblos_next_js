@@ -1,0 +1,15 @@
+.titleContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.titleContainer > h1 {
+  align-self: center;
+}
+
+
+@media (max-width: 600px) {
+  .container {
+    margin-top: 10rem;
+  }
+}

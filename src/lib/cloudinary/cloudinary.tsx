@@ -1,58 +1,79 @@
 // components/CloudinaryImage.jsx
 "use client"; // if you're using App Router (Next.js 13+)
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Image from "next/image";
-import { Cloudinary } from "@cloudinary/url-gen";
-import {
-  AdvancedImage,
-  lazyload,
-  responsive,
-  accessibility,
-  placeholder,
-} from "@cloudinary/react";
+import cloudinaryLoader from "./cloudinaryLoader";
 
 const CloudinaryImage = ({
   puebloTitle,
   publicId,
   className,
+  width = 400,
+  height = 400,
 }: {
   puebloTitle: string;
   publicId: string;
   className?: string;
+  width?: number;
+  height?: number;
 }) => {
   const [hasError, setHasError] = useState(false);
-  const cld = new Cloudinary({
-    cloud: {
-      cloudName: process.env.NEXT_PUBLIC_CLOUD_NAME,
-    },
-  });
+  // const cld = new Cloudinary({
+  //   cloud: {
+  //     cloudName: process.env.NEXT_PUBLIC_CLOUD_NAME,
+  //   },
+  // });
 
-  const cldImg = cld.image(publicId); // e.g. "sample" or "folder/image"
+  // const cldImg = cld.image(publicId); // e.g. "sample" or "folder/image"
+  // Generate a super low-res placeholder based on aspect ratio
+  const blurDataURL = useMemo(() => {
+    const aspectRatio = width / height;
+    const blurWidth = 10; // tiny width for placeholder
+    const blurHeight = Math.round(blurWidth / aspectRatio);
 
-  if (hasError) {
+    return `https://res.cloudinary.com/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload/w_${blurWidth},h_${blurHeight},c_fill,q_10/${publicId}`;
+  }, [width, height, publicId]);
+
+  if (!hasError) {
     return (
       <Image
+        className={className || ""}
         src="/imageNotFound.png" // Replace with your fallback image path
         alt="image not available"
-        style={{ maxWidth: "90%", maxHeight: "90%" }}
-        width={400}
-        height={400}
+        style={{ maxWidth: "100%", maxHeight: "100%" }}
+        width={width}
+        height={height}
       />
     );
   }
   return (
-    <AdvancedImage
-      cldImg={cldImg}
-      className={className || ""}
-      style={{ maxWidth: "100%", maxHeight: "100%" }}
-      alt={puebloTitle}
-      plugins={[
-        lazyload({ threshold: 0, rootMargin: "0px" }),
-        responsive(),
-        placeholder({ mode: "blur" }),
-      ]}
-      onError={() => setHasError(true)}
-    />
+    <>
+      {/* <AdvancedImage
+        cldImg={cldImg}
+        className={className || ""}
+        style={{ maxWidth: "100%", maxHeight: "100%" }}
+        alt={puebloTitle}
+        plugins={[
+          lazyload({ threshold: 0, rootMargin: "0px" }),
+          responsive(),
+          placeholder({ mode: "blur" }),
+        ]}
+        onError={() => setHasError(true)}
+      /> */}
+      <Image
+        className={className || ""}
+        loader={cloudinaryLoader}
+        src={publicId} // e.g. "folder/image.jpg"
+        alt={puebloTitle}
+        width={width}
+        height={height}
+        placeholder="blur"
+        blurDataURL={blurDataURL}
+        onError={() => setHasError(true)}
+        loading="lazy"
+        style={{ maxWidth: "100%", maxHeight: "100%" }}
+      />
+    </>
   );
 };
 

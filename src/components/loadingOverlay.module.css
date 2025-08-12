@@ -39,3 +39,9 @@
   animation: fadeInOut 2s ease-in-out infinite;
   font-size: 1.25rem;
 }
+
+@media (max-width) {
+  .container {
+    margin-top: 10rem;
+  }
+}

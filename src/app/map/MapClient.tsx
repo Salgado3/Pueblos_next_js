@@ -22,7 +22,8 @@ const MapClient = () => {
     });
   }, []);
   if (isLoading) return <LoadingOverlay />;
-  if (filteredPueblos.length === 0) return <NotFoundOverlay />;
+  if (filteredPueblos.length === 0)
+    return <NotFoundOverlay title="Looks like nothing is here" />;
   return (
     <MapContainer
       key={"mapContainer"}

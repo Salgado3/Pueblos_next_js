@@ -31,6 +31,7 @@
     top: 0;
     z-index: 1001;
     background: inherit;
+    border-bottom: 1px solid ghostwhite;
   }
   .titleContainer {
     width: 95%;

@@ -1,10 +1,11 @@
+"use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePueblosContext } from "@/app/hooks/PueblosContext";
 
 import styles from "./notFoundOverlay.module.css";
 
-const NotFoundOverlay = () => {
+const NotFoundOverlay = ({ title }: { title: string }) => {
   const router = useRouter();
   const { airportId, setAirportId } = usePueblosContext();
   const handleClick = () => {
@@ -23,7 +24,7 @@ const NotFoundOverlay = () => {
         height={50}
         aria-hidden
       />
-      <p className={styles.notFoundtext}>Looks like nothing is here</p>
+      <h3 className={styles.notFoundtext}>{title}</h3>
       <button onClick={handleClick}>Go Back</button>
     </div>
   );

@@ -6,7 +6,6 @@ export type Json =
   | { [key: string]: Json | undefined }
   | Json[]
 
-  export type Pueblo = Database["public"]["Tables"]["pueblos_magicos"]["Row"];
 export type Database = {
   // Allows to automatically instanciate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
@@ -15,6 +14,35 @@ export type Database = {
   }
   public: {
     Tables: {
+      liked: {
+        Row: {
+          created_at: string | null
+          id: string
+          pueblo_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          pueblo_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          pueblo_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "liked_pueblo_id_fkey"
+            columns: ["pueblo_id"]
+            isOneToOne: false
+            referencedRelation: "pueblos_magicos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       pueblos_magicos: {
         Row: {
           airport_id: string | null
@@ -65,6 +93,35 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
+      }
+      visited: {
+        Row: {
+          created_at: string | null
+          id: string
+          pueblo_id: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string
+          pueblo_id?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          pueblo_id?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "visited_pueblo_id_fkey"
+            columns: ["pueblo_id"]
+            isOneToOne: false
+            referencedRelation: "pueblos_magicos"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {

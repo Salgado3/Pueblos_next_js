@@ -1,14 +1,7 @@
-"use client";
-import NotFoundOverlay from "@/components/NotFoundOverlay";
+import ProfileClientWrapper from "./ProfileClientWrapper";
 
-import styles from "./page.module.css";
-
-const page = () => {
-  return (
-    <div className={styles.container}>
-      <NotFoundOverlay />
-    </div>
-  );
+const page = async () => {
+  return <ProfileClientWrapper />;
 };
 
 export default page;

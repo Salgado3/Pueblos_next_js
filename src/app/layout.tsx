@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import NavBar from "@/components/NavBar";
 import { QueryProvider } from "./query-provider";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { ChangeViewMenu } from "@/components/ChangeViewMenu";
 import { PueblosProvider } from "./hooks/PueblosContext";
-import isMobileRequest from "@/components/isMobileRequest";
 
 import "./globals.css";
 import "@mantine/core/styles.css";
@@ -38,7 +36,7 @@ const RootLayout = async ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-  const isMobile = await isMobileRequest();
+
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

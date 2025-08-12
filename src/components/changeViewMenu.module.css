@@ -7,15 +7,17 @@
   flex-wrap: wrap;
 }
 
-@media only screen and (max-width: 500px) {
+@media (max-width: 470px) {
   .container {
     justify-content: center;
     position: fixed;
     margin: 0;
     bottom: 0;
-    z-index: 1000;
+    z-index: 1001;
     background: inherit;
     width: 100%;
+    padding-top: 0.5rem;
+    border-top: 1px solid ghostwhite;
   }
   .button {
     margin: 0.5rem 0.5rem;

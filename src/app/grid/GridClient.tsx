@@ -15,7 +15,8 @@ const GridClient = () => {
     return <LoadingOverlay />;
   }
 
-  if (filteredPueblos.length === 0) return <NotFoundOverlay />;
+  if (filteredPueblos.length === 0)
+    return <NotFoundOverlay title="Looks like nothing is here" />;
 
   const puebloData = filteredPueblos?.map((item, i) => {
     if (!item.title) return;

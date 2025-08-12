@@ -56,3 +56,8 @@
     grid-template-columns: repeat(3, 1fr); /* 3 columns on desktop */
   }
 }
+@media (max-width: 600px) {
+  .unOrderedListContainer {
+    margin-top: 7rem;
+  }
+}

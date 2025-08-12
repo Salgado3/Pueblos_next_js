@@ -4,11 +4,8 @@
   padding: 1rem;
 }
 
-.cardContainerLink:hover {
-  box-shadow: 2.5px 2.5px 2.5px 2.5px rgba(97, 72, 219, 0.911);
-  transition-duration: 0.5s;
-  transition-property: transform;
-  transform: scale(1.005);
+.cardContainerLink {
+  display: flex;
 }
 
 .imageContainer {
@@ -26,7 +23,7 @@
   width: 80%;
 }
 
-@media only screen and (max-width: 500px) {
+@media (max-width: 600px) {
   .cardContainerLink {
     display: flex;
     justify-content: space-between;
@@ -41,6 +38,9 @@
     width: 30%;
   }
 
+  .cardContainer:first-of-type {
+    margin-top: 7rem;
+  }
   .cardContainer:hover {
     border: 1px solid yellow;
   }

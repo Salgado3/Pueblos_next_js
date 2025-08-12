@@ -2,21 +2,21 @@
 import { usePueblosContext } from "../hooks/PueblosContext";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
-
-import styles from "./listClient.module.css";
-import { Pueblo } from "../../../database.types";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
 import { useMediaQuery } from "@mantine/hooks";
 import LoadingOverlay from "@/components/LoadingOverlay";
+
+import styles from "./listClient.module.css";
 
 const ListClient = () => {
   const { filteredPueblos, isLoading } = usePueblosContext();
   const isMobile = useMediaQuery("(max-width: 500px)");
 
   if (isLoading) return <LoadingOverlay />;
-  if (filteredPueblos.length === 0) return <NotFoundOverlay />;
+  if (filteredPueblos.length === 0)
+    return <NotFoundOverlay title="Looks like nothing is here" />;
 
-  const puebloData = filteredPueblos?.map((item: Pueblo, i: number) => {
+  const puebloData = filteredPueblos?.map((item, i) => {
     if (!item?.title) return;
     return (
       <li className={styles.cardContainer} key={item.title + i}>
@@ -30,6 +30,8 @@ const ListClient = () => {
               puebloTitle={item.title}
               publicId={item.cloudinary_id || ""}
               className={styles.cloudinaryImage}
+              width={isMobile ? 75 : 400}
+              height={isMobile ? 75 : 400}
             />
           </div>
           <div className={styles.titleContainer}>
