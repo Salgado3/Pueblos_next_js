@@ -2,11 +2,11 @@
 "use client";
 import { createContext, ReactNode, useContext, useMemo, useState } from "react";
 import usePueblos from "@/lib/reactQuery/usePueblos";
-import { Pueblo } from "../../../database.types";
+import { type Database } from "../../../database.types";
 
 interface PueblosContextValue {
-  allPueblos: Pueblo[];
-  filteredPueblos: Pueblo[];
+  allPueblos: Database["public"]["Tables"]["pueblos_magicos"]["Row"][];
+  filteredPueblos: Database["public"]["Tables"]["pueblos_magicos"]["Row"][];
   airportId: string;
   setAirportId: (id: string) => void;
   isLoading: boolean;
@@ -19,17 +19,22 @@ interface PueblosProviderProps {
 }
 
 export const PueblosProvider = ({ children }: PueblosProviderProps) => {
-  const { data: allPueblos = [], isLoading } = usePueblos();
+  const { data: allPueblos = [], isLoading, isError, error } = usePueblos();
+  if (isError) throw new Error(error.message);
   const [airportId, setAirportId] = useState("");
 
   const filteredPueblos = useMemo(() => {
     if (!airportId) return allPueblos;
-    return allPueblos?.filter((pueblo) => pueblo.airport_id === airportId);
+    return (
+      //@ts-ignore
+      allPueblos?.filter((pueblo) => pueblo.airport_id === airportId) || []
+    );
   }, [allPueblos, airportId]);
 
   return (
     <PueblosContext.Provider
       value={{
+        //@ts-ignore
         allPueblos,
         filteredPueblos,
         airportId,

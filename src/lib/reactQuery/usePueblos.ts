@@ -2,10 +2,11 @@
 
 import { type DefinedUseQueryResult, type UseQueryResult, useQuery } from "@tanstack/react-query";
 import { createClient } from "../supabase/utils/client";
+import { type Database } from "../../../database.types";
 
 
 
-const usePueblos = ():UseQueryResult => {
+const usePueblos = ():UseQueryResult<Database["public"]["Tables"]["pueblos_magicos"]["Row"][] | Error> => {
   const supabase = createClient();
   //@ts-ignore
   return useQuery({
