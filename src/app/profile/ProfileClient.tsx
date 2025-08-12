@@ -24,14 +24,13 @@ const ProfileClient = () => {
         .eq("user_id", user.id);
     };
     getUserLikes();
-  }, []);
+  }, [supabase]);
 
   if (!hasMounted) return null;
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         <Title>Welcome!</Title>{" "}
-      
       </div>
       {/* <Title order={2}>Visited</Title> */}
       {/* <ProgressRing /> */}

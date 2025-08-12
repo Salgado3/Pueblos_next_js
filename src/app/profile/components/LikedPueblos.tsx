@@ -4,13 +4,13 @@ import Image from "next/image";
 import usePueblos from "@/lib/reactQuery/usePueblos";
 import useUserLikedPueblos from "@/lib/reactQuery/useUserLikedPueblos";
 import { createClient } from "@/lib/supabase/utils/client";
-import { useEffect, useState } from "react";
+import { Key, useEffect, useState } from "react";
 
 import styles from "./likedPueblos.module.css";
 import { Title } from "@mantine/core";
 import Link from "next/link";
 const LikedPueblos = () => {
-  const [userId, setUserId] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string>("");
   const [loading, setLoading] = useState(true);
   const {
     data: pueblosData,
@@ -29,7 +29,7 @@ const LikedPueblos = () => {
       const supabase = createClient();
       const { data: authData, error } = await supabase.auth.getUser();
       if (error) {
-        setUserId(null);
+        setUserId("");
       }
       if (authData.user) {
         setUserId(authData.user.id);
@@ -38,14 +38,15 @@ const LikedPueblos = () => {
     };
     fetchUserId();
   }, []);
+  //@ts-expect-error
   const puebloIdArray = likedPuebloData?.map(
     (item: { pueblo_id: string; id: string }) => item.pueblo_id
   );
+  //@ts-expect-error
   const filteredLikedPueblos = pueblosData?.filter((item) => {
-    console.log("Jimes item.id", likedPuebloData, puebloIdArray);
     return puebloIdArray?.includes(item.id);
   });
-  console.log("Jaimes pueblodata", puebloIdArray);
+
   if (usePueblosIsLoading || likedPueblosIsLoading || loading) {
     return <LoadingOverlay />;
   }
@@ -71,37 +72,43 @@ const LikedPueblos = () => {
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
-      <Title order={2} className={styles.title}>
-        Pueblos I Love
-      </Title>
-      <Image
-        className={styles.titleContainerImg}
-        src="/axolotlLove.png"
-        alt="axolotl holding a heart"
-        width={30}
-        height={35}
-        aria-hidden
-      />
+        <Title order={2} className={styles.title}>
+          Pueblos I Love
+        </Title>
+        <Image
+          className={styles.titleContainerImg}
+          src="/axolotlLove.png"
+          alt="axolotl holding a heart"
+          width={30}
+          height={35}
+          aria-hidden
+        />
       </div>
       <ul className={styles.unorderedListContainer}>
-        {filteredLikedPueblos?.map((item) => {
-          return (
-            <li key={item.id} className={styles.listContainer}>
-              <Link
-                className={styles.cardContainerLink}
-                href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
-                rel="noopener noreferrer"
-              >
-                <CloudinaryImage
-                  puebloTitle={item.title}
-                  publicId={item.cloudinary_id}
-                  className={styles.image}
-                />
-              </Link>
-              {/* <Title order={3}>{item.title}</Title> */}
-            </li>
-          );
-        })}
+        {filteredLikedPueblos?.map(
+          (item: {
+            id: Key | null | undefined;
+            title: string;
+            cloudinary_id: string;
+          }) => {
+            return (
+              <li key={item.id} className={styles.listContainer}>
+                <Link
+                  className={styles.cardContainerLink}
+                  href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
+                  rel="noopener noreferrer"
+                >
+                  <CloudinaryImage
+                    puebloTitle={item.title}
+                    publicId={item.cloudinary_id}
+                    className={styles.image}
+                  />
+                </Link>
+                {/* <Title order={3}>{item.title}</Title> */}
+              </li>
+            );
+          }
+        )}
       </ul>
     </div>
   );

@@ -27,12 +27,13 @@ const page = () => {
           className={styles.logoImg}
         />
       </div>
-      <p className={styles.text}>Every pluebo has a story. </p>
-      <p>
-        It can be the cobble streets linking the the town square, the endless
-        alleys, the homemade food and winding markets. Regardless of where you
-        are, you get to meet new people, learn their story and appreciate the
-        place they call home...
+      <p className={styles.text}>Every place tells a story.</p>
+      <p style={{ textAlign: "justify" }}>
+        Whether it's found in cobblestone streets, the endless alleys, the
+        homemade food and winding markets or the people hanging out in the town
+        square. My hope is that this site will inspire you to plan that trip
+        you've been holding off on, pack your bags, and add the next chapter to
+        your story...
       </p>
     </Card>
   );

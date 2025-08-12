@@ -2,19 +2,19 @@
 
 import { type DefinedUseQueryResult, type UseQueryResult, useQuery } from "@tanstack/react-query";
 import { createClient } from "../supabase/utils/client";
-import { type Pueblo } from "../../../database.types";
 
 
-const usePueblos = ():UseQueryResult<Pueblo[], Error> => {
+
+const usePueblos = ():UseQueryResult => {
   const supabase = createClient();
   //@ts-ignore
-  return useQuery<Pueblo[], Error>({
+  return useQuery({
     queryKey: ["pueblos"],
     queryFn: async ()=> {
       const { data, error } = await supabase
         .from("pueblos_magicos")
         .select("*")
-        .order("title", { ascending: false });
+        .order("title", { ascending: true });
       if (error) {
         throw new Error(error.message); // Use the error message for better debugging
       }

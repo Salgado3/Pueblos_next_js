@@ -35,20 +35,25 @@ export default function PueblosClient() {
   const name = normalize(
     decodeURIComponent(selectedPueblo).replace(/_/g, " ").toLowerCase()
   );
-  const pueblo = data?.find((p) => normalize(p.title.toLowerCase()) === name);
-  if (pueblosError || !pueblo?.id)
-    return <NotFoundOverlay title="Looks like nothing is here" />;
+  //@ts-expect-error
+  const pueblo = data?.find(
+    (p: { title: string }) => normalize(p?.title.toLowerCase()) === name
+  );
+
   // const { data: authData, error: authError } = await supabase.auth.getUser();
   const { data: isLiked, isLoading: likedStatusLoading } = useUserLikedPueblos(
     userId,
-    pueblo.id
+    pueblo?.id
   );
   const { data: isVisited, isLoading: visitedStatusLoading } =
-    useUserVisitedPueblos(userId, pueblo.id);
+    useUserVisitedPueblos(userId, pueblo?.id);
 
-  const { mutate: toggleLike } = updateUserLikedPueblos(userId, pueblo.id);
-  const { mutate: toggleVisited } = updateUserVisitedPueblos(userId, pueblo.id);
-  console.log("Jaimes isVisited", isVisited);
+  const { mutate: toggleLike } = updateUserLikedPueblos(userId, pueblo?.id);
+  const { mutate: toggleVisited } = updateUserVisitedPueblos(
+    userId,
+    pueblo?.id
+  );
+
   useEffect(() => {
     setLoading(true);
     const fetchUserId = async () => {
@@ -64,6 +69,8 @@ export default function PueblosClient() {
     };
     fetchUserId();
   }, []);
+  if (pueblosError || !pueblo?.id)
+    return <NotFoundOverlay title="Looks like nothing is here" />;
 
   if (isLoading || likedStatusLoading || visitedStatusLoading || loading)
     return <LoadingOverlay />;
@@ -161,11 +168,10 @@ export default function PueblosClient() {
           </ThemeIcon>
         }
       >
-        <List.Item>Clone or download repository from GitHub</List.Item>
-        <List.Item>Install dependencies with yarn</List.Item>
-        <List.Item>To start development server run npm start command</List.Item>
+        <List.Item>Coming soon...</List.Item>
+        <List.Item>I will personally be curating these lists</List.Item>
         <List.Item>
-          Run tests to make sure your changes do not break the build
+          So this might take me a week or two... maybe three
         </List.Item>
         <List.Item
           icon={
@@ -174,7 +180,7 @@ export default function PueblosClient() {
             </ThemeIcon>
           }
         >
-          Submit a pull request once you are done
+          Thanks for understanding 🫶
         </List.Item>
       </List>
     </main>

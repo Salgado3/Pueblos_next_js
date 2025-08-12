@@ -58,6 +58,6 @@
 }
 @media (max-width: 600px) {
   .unOrderedListContainer {
-    margin-top: 7rem;
+    margin: 7rem;
   }
 }
