@@ -23,11 +23,13 @@
 .titleContainer {
   display: flex;
   justify-content: center;
+  margin-bottom: 0.5rem;
 }
 
 .titleContainerImg {
   height: 2rem;
   width: 2.5rem;
+  align-self: end;
 }
 
 .image {
@@ -37,7 +39,8 @@
 
 @media (max-width: 600px) {
   .container {
-    height: 55vh;
+    height: 65vh;
+    overflow: scroll;
   }
   .unorderedListContainer {
     grid-template-columns: repeat(2, 1fr);

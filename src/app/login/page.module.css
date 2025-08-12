@@ -1,37 +1,41 @@
-.cardContainer {
-  width: 100%;
-  align-self: center;
-}
-
 .container {
   display: flex;
   flex-direction: column;
+  width: 100%;
+  margin-top: 10rem;
+}
+
+.cardContainer {
   width: 50%;
-  margin: auto;
-  /* margin-top: 3rem; */
+  align-self: center;
 }
 
 .logoImg {
-  height: 3rem;
+  align-self: center;
   width: 3.25rem;
-  align-self: flex-end;
-  margin-bottom: -11rem;
+  height: 3rem;
+  margin-bottom: -1rem;
 }
 
 .button {
   margin: 1.5rem 0.5rem;
 }
 
-@media only screen and (max-width: 500px) {
+@media (max-width: 500px) {
   .container {
-    width: 80%;
-    margin-top: 10rem;
+    width: 100%;
   }
+  .cardContainer {
+    margin-top: 11rem;
+    width: 80%;
+    align-self: center;
+  }
+
   .logoImg {
+    align-self: flex-end;
     height: 3rem;
     width: 3.25rem;
-    align-self: flex-end;
-    position: sticky;
-    top: 11rem;
+    margin-right: 3rem;
+    margin-bottom: -12rem;
   }
 }

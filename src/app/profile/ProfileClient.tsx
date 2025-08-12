@@ -30,7 +30,7 @@ const ProfileClient = () => {
   return (
     <div className={styles.container}>
       <div className={styles.titleContainer}>
-        <Title>Welcome!</Title>{" "}
+        {/* <Title>Welcome!</Title>{" "} */}
       </div>
       {/* <Title order={2}>Visited</Title> */}
       {/* <ProgressRing /> */}
