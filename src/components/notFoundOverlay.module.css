@@ -47,6 +47,8 @@
 
 @media (max-width: 600px) {
   .container {
-    margin: auto;
+    padding-top: 150px;
+    padding-bottom: 120px;
+    margin: 0 auto;
   }
 }

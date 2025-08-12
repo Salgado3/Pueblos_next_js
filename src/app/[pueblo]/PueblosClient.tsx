@@ -83,7 +83,7 @@ export default function PueblosClient() {
   };
 
   return (
-    <main className={styles.cardContainer} key={pueblo.title}>
+    <div className={styles.cardContainer} key={pueblo.title}>
       <h2 className={styles.titleHeader}>{pueblo.title}</h2>
       <div className={styles.imageContainer}>
         <CloudinaryImage
@@ -183,6 +183,6 @@ export default function PueblosClient() {
           Thanks for understanding 🫶
         </List.Item>
       </List>
-    </main>
+    </div>
   );
 }

@@ -27,6 +27,7 @@
   .container {
     width: 100%;
     position: fixed;
+    /* height: 100px; */
     margin: 0;
     top: 0;
     z-index: 1001;

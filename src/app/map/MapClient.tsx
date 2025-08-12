@@ -29,7 +29,12 @@ const MapClient = () => {
       key={"mapContainer"}
       center={[23.0, -104.0]}
       zoom={6}
-      style={{ height: "60%", width: "100%", marginTop: "10rem" }}
+      style={{
+        height: "80%",
+        width: "100%",
+        paddingTop: "120px",
+        paddingBottom: "120px",
+      }}
     >
       <TileLayer
         attribution="&copy; OpenStreetMap contributors"

@@ -51,7 +51,11 @@ const ListClient = () => {
     );
   });
 
-  return <ul>{puebloData}</ul>;
+  return (
+    <div className={styles.container}>
+      <ul>{puebloData}</ul>
+    </div>
+  );
 };
 
 export default ListClient;

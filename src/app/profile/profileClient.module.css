@@ -7,9 +7,9 @@
   align-self: center;
 }
 
-
 @media (max-width: 600px) {
   .container {
-    margin-top: 10rem;
+    padding-top: 100px;
+    padding-bottom: 120px;
   }
 }

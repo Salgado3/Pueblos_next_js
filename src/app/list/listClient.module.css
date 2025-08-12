@@ -24,6 +24,10 @@
 }
 
 @media (max-width: 600px) {
+  .container {
+    padding-top: 100px;
+    padding-bottom: 120px;
+  }
   .cardContainerLink {
     display: flex;
     justify-content: space-between;
@@ -38,12 +42,6 @@
     width: 30%;
   }
 
-  .cardContainer:first-of-type {
-    margin-top: 7rem;
-  }
-  .cardContainer:last-of-type {
-    margin-bottom: 7rem;
-  }
   .cardContainer:hover {
     border: 1px solid yellow;
   }

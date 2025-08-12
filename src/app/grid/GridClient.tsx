@@ -61,11 +61,8 @@ const GridClient = () => {
   });
 
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <ul className={styles.unOrderedListContainer}>{puebloData}</ul>{" "}
-      </main>
-      <footer className={styles.footer}></footer>
+    <div className={styles.container}>
+      <ul className={styles.unOrderedListContainer}>{puebloData}</ul>
     </div>
   );
 };

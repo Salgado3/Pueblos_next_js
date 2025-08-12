@@ -57,7 +57,15 @@
   }
 }
 @media (max-width: 600px) {
+  .container {
+    padding-top: 100px;
+    padding-bottom: 120px;
+  }
   .unOrderedListContainer {
-    margin: 7rem auto;
+    margin: 0 auto;
+  }
+  .cloudinaryImg {
+    height: 15rem;
+    width: 90%;
   }
 }
