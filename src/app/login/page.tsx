@@ -13,6 +13,7 @@ import styles from "./page.module.css";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const supabase = createClient();
   const queryClient = useQueryClient();
@@ -59,7 +60,7 @@ export default function LoginPage() {
 
   const handleLogin = async () => {
     const id = showLoadingNotification();
-
+    setIsLoading(true);
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -67,15 +68,17 @@ export default function LoginPage() {
 
     if (error) {
       updateErrorNotification(id, "Invalid email or password.");
-    } else {
-      updateSuccessNotification(
-        id,
-        "Login successful!",
-        "Redirecting to your dashboard."
-      );
-      await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
-      router.push("/");
     }
+
+    updateSuccessNotification(
+      id,
+      "Login successful!",
+      "Redirecting to your dashboard."
+    );
+
+    await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
+    setIsLoading(false);
+    router.push("/");
   };
 
   const handleSignup = async () => {
@@ -91,15 +94,15 @@ export default function LoginPage() {
         id,
         "An error occurred during sign up. Please try again."
       );
-    } else {
-      // The user is NOT logged in after sign-up, so we don't redirect.
-      // Instead, we show a success message and prompt them to check their email.
-      updateSuccessNotification(
-        id,
-        "Sign up successful!",
-        "Please check your email to confirm your account."
-      );
     }
+    // The user is NOT logged in after sign-up, so we don't redirect.
+    // Instead, we show a success message and prompt them to check their email.
+    updateSuccessNotification(
+      id,
+      "Sign up successful!",
+      "Please check your email to confirm your account."
+    );
+    setIsLoading(false);
   };
 
   return (
@@ -141,13 +144,19 @@ export default function LoginPage() {
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
         <div className={styles.buttonGroup}>
-          <Button type="button" className={styles.button} onClick={handleLogin}>
+          <Button
+            type="button"
+            className={styles.button}
+            onClick={handleLogin}
+            loading={isLoading}
+          >
             Log in
           </Button>
           <Button
             type="button"
             className={styles.button}
             onClick={handleSignup}
+            loading={isLoading}
           >
             Sign up
           </Button>

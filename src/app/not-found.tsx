@@ -1,13 +1,13 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import NotFoundOverlay from "@/components/NotFoundOverlay";
+
+import styles from "./not-found.module.css";
+
 export default function NotFound() {
-  const router = useRouter();
   return (
-    <div>
-      <h2>Not Found</h2>
-      <p>Could not find requested resource</p>
-      <button onClick={() => router.push("/")}>Go home</button>
+    <div className={styles.container}>
+      <NotFoundOverlay title="Looks like nothing is here" />
     </div>
   );
 }

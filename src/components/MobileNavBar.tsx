@@ -10,7 +10,7 @@ import styles from "./mobileNavBar.module.css";
 
 const MobileNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [navBarImg, setNavBarImg] = useState("/axolotl.png");
+  const [navBarImg, setNavBarImg] = useState(() => "/axolotl.png");
   const [logoClass, setLogoClass] = useState(styles.logoImg);
   const supabase = createClient();
   const router = useRouter();
@@ -38,24 +38,9 @@ const MobileNavBar = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.titleContainer}>
-        <Image
-          src={navBarImg}
-          alt="axolotl"
-          aria-hidden
-          width={40}
-          height={40}
-          className={logoClass}
-        />
-
-        <Title order={2} className={styles.logo}>
-          Querido Pueblos
-        </Title>
-        <ColorSchemeToggle />
-      </div>
       <NavLink
         href="#required-for-focus"
-        label={
+        leftSection={
           <Burger
             style={{ width: "80%" }}
             opened={isOpen}
@@ -63,6 +48,23 @@ const MobileNavBar = () => {
             aria-label="Toggle navigation"
           />
         }
+        label={
+          <div className={styles.titleContainer}>
+            <Image
+              src={navBarImg}
+              alt="axolotl"
+              aria-hidden
+              width={40}
+              height={40}
+              className={logoClass}
+            />
+
+            <Title order={2} className={styles.logo}>
+              Querido Pueblos
+            </Title>
+          </div>
+        }
+        rightSection={<ColorSchemeToggle />}
       >
         <NavLink label="About" href="/about" />
         <NavLink label="Profile" href="/profile" />
