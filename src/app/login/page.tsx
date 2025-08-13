@@ -1,7 +1,7 @@
 "use client";
 import { PasswordInput, TextInput, Card, Title, Button } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
-
+import { useQueryClient } from "@tanstack/react-query";
 import { IconCheck } from "@tabler/icons-react";
 import { useState } from "react";
 import Image from "next/image";
@@ -15,15 +15,16 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const supabase = createClient();
+  const queryClient = useQueryClient();
 
   const showLoadingNotification = () => {
     return notifications.show({
       loading: true,
       title: "Processing request",
       message: "Please wait...",
-      autoClose: false,
       withCloseButton: false,
       position: "top-center",
+      autoClose: false,
     });
   };
 
@@ -39,7 +40,7 @@ export default function LoginPage() {
       message: message,
       icon: <IconCheck size={18} />,
       loading: false,
-      autoClose: 2000,
+      autoClose: 3000,
       position: "top-center",
     });
   };
@@ -51,7 +52,7 @@ export default function LoginPage() {
       color: "red",
       title: "Something went wrong",
       message: message,
-      autoClose: 2000,
+      autoClose: 3000,
       position: "top-center",
     });
   };
@@ -72,6 +73,7 @@ export default function LoginPage() {
         "Login successful!",
         "Redirecting to your dashboard."
       );
+      await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
       router.push("/");
     }
   };

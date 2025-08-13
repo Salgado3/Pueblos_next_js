@@ -2,7 +2,6 @@
   display: flex;
   width: 60vw;
   margin: auto;
-  margin-top: 10rem;
 }
 
 .cardTitleContainer {
@@ -27,6 +26,7 @@
 
 @media only screen and (max-width: 600px) {
   .cardContainer {
+    margin-top: 10rem;
     width: 80vw;
   }
   .title {

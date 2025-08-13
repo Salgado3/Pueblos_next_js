@@ -19,9 +19,9 @@ interface PueblosProviderProps {
 }
 
 export const PueblosProvider = ({ children }: PueblosProviderProps) => {
-  const { data: allPueblos = [], isLoading, isError, error } = usePueblos();
-  if (isError) throw new Error(error.message);
   const [airportId, setAirportId] = useState("");
+  const { data: allPueblos, isLoading, isError, error } = usePueblos();
+  if (isError || error) throw new Error(error.message);
 
   const filteredPueblos = useMemo(() => {
     if (!airportId) return allPueblos;
@@ -29,7 +29,7 @@ export const PueblosProvider = ({ children }: PueblosProviderProps) => {
       //@ts-ignore
       allPueblos?.filter((pueblo) => pueblo.airport_id === airportId) || []
     );
-  }, [allPueblos, airportId]);
+  }, [allPueblos, airportId, isLoading]);
 
   return (
     <PueblosContext.Provider

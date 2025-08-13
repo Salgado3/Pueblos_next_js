@@ -11,7 +11,7 @@ export const ChangeViewMenu = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [isDisabled, setIsDisabled] = useState("");
-  const params = useParams<{ tag: string; item: string }>();
+  const mainView = ["/map", "/list", "/grid"].includes(pathname);
   const handleOnClick = ({
     event,
     path,
@@ -25,7 +25,7 @@ export const ChangeViewMenu = () => {
   };
   if (pathname === "/login") return;
   return (
-    <div className={styles.container}>
+    <div className={mainView ? styles.container : styles.auxViewContainer}>
       <Button
         justify="center"
         variant="default"
@@ -33,7 +33,7 @@ export const ChangeViewMenu = () => {
         className={styles.button}
         onClick={(e) => handleOnClick({ event: e, path: "/map" })}
         title="map view"
-        disabled={isDisabled.includes("/map")}
+        disabled={isDisabled === "/map"}
       >
         <IconMap2 />
       </Button>
@@ -44,7 +44,7 @@ export const ChangeViewMenu = () => {
         className={styles.button}
         onClick={(e) => handleOnClick({ event: e, path: "/grid" })}
         title="grid view"
-        disabled={isDisabled.includes("/grid")}
+        disabled={isDisabled === "/grid"}
       >
         <IconLayoutGrid />
       </Button>
@@ -55,11 +55,11 @@ export const ChangeViewMenu = () => {
         className={styles.button}
         onClick={(e) => handleOnClick({ event: e, path: "/list" })}
         title="list view"
-        disabled={isDisabled.includes("/list")}
+        disabled={isDisabled === "/list"}
       >
         <IconListDetails />
       </Button>
-      {["/map", "/list", "/grid"].includes(pathname) && <PueblosSearch />}
+      {mainView && <PueblosSearch />}
     </div>
   );
 };
