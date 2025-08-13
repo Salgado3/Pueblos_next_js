@@ -10,7 +10,7 @@ import styles from "./mobileNavBar.module.css";
 
 const MobileNavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [navBarImg, setNavBarImg] = useState(() => "/axolotl.png");
+  const [navBarImg, setNavBarImg] = useState(() => "/axolotlLove.png");
   const [logoClass, setLogoClass] = useState(styles.logoImg);
   const supabase = createClient();
   const router = useRouter();
@@ -20,7 +20,7 @@ const MobileNavBar = () => {
 
   useEffect(() => {
     if (computedColorScheme === "dark") {
-      setNavBarImg("/axolotl.png");
+      setNavBarImg("/axolotlLove.png");
       setLogoClass(styles.logoImg);
     } else {
       setNavBarImg("/axolotlSunglasses.png");
@@ -40,6 +40,7 @@ const MobileNavBar = () => {
     <div className={styles.container}>
       <NavLink
         href="#required-for-focus"
+        disableRightSectionRotation={true}
         leftSection={
           <Burger
             style={{ width: "80%" }}

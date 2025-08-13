@@ -13,7 +13,10 @@ import styles from "./page.module.css";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+  const [loadingStatus, setIsLoadingStatus] = useState<{
+    loading: boolean;
+    button: "login" | "signup" | "";
+  }>({ loading: false, button: "" });
   const router = useRouter();
   const supabase = createClient();
   const queryClient = useQueryClient();
@@ -24,7 +27,7 @@ export default function LoginPage() {
       title: "Processing request",
       message: "Please wait...",
       withCloseButton: false,
-      position: "top-center",
+      position: "bottom-center",
       autoClose: false,
     });
   };
@@ -42,7 +45,7 @@ export default function LoginPage() {
       icon: <IconCheck size={18} />,
       loading: false,
       autoClose: 4000,
-      position: "top-center",
+      position: "bottom-center",
     });
   };
 
@@ -54,13 +57,13 @@ export default function LoginPage() {
       title: "Something went wrong",
       message: message,
       autoClose: 3000,
-      position: "top-center",
+      position: "bottom-center",
     });
   };
 
   const handleLogin = async () => {
     const id = showLoadingNotification();
-    setIsLoading(true);
+    setIsLoadingStatus({ loading: true, button: "login" });
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -77,12 +80,13 @@ export default function LoginPage() {
     );
 
     await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
-    setIsLoading(false);
+    setIsLoadingStatus({ loading: false, button: "" });
     router.push("/");
   };
 
   const handleSignup = async () => {
     const id = showLoadingNotification();
+    setIsLoadingStatus({ loading: true, button: "signup" });
 
     const { error } = await supabase.auth.signUp({
       email,
@@ -102,7 +106,7 @@ export default function LoginPage() {
       "Sign up successful!",
       "Please check your email to confirm your account."
     );
-    setIsLoading(false);
+    setIsLoadingStatus({ loading: false, button: "" });
   };
 
   return (
@@ -148,7 +152,7 @@ export default function LoginPage() {
             type="button"
             className={styles.button}
             onClick={handleLogin}
-            loading={isLoading}
+            loading={loadingStatus.loading && loadingStatus.button === "login"}
           >
             Log in
           </Button>
@@ -156,7 +160,7 @@ export default function LoginPage() {
             type="button"
             className={styles.button}
             onClick={handleSignup}
-            loading={isLoading}
+            loading={loadingStatus.loading && loadingStatus.button === "signup"}
           >
             Sign up
           </Button>
