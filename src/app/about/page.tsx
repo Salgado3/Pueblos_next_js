@@ -28,7 +28,7 @@ const page = () => {
         />
       </div>
       <p className={styles.text}>Every place tells a story.</p>
-      <p style={{ textAlign: "justify" }}>
+      <p style={{ textAlign: "justify", marginTop: "1rem" }}>
         Whether it&apos;s found in cobblestone streets, the endless alleys, the
         homemade food and winding markets or the people hanging out in the town
         square. My hope is that this site will inspire you to plan that trip

@@ -108,7 +108,7 @@ export default function LoginPage() {
         src={"/axolotlPeakPlain.png"}
         width={50}
         height={50}
-        alt="Axolotl"
+        alt="axolotl"
         aria-hidden
         className={styles.logoImg}
       />
