@@ -29,7 +29,7 @@ export const PueblosProvider = ({ children }: PueblosProviderProps) => {
       //@ts-ignore
       allPueblos?.filter((pueblo) => pueblo.airport_id === airportId) || []
     );
-  }, [allPueblos, airportId, isLoading]);
+  }, [allPueblos, airportId]);
 
   return (
     <PueblosContext.Provider

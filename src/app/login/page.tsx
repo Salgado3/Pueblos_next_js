@@ -40,7 +40,7 @@ export default function LoginPage() {
       message: message,
       icon: <IconCheck size={18} />,
       loading: false,
-      autoClose: 3000,
+      autoClose: 4000,
       position: "top-center",
     });
   };
