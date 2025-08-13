@@ -73,15 +73,11 @@ export default function LoginPage() {
       updateErrorNotification(id, "Invalid email or password.");
     }
 
-    updateSuccessNotification(
-      id,
-      "Login successful!",
-      "Redirecting to your dashboard."
-    );
+    updateSuccessNotification(id, "Login successful!", "Redirecting.");
 
-    await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
     setIsLoadingStatus({ loading: false, button: "" });
     router.push("/");
+    await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
   };
 
   const handleSignup = async () => {

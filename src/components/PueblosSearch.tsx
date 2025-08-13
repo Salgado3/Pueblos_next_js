@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import {  Select } from "@mantine/core";
+import { Select } from "@mantine/core";
 import { airports } from "./airportData";
 import { usePueblosContext } from "@/app/hooks/PueblosContext";
 
@@ -18,12 +18,11 @@ export const PueblosSearch = () => {
       placeholder="Filter by Airport"
       comboboxProps={{ shadow: "md", width: 200, zIndex: "9999" }}
       data={airportOptions}
-      value={value ? value : null}
-      searchable
+      value={value}
       nothingFoundMessage="Nothing found..."
-      onChange={(options, search) => {
-        setAirportId(options || "");
-        setValue(search?.label);
+      onChange={(selectedAirportId) => {
+        setValue(selectedAirportId || "");
+        setAirportId(selectedAirportId || "");
       }}
     />
   );

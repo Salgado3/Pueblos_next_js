@@ -17,20 +17,6 @@ export default function Navbar() {
     getInitialValueInEffect: true,
   });
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [hasMounted, setHasMounted] = useState(false);
-
-  useEffect(() => {
-    setHasMounted(true);
-    const getUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      setIsLoggedIn(!!data.user);
-    };
-    getUser();
-  }, [supabase.auth, pathname]);
-
-  if (!hasMounted) return null;
-
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.push("/");
@@ -43,7 +29,7 @@ export default function Navbar() {
           <Image
             src={
               computedColorScheme === "dark"
-                ? "/axolotl.png"
+                ? "/axolotlLove.png"
                 : "/axolotlSunglasses.png"
             }
             alt="axolotl"
@@ -69,7 +55,7 @@ export default function Navbar() {
       </div>
 
       <div className={styles.rightLinks}>
-        {isLoggedIn && (
+        {!isLoginPage && (
           <>
             <Link href="/profile" className={styles.link}>
               Profile

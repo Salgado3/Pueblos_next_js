@@ -52,7 +52,7 @@ const LikedPueblos = () => {
   }
 
   if (filteredLikedPueblos?.length === 0) {
-    return <p>not found</p>;
+    return <p>The Pueblos you love will display here..</p>;
   }
 
   //    airport_id: string | null

@@ -25,8 +25,10 @@
 }
 
 .logoImg {
-  height: 2.5rem;
-  transition: opacity 0.3s ease;
+  height: 1.8rem;
+  width: 1.8rem;
+  align-self: end;
+  margin: 0 0.5rem;
 }
 
 .logoImgSunglasses {
