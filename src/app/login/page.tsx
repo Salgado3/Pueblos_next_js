@@ -17,6 +17,8 @@ export default function LoginPage() {
     loading: boolean;
     button: "login" | "signup" | "";
   }>({ loading: false, button: "" });
+  const isFormValid =
+    email.length > 0 && email.includes("@") && password.length > 0;
   const router = useRouter();
   const supabase = createClient();
   const queryClient = useQueryClient();
@@ -45,6 +47,7 @@ export default function LoginPage() {
       icon: <IconCheck size={18} />,
       loading: false,
       autoClose: 4000,
+      withCloseButton: true,
       position: "bottom-center",
     });
   };
@@ -57,11 +60,22 @@ export default function LoginPage() {
       title: "Something went wrong",
       message: message,
       autoClose: 3000,
+      withCloseButton: true,
       position: "bottom-center",
     });
   };
 
   const handleLogin = async () => {
+    if (!email || !password) {
+      notifications.show({
+        withCloseButton: true,
+        title: "Validation Error",
+        message: "Email and password are required.",
+        color: "red",
+        position: "bottom-center",
+      });
+      return;
+    }
     const id = showLoadingNotification();
     setIsLoadingStatus({ loading: true, button: "login" });
     const { error } = await supabase.auth.signInWithPassword({
@@ -81,6 +95,16 @@ export default function LoginPage() {
   };
 
   const handleSignup = async () => {
+    if (!email || !password) {
+      notifications.show({
+        withCloseButton: true,
+        title: "Validation Error",
+        message: "Email and password are required.",
+        color: "red",
+        position: "bottom-center",
+      });
+      return;
+    }
     const id = showLoadingNotification();
     setIsLoadingStatus({ loading: true, button: "signup" });
 
@@ -149,6 +173,7 @@ export default function LoginPage() {
             className={styles.button}
             onClick={handleLogin}
             loading={loadingStatus.loading && loadingStatus.button === "login"}
+            disabled={!isFormValid}
           >
             Log in
           </Button>
@@ -157,6 +182,7 @@ export default function LoginPage() {
             className={styles.button}
             onClick={handleSignup}
             loading={loadingStatus.loading && loadingStatus.button === "signup"}
+            disabled={!isFormValid}
           >
             Sign up
           </Button>
