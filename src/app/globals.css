@@ -39,4 +39,8 @@ a {
   html {
     color-scheme: dark;
   }
+
+  a:hover {
+    text-decoration: underline;
+  }
 }

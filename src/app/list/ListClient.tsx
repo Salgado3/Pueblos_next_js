@@ -10,7 +10,7 @@ import styles from "./listClient.module.css";
 
 const ListClient = () => {
   const { filteredPueblos, isLoading } = usePueblosContext();
-  const isMobile = useMediaQuery("(max-width: 500px)");
+  const isMobile = useMediaQuery("(max-width: 600px)", true);
 
   if (isLoading) return <LoadingOverlay />;
   if (filteredPueblos.length === 0)

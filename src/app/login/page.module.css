@@ -20,7 +20,6 @@
 .link {
   display: flex;
   align-items: flex-end;
-  color: blue;
   padding: 1rem 0;
 }
 
@@ -43,5 +42,11 @@
     height: 3rem;
     width: 3.25rem;
     margin-right: 3rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .cardContainer p {
+    color: var(--mantine-color-text);
   }
 }
