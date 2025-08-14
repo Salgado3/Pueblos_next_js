@@ -24,10 +24,12 @@ export const ChangeViewMenu = () => {
     setIsDisabled(path);
     router.push(path);
   };
-
+//TODO verify
   useEffect(() => {
-    setIsDisabled(pathname);
-  }, [mainView]);
+    if (!mainView) {
+      setIsDisabled(pathname);
+    }
+  }, [mainView, pathname]);
 
   if (pathname === "/login" || pathname === "/signup") return;
   return (
