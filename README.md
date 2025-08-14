@@ -46,7 +46,8 @@ On the technical side, I did get a better feel for the MVC model. I had to creat
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-    <img src="axolotlPlane.png" alt="axoltl flying a plane" width="80" height="80">
+
+  <img width="300" height="300" alt="image" src="https://github.com/user-attachments/assets/57b25f22-d92d-4168-bda2-cb7bf7dd1dfc" />
   </a>
 
   <h3 align="center">Querido Pueblo</h3>
@@ -74,17 +75,8 @@ On the technical side, I did get a better feel for the MVC model. I had to creat
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
     <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -140,9 +132,9 @@ See the [open issues](https://github.com/Salgado3/Pueblos_next_js/issues) for a 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
+[Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white](https://img.icons8.com/?size=100&id=yUdJlcKanVbh&format=png&color=000000)
 [Next-url]: https://nextjs.org/
-[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB
+[React.js]: https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB](https://img.icons8.com/?size=100&id=asWSSTBrDlTW&format=png&color=000000)
 [React-url]: https://reactjs.org/
 [Supabase]: https://img.icons8.com/?size=100&id=sH0rW2TvYdr9&format=png&color=000000
 [Supabase-url]: https://supabase.com/
