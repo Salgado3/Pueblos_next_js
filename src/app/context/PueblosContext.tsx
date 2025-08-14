@@ -9,6 +9,8 @@ interface PueblosContextValue {
   filteredPueblos: Database["public"]["Tables"]["pueblos_magicos"]["Row"][];
   airportId: string;
   setAirportId: (id: string) => void;
+  airportName: string;
+  setAirportName: (name: string) => void;
   isLoading: boolean;
 }
 //@ts-ignore
@@ -20,6 +22,7 @@ interface PueblosProviderProps {
 
 export const PueblosProvider = ({ children }: PueblosProviderProps) => {
   const [airportId, setAirportId] = useState("");
+  const [airportName, setAirportName] = useState("");
   const { data: allPueblos, isLoading, isError, error } = usePueblos();
   if (isError || error) throw new Error(error.message);
 
@@ -39,6 +42,8 @@ export const PueblosProvider = ({ children }: PueblosProviderProps) => {
         filteredPueblos,
         airportId,
         setAirportId,
+        airportName,
+        setAirportName,
         isLoading,
       }}
     >

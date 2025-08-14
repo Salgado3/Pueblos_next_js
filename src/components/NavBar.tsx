@@ -16,12 +16,12 @@ export default function Navbar() {
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });
-
+//TODO confirm
   const handleLogout = async () => {
     await supabase.auth.signOut();
     router.push("/");
   };
-  const isLoginPage = pathname === "/login";
+  const isUserLoggedIn = pathname === "/login" || pathname === "/signup";
   return (
     <nav className={styles.navbar}>
       <div className={styles.leftLinks}>
@@ -47,7 +47,7 @@ export default function Navbar() {
           </Title>
         </div>
 
-        {!isLoginPage && (
+        {!isUserLoggedIn && (
           <Link href="/about" className={styles.link}>
             About
           </Link>
@@ -55,7 +55,7 @@ export default function Navbar() {
       </div>
 
       <div className={styles.rightLinks}>
-        {!isLoginPage && (
+        {!isUserLoggedIn && (
           <>
             <Link href="/profile" className={styles.link}>
               Profile

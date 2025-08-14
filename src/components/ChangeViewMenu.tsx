@@ -1,9 +1,10 @@
 "use client";
 import { Button } from "@mantine/core";
 import { IconMap2, IconLayoutGrid, IconListDetails } from "@tabler/icons-react";
-import { MouseEvent, useState } from "react";
+import { MouseEvent, useEffect, useState } from "react";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import { PueblosSearch } from "./PueblosSearch";
+import BackLink from "./BackLink";
 
 import styles from "./changeViewMenu.module.css";
 
@@ -23,9 +24,15 @@ export const ChangeViewMenu = () => {
     setIsDisabled(path);
     router.push(path);
   };
+
+  useEffect(() => {
+    setIsDisabled(pathname);
+  }, [mainView]);
+
   if (pathname === "/login" || pathname === "/signup") return;
   return (
     <div className={mainView ? styles.container : styles.auxViewContainer}>
+      <BackLink />
       <Button
         justify="center"
         variant="default"
