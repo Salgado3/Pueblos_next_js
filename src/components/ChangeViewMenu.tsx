@@ -23,7 +23,7 @@ export const ChangeViewMenu = () => {
     setIsDisabled(path);
     router.push(path);
   };
-  if (pathname === "/login") return;
+  if (pathname === "/login" || pathname === "/signup") return;
   return (
     <div className={mainView ? styles.container : styles.auxViewContainer}>
       <Button

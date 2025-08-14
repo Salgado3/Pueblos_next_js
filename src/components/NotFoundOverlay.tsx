@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { usePueblosContext } from "@/app/hooks/PueblosContext";
+import { usePueblosContext } from "@/app/context/PueblosContext";
 
 import styles from "./notFoundOverlay.module.css";
 

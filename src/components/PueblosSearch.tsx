@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Select } from "@mantine/core";
 import { airports } from "./airportData";
-import { usePueblosContext } from "@/app/hooks/PueblosContext";
+import { usePueblosContext } from "@/app/context/PueblosContext";
 
 export const PueblosSearch = () => {
   const [value, setValue] = useState<string>("");

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 import "leaflet/dist/leaflet.css";
 import Link from "next/link";
-import { usePueblosContext } from "../hooks/PueblosContext";
+import { usePueblosContext } from "../context/PueblosContext";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
 

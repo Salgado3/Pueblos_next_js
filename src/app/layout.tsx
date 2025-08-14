@@ -4,7 +4,7 @@ import { QueryProvider } from "./query-provider";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import { ChangeViewMenu } from "@/components/ChangeViewMenu";
-import { PueblosProvider } from "./hooks/PueblosContext";
+import { PueblosProvider } from "./context/PueblosContext";
 
 import "./globals.css";
 import "@mantine/core/styles.css";
@@ -36,7 +36,6 @@ const RootLayout = async ({
 }: Readonly<{
   children: React.ReactNode;
 }>) => {
-
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>

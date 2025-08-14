@@ -18,7 +18,8 @@ const MobileNavBar = () => {
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });
-
+  const userNotLoggedIn =
+    pathname.includes("/login") || pathname.includes("/signup");
   useEffect(() => {
     if (computedColorScheme === "dark") {
       setNavBarImg("/axolotlLove.png");
@@ -69,17 +70,9 @@ const MobileNavBar = () => {
         }
         rightSection={<ColorSchemeToggle />}
       >
-        <NavLink
-          disabled={pathname.includes("/login")}
-          label="About"
-          href="/about"
-        />
-        <NavLink
-          disabled={pathname.includes("/login")}
-          label="Profile"
-          href="/profile"
-        />
-        {!pathname.includes("/login") && (
+        <NavLink disabled={userNotLoggedIn} label="About" href="/about" />
+        <NavLink disabled={userNotLoggedIn} label="Profile" href="/profile" />
+        {!userNotLoggedIn && (
           <NavLink
             label="Logout"
             href="#required-for-focus"

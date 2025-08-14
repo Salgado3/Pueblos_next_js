@@ -1,29 +1,30 @@
 "use client";
-import { PasswordInput, TextInput, Card, Title, Button } from "@mantine/core";
-import { notifications } from "@mantine/notifications";
-import { useQueryClient } from "@tanstack/react-query";
-import { IconArrowNarrowRight, IconCheck } from "@tabler/icons-react";
 import { useState } from "react";
+import { Button, Card, PasswordInput, TextInput, Title } from "@mantine/core";
+import { notifications } from "@mantine/notifications";
+import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/utils/client";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 
 import styles from "./page.module.css";
+import { IconArrowNarrowRight, IconCheck } from "@tabler/icons-react";
 
-export default function LoginPage() {
+const SignupPage = () => {
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loadingStatus, setIsLoadingStatus] = useState<{
-    loading: boolean;
-    button: "login" | "signup" | "";
-  }>({ loading: false, button: "" });
-  const isFormValid =
-    email.length > 0 && email.includes("@") && password.length > 0;
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const supabase = createClient();
-  const queryClient = useQueryClient();
 
+  const isFormValid =
+    username.length > 0 &&
+    email.length > 0 &&
+    email.includes("@") &&
+    password.length > 0 &&
+    password === confirmPassword;
   const showLoadingNotification = () => {
     return notifications.show({
       loading: true,
@@ -34,7 +35,6 @@ export default function LoginPage() {
       autoClose: false,
     });
   };
-
   const updateSuccessNotification = (
     id: string,
     title: string,
@@ -52,7 +52,6 @@ export default function LoginPage() {
       position: "bottom-center",
     });
   };
-
   const updateErrorNotification = (id: string, message: string) => {
     notifications.update({
       id,
@@ -66,35 +65,45 @@ export default function LoginPage() {
     });
   };
 
-  const handleLogin = async () => {
-    if (!email || !password) {
+  const handleSignup = async () => {
+    if (!email || !password || !confirmPassword) {
       notifications.show({
         withCloseButton: true,
         title: "Validation Error",
-        message: "Email and password are required.",
+        message: "Email and password are required. Make sure password matches",
         color: "red",
         position: "bottom-center",
       });
       return;
     }
     const id = showLoadingNotification();
-    setIsLoadingStatus({ loading: true, button: "login" });
-    const { error } = await supabase.auth.signInWithPassword({
+    setIsLoading(true);
+
+    const { error } = await supabase.auth.signUp({
       email,
       password,
+      options: {
+        data: {
+          display_name: username,
+        },
+      },
     });
 
     if (error) {
-      updateErrorNotification(id, "Invalid email or password.");
+      updateErrorNotification(
+        id,
+        "An error occurred during sign up. Please try again."
+      );
     }
-
-    updateSuccessNotification(id, "Login successful!", "Redirecting.");
-
-    setIsLoadingStatus({ loading: false, button: "" });
-    router.push("/");
-    await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
+    // The user is NOT logged in after sign-up, so we don't redirect.
+    // Instead, we show a success message and prompt them to check their email.
+    updateSuccessNotification(
+      id,
+      "Sign up successful!",
+      "Please check your email to confirm your account."
+    );
+    setIsLoading(false);
   };
-
   return (
     <div className={styles.container}>
       <Image
@@ -105,6 +114,7 @@ export default function LoginPage() {
         aria-hidden
         className={styles.logoImg}
       />
+
       <Card
         shadow="sm"
         padding="lg"
@@ -112,18 +122,32 @@ export default function LoginPage() {
         withBorder
         className={styles.cardContainer}
       >
-        <Title>Welcome!</Title>
         <TextInput
+          className={styles.usernameInput}
+          id="username"
+          mt="md"
+          label="username"
+          placeholder="Enter a username"
+          description="Enter a username"
+          name="username"
+          required
+          value={username}
+          onChange={(e) => setUsername(e.currentTarget.value)}
+        />
+        <TextInput
+          className={styles.emailInput}
           id="email"
           mt="md"
           label="Email"
           placeholder="Enter email"
+          description="Enter your email"
           name="email"
           required
           value={email}
           onChange={(e) => setEmail(e.currentTarget.value)}
         />
         <PasswordInput
+          className={styles.passwordInput}
           id="password"
           label="Password"
           description="Create a password"
@@ -133,22 +157,35 @@ export default function LoginPage() {
           value={password}
           onChange={(e) => setPassword(e.currentTarget.value)}
         />
-        <Link href={"/signup"} className={styles.link}>
-          <span>sign up here</span>
+        <PasswordInput
+          className={styles.confirmPasswordInput}
+          id="confirm_password"
+          label="Confirm Password"
+          description="Confirm password"
+          placeholder="Please reenter password"
+          name="confirm_password"
+          required
+          value={confirmPassword}
+          onChange={(e) => setConfirmPassword(e.currentTarget.value)}
+        />
+        <Link href={"/login"} className={styles.link}>
+          <span>Back to login</span>
           <IconArrowNarrowRight />
         </Link>
-        <div className={styles.buttonGroup}>
+        <div className={styles.buttonContainer}>
           <Button
             type="button"
             className={styles.button}
-            onClick={handleLogin}
-            loading={loadingStatus.loading && loadingStatus.button === "login"}
+            onClick={handleSignup}
+            loading={isLoading}
             disabled={!isFormValid}
           >
-            Log in
+            Sign up
           </Button>
         </div>
       </Card>
     </div>
   );
-}
+};
+
+export default SignupPage;

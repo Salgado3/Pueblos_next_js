@@ -1,5 +1,5 @@
 "use client";
-import { usePueblosContext } from "../hooks/PueblosContext";
+import { usePueblosContext } from "../context/PueblosContext";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
