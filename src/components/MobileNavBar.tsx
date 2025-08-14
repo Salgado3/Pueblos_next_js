@@ -5,6 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import ColorSchemeToggle from "./ColorSchemeToggle";
+import BackLink from "./BackLink";
 
 import styles from "./mobileNavBar.module.css";
 
@@ -80,6 +81,7 @@ const MobileNavBar = () => {
           />
         )}
       </NavLink>
+      <BackLink />
     </div>
   );
 };

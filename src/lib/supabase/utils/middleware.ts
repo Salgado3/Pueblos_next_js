@@ -13,6 +13,20 @@ export async function updateSession(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser();
 
+   const { pathname } = request.nextUrl;
+  const isLoginPage = pathname.startsWith("/login");
+  const isSignupPage = pathname.startsWith("/signup");
+
+  // 1. If the user is logged in...
+  if (user) {
+    // ...and they try to go to the login or signup page, redirect them to the homepage.
+    if (isLoginPage || isSignupPage) {
+      const url = request.nextUrl.clone();
+      url.pathname = "/"; // Redirect to a protected page or homepage
+      return NextResponse.redirect(url);
+    }
+  } 
+
   if (
     !user &&
     !request.nextUrl.pathname.startsWith("/login") &&
