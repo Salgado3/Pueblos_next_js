@@ -58,23 +58,10 @@
   .cardContainer p {
     color: var(--mantine-color-text);
   }
-
-  /* button:disabled {
-    border: 1px solid ghostwhite;
-    color: ghostwhite;
-    opacity: 0.5;
-  } */
 }
 
 @media (prefers-color-scheme: light) {
   .cardContainer p {
     color: var(--mantine-color-text);
-  }
-
-  .button:disabled {
-    border: 1px solid black;
-    color: black;
-    background-color: var(--mantine-color-blue-outline);
-    opacity: 0.7;
   }
 }
