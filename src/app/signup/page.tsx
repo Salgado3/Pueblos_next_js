@@ -70,7 +70,8 @@ const SignupPage = () => {
       notifications.show({
         withCloseButton: true,
         title: "Validation Error",
-        message: "Email and password are required. Make sure password matches",
+        message:
+          "Email and password are required. Make sure the password matches",
         color: "red",
         position: "bottom-center",
       });
@@ -128,7 +129,7 @@ const SignupPage = () => {
           mt="md"
           label="username"
           placeholder="Enter a username"
-          description="Enter a username"
+          description=""
           name="username"
           required
           value={username}
@@ -140,7 +141,7 @@ const SignupPage = () => {
           mt="md"
           label="Email"
           placeholder="Enter email"
-          description="Enter your email"
+          description=""
           name="email"
           required
           value={email}
@@ -150,7 +151,7 @@ const SignupPage = () => {
           className={styles.passwordInput}
           id="password"
           label="Password"
-          description="Create a password"
+          description=""
           placeholder="Please enter password"
           name="password"
           required
@@ -161,7 +162,7 @@ const SignupPage = () => {
           className={styles.confirmPasswordInput}
           id="confirm_password"
           label="Confirm Password"
-          description="Confirm password"
+          description=""
           placeholder="Please reenter password"
           name="confirm_password"
           required
@@ -175,10 +176,12 @@ const SignupPage = () => {
         <div className={styles.buttonContainer}>
           <Button
             type="button"
+            variant="filled"
             className={styles.button}
             onClick={handleSignup}
             loading={isLoading}
-            disabled={!isFormValid}
+            // disabled={!isFormValid}
+            fullWidth
           >
             Sign up
           </Button>

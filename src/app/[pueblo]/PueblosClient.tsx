@@ -91,9 +91,9 @@ export default function PueblosClient() {
           className={styles.image}
           publicId={pueblo.cloudinary_id || ""}
         />
-        <div>
+        <div className={styles.buttonContainer}>
           <Button
-            variant={isLiked ? "filled" : "subtle"}
+            variant={isLiked ? "filled" : "outline"}
             color="pink"
             title={isLiked ? "Liked" : "Like"}
             onClick={handleLikeButton}
@@ -101,13 +101,14 @@ export default function PueblosClient() {
             <IconHeartPlus />
           </Button>
           <Button
-            variant={isVisited ? "filled" : "subtle"}
+            variant={isVisited ? "filled" : "outline"}
             color="pink"
             title={isVisited ? "Visited" : "Visit"}
             onClick={handleVisitedButton}
           >
             <IconMapStar />
           </Button>
+
           <div>
             <Link
               href={pueblo.photo_by_url ?? ""}
@@ -118,7 +119,6 @@ export default function PueblosClient() {
             </Link>
           </div>
         </div>
-
         {pueblo.latitude && pueblo.longitude && (
           <MapContainer
             key={"mapContainer"}
@@ -152,7 +152,7 @@ export default function PueblosClient() {
         >
           <p>View on Google Maps</p>
         </Link>
-        <p>{`Airport ${pueblo.airport_id}`}</p>
+        <p>{`Nearest Airport: ${pueblo.airport_id}`}</p>
       </div>
       <p className={styles.description}>{pueblo.description}</p>
 

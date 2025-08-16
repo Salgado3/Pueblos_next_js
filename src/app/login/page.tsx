@@ -114,6 +114,7 @@ export default function LoginPage() {
       >
         <Title>Welcome!</Title>
         <TextInput
+        className={styles.emailInput}
           id="email"
           mt="md"
           label="Email"
@@ -124,9 +125,10 @@ export default function LoginPage() {
           onChange={(e) => setEmail(e.currentTarget.value)}
         />
         <PasswordInput
+        className={styles.passwordInput}
           id="password"
           label="Password"
-          description="Create a password"
+          description=""
           placeholder="Please enter password"
           name="password"
           required
@@ -143,7 +145,8 @@ export default function LoginPage() {
             className={styles.button}
             onClick={handleLogin}
             loading={loadingStatus.loading && loadingStatus.button === "login"}
-            disabled={!isFormValid}
+            // disabled={isFormValid}
+            fullWidth
           >
             Log in
           </Button>

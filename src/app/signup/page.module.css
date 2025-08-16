@@ -21,7 +21,7 @@
 .emailInput,
 .passwordInput,
 .confirmPasswordInput {
-  margin: 0.5rem 0;
+  margin-top: 1.5rem;
 }
 
 .link {
@@ -43,6 +43,10 @@
     align-self: center;
   }
 
+  .button {
+    margin: 0;
+  }
+
   .logoImg {
     align-self: flex-end;
     height: 3rem;
@@ -53,5 +57,24 @@
 @media (prefers-color-scheme: dark) {
   .cardContainer p {
     color: var(--mantine-color-text);
+  }
+
+  /* button:disabled {
+    border: 1px solid ghostwhite;
+    color: ghostwhite;
+    opacity: 0.5;
+  } */
+}
+
+@media (prefers-color-scheme: light) {
+  .cardContainer p {
+    color: var(--mantine-color-text);
+  }
+
+  .button:disabled {
+    border: 1px solid black;
+    color: black;
+    background-color: var(--mantine-color-blue-outline);
+    opacity: 0.7;
   }
 }

@@ -9,12 +9,29 @@
 .description {
   align-self: center;
   margin: 1rem 0;
-  width: 60vw;
+  width: 35vw;
+}
+
+.titleHeader {
+  font-size: 2rem;
 }
 
 .image {
   width: inherit;
   border-radius: 12px;
+}
+
+.buttonContainer {
+  display: flex;
+  margin: 1rem 0;
+}
+.buttonContainer > button {
+  margin: 0 0.5rem;
+}
+
+.buttonContainer > a {
+  margin-left: auto;
+  align-content: center;
 }
 
 .map {
@@ -28,7 +45,7 @@
 .thingsToDoList {
   margin-bottom: 0.5rem;
   align-self: center;
-  width: 60vw;
+  width: 35vw;
 }
 
 @media (max-width: 500px) {

@@ -7,12 +7,14 @@ import { PueblosSearch } from "./PueblosSearch";
 import BackLink from "./BackLink";
 
 import styles from "./changeViewMenu.module.css";
+import { useMediaQuery } from "@mantine/hooks";
 
 export const ChangeViewMenu = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [isDisabled, setIsDisabled] = useState("");
   const mainView = ["/map", "/list", "/grid"].includes(pathname);
+  const isMobile = useMediaQuery("(max-width: 500px)");
   const handleOnClick = ({
     event,
     path,
@@ -24,7 +26,7 @@ export const ChangeViewMenu = () => {
     setIsDisabled(path);
     router.push(path);
   };
-//TODO verify
+  //TODO verify
   useEffect(() => {
     if (!mainView) {
       setIsDisabled(pathname);
@@ -34,7 +36,7 @@ export const ChangeViewMenu = () => {
   if (pathname === "/login" || pathname === "/signup") return;
   return (
     <div className={mainView ? styles.container : styles.auxViewContainer}>
-      <BackLink />
+      {!isMobile && <BackLink />}
       <Button
         justify="center"
         variant="default"
