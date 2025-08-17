@@ -1,12 +1,7 @@
-.titleContainer {
+.visitedContainer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
 }
-
-.titleContainer > h1 {
-  align-self: center;
-}
-
 @media (max-width: 600px) {
   .container {
     padding-top: 100px;

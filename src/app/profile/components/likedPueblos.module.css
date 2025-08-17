@@ -1,7 +1,7 @@
 .title {
   display: flex;
   justify-content: center;
-  margin-top: 2rem;
+  margin: 1rem;
 }
 
 .unorderedListContainer {
@@ -29,12 +29,38 @@
 .titleContainerImg {
   height: 2rem;
   width: 2.5rem;
-  align-self: end;
+  align-self: center;
 }
 
 .image {
   width: inherit;
   height: inherit;
+}
+
+.overlay {
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  transition: 0.5s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the text */
+}
+
+.image:hover {
+  opacity: 0.8;
 }
 
 @media (max-width: 600px) {

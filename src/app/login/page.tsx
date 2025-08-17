@@ -91,7 +91,7 @@ export default function LoginPage() {
     updateSuccessNotification(id, "Login successful!", "Redirecting.");
 
     setIsLoadingStatus({ loading: false, button: "" });
-    router.push("/");
+    router.replace("/");
     await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
   };
 
@@ -114,7 +114,7 @@ export default function LoginPage() {
       >
         <Title>Welcome!</Title>
         <TextInput
-        className={styles.emailInput}
+          className={styles.emailInput}
           id="email"
           mt="md"
           label="Email"
@@ -125,7 +125,7 @@ export default function LoginPage() {
           onChange={(e) => setEmail(e.currentTarget.value)}
         />
         <PasswordInput
-        className={styles.passwordInput}
+          className={styles.passwordInput}
           id="password"
           label="Password"
           description=""

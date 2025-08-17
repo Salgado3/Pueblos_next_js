@@ -1,14 +1,16 @@
 import { ActionIcon, RingProgress, Text, Center } from "@mantine/core";
 import { IconCheck } from "@tabler/icons-react";
 
-const ProgressRing = () => {
+const ProgressRing = ({ valueCount }: { valueCount: number }) => {
+  const percentage = Math.round((valueCount / 134) * 100);
+
   return (
     <div>
       <RingProgress
-        sections={[{ value: 40, color: "blue" }]}
+        sections={[{ value: percentage, color: "blue" }]}
         label={
           <Text c="blue" fw={700} ta="center" size="xl">
-            40%
+            {percentage}%
           </Text>
         }
       />

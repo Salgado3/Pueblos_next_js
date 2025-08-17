@@ -7,35 +7,105 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "12.2.12 (cd3cf9e)"
   }
   public: {
     Tables: {
-      liked: {
+      categories: {
         Row: {
           created_at: string | null
           id: string
-          pueblo_id: string | null
-          user_id: string | null
+          title: string
+          type: string | null
+          url_link: string | null
         }
         Insert: {
           created_at?: string | null
           id?: string
-          pueblo_id?: string | null
-          user_id?: string | null
+          title: string
+          type?: string | null
+          url_link?: string | null
         }
         Update: {
           created_at?: string | null
           id?: string
+          title?: string
+          type?: string | null
+          url_link?: string | null
+        }
+        Relationships: []
+      }
+      pueblo_categories: {
+        Row: {
+          category_id: string | null
+          id: string
+          pueblo_id: string | null
+        }
+        Insert: {
+          category_id?: string | null
+          id?: string
           pueblo_id?: string | null
-          user_id?: string | null
+        }
+        Update: {
+          category_id?: string | null
+          id?: string
+          pueblo_id?: string | null
         }
         Relationships: [
           {
-            foreignKeyName: "liked_pueblo_id_fkey"
+            foreignKeyName: "pueblo_categories_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pueblo_categories_pueblo_id_fkey"
+            columns: ["pueblo_id"]
+            isOneToOne: false
+            referencedRelation: "pueblos_magicos"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      pueblo_thing_details: {
+        Row: {
+          category_id: string
+          description: string | null
+          id: string
+          pueblo_id: string
+          title: string | null
+          url_link: string | null
+        }
+        Insert: {
+          category_id: string
+          description?: string | null
+          id?: string
+          pueblo_id: string
+          title?: string | null
+          url_link?: string | null
+        }
+        Update: {
+          category_id?: string
+          description?: string | null
+          id?: string
+          pueblo_id?: string
+          title?: string | null
+          url_link?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pueblo_thing_details_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "pueblo_thing_details_pueblo_id_fkey"
             columns: ["pueblo_id"]
             isOneToOne: false
             referencedRelation: "pueblos_magicos"
@@ -47,6 +117,7 @@ export type Database = {
         Row: {
           airport_id: string | null
           cloudinary_id: string | null
+          country: string | null
           created_at: string | null
           description: string | null
           description_url: string | null
@@ -57,12 +128,14 @@ export type Database = {
           mongo_id: string | null
           photo_by: string | null
           photo_by_url: string | null
+          state: string | null
           title: string | null
           user_id: string | null
         }
         Insert: {
           airport_id?: string | null
           cloudinary_id?: string | null
+          country?: string | null
           created_at?: string | null
           description?: string | null
           description_url?: string | null
@@ -73,12 +146,14 @@ export type Database = {
           mongo_id?: string | null
           photo_by?: string | null
           photo_by_url?: string | null
+          state?: string | null
           title?: string | null
           user_id?: string | null
         }
         Update: {
           airport_id?: string | null
           cloudinary_id?: string | null
+          country?: string | null
           created_at?: string | null
           description?: string | null
           description_url?: string | null
@@ -89,33 +164,37 @@ export type Database = {
           mongo_id?: string | null
           photo_by?: string | null
           photo_by_url?: string | null
+          state?: string | null
           title?: string | null
           user_id?: string | null
         }
         Relationships: []
       }
-      visited: {
+      user_pueblo_actions: {
         Row: {
+          action_type: string
           created_at: string | null
           id: string
-          pueblo_id: string | null
-          user_id: string | null
+          pueblo_id: string
+          user_id: string
         }
         Insert: {
+          action_type: string
           created_at?: string | null
           id?: string
-          pueblo_id?: string | null
-          user_id?: string | null
+          pueblo_id: string
+          user_id: string
         }
         Update: {
+          action_type?: string
           created_at?: string | null
           id?: string
-          pueblo_id?: string | null
-          user_id?: string | null
+          pueblo_id?: string
+          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "visited_pueblo_id_fkey"
+            foreignKeyName: "user_pueblo_actions_pueblo_id_fkey"
             columns: ["pueblo_id"]
             isOneToOne: false
             referencedRelation: "pueblos_magicos"

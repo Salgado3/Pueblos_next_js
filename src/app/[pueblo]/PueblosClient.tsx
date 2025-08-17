@@ -19,67 +19,78 @@ import "leaflet/dist/leaflet.css";
 import styles from "./pueblosClient.module.css";
 import { createClient } from "@/lib/supabase/utils/client";
 import { useEffect, useState } from "react";
-import useUserLikedPueblos from "@/lib/reactQuery/useUserLikedPueblos";
-import useUserVisitedPueblos from "@/lib/reactQuery/useUserVisitedPueblos";
-import updateUserLikedPueblos from "@/lib/reactQuery/useUpdateUserLikedPueblos";
-import updateUserVisitedPueblos from "@/lib/reactQuery/useUpdateUserVisitedPueblos";
+import { airports } from "@/components/airportData";
+import useUpdateUserPuebloAction from "@/lib/reactQuery/useUpdateUserPuebloAction";
+import { useQuery } from "@tanstack/react-query";
+import useFetchUserActions from "@/lib/reactQuery/useFetchUserActions";
+import ThingsToDoList from "./components/ThingsToDoList";
 
 export default function PueblosClient() {
-  const [userId, setUserId] = useState<string>("");
-  const [loading, setLoading] = useState(true);
   const params = useParams();
   const selectedPueblo = params?.pueblo as string;
-  const { data, isLoading, error: pueblosError } = usePueblos();
+  const {
+    data: pueblosData,
+    isLoading: pueblosIsLoading,
+    error: pueblosError,
+  } = usePueblos();
+
+  // Use a useQuery hook to manage auth state and get the userId
+  const { data: authData, isLoading: authIsLoading } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () => {
+      const supabase = createClient();
+      const { data, error } = await supabase.auth.getUser();
+      if (error) throw error;
+      return data;
+    },
+    staleTime: 1000 * 60 * 5, // Cache the user for 5 minutes
+  });
+
+  const userId = authData?.user?.id;
+
   const normalize = (str: string) =>
     str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
   const name = normalize(
     decodeURIComponent(selectedPueblo).replace(/_/g, " ").toLowerCase()
   );
-  //@ts-expect-error
-  const pueblo = data?.find(
+
+  const airport = airports?.find(
+    (airport) => airport.value === pueblo?.airport_id
+  );
+  const airportFullName = airport?.label;
+  //@ts-ignore
+  const pueblo = pueblosData?.find(
     (p: { title: string }) => normalize(p?.title.toLowerCase()) === name
   );
+  const { data: userActionsData, isLoading: userActionsIsLoading } =
+    useFetchUserActions(userId as string);
 
-  // const { data: authData, error: authError } = await supabase.auth.getUser();
-  const { data: isLiked, isLoading: likedStatusLoading } = useUserLikedPueblos(
-    userId,
-    pueblo?.id
+  const { mutate: toggleAction } = useUpdateUserPuebloAction(
+    userId as string,
+    pueblo?.id as string
   );
-  const { data: isVisited, isLoading: visitedStatusLoading } =
-    useUserVisitedPueblos(userId, pueblo?.id);
-
-  const { mutate: toggleLike } = updateUserLikedPueblos(userId, pueblo?.id);
-  const { mutate: toggleVisited } = updateUserVisitedPueblos(
-    userId,
-    pueblo?.id
-  );
-
-  useEffect(() => {
-    setLoading(true);
-    const fetchUserId = async () => {
-      const supabase = createClient();
-      const { data: authData, error } = await supabase.auth.getUser();
-      if (error) {
-        setUserId("");
-      }
-      if (authData.user) {
-        setUserId(authData.user.id);
-      }
-      setLoading(false);
-    };
-    fetchUserId();
-  }, []);
+  if (pueblosIsLoading || authIsLoading || userActionsIsLoading)
+    return <LoadingOverlay />;
   if (pueblosError || !pueblo?.id)
     return <NotFoundOverlay title="Looks like nothing is here" />;
 
-  if (isLoading || likedStatusLoading || visitedStatusLoading || loading)
-    return <LoadingOverlay />;
+  // Derive the boolean flags from the fetched data
+  const isLiked = userActionsData?.some(
+    (action) =>
+      action.pueblo_id === pueblo?.id && action.action_type === "liked"
+  );
+  const isVisited = userActionsData?.some(
+    (action) =>
+      action.pueblo_id === pueblo?.id && action.action_type === "visited"
+  );
 
-  const handleLikeButton = async () => {
-    if (typeof isLiked === "boolean") toggleLike(isLiked);
+  const handleLikeButton = () => {
+    if (typeof isLiked === "boolean")
+      toggleAction({ isActioned: isLiked, actionType: "liked" });
   };
   const handleVisitedButton = () => {
-    if (typeof isVisited === "boolean") toggleVisited(isVisited);
+    if (typeof isVisited === "boolean")
+      toggleAction({ isActioned: isVisited, actionType: "visited" });
   };
 
   return (
@@ -108,16 +119,17 @@ export default function PueblosClient() {
           >
             <IconMapStar />
           </Button>
-
-          <div>
-            <Link
-              href={pueblo.photo_by_url ?? ""}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              photo by: {pueblo.photo_by}
-            </Link>
-          </div>
+          {pueblo.photo_by_url && pueblo.photo_by && (
+            <div>
+              <Link
+                href={pueblo.photo_by_url}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                photo by: {pueblo.photo_by}
+              </Link>
+            </div>
+          )}
         </div>
         {pueblo.latitude && pueblo.longitude && (
           <MapContainer
@@ -127,7 +139,7 @@ export default function PueblosClient() {
             className={styles.map}
           >
             <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+              attribution='© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <Marker
@@ -146,43 +158,26 @@ export default function PueblosClient() {
           </MapContainer>
         )}
         <Link
-          href={`https://www.google.com/maps/place/${pueblo.title}`}
+          href={`https://www.google.com/maps/search/?api=1&query=${pueblo.latitude},${pueblo.longitude}`}
           target="_blank"
           rel="noopener noreferrer"
         >
           <p>View on Google Maps</p>
         </Link>
-        <p>{`Nearest Airport: ${pueblo.airport_id}`}</p>
+        {airportFullName && <p>{`Nearest Airport: ${airportFullName}`}</p>}
       </div>
       <p className={styles.description}>{pueblo.description}</p>
-
-      <h3 className={styles.thingsToDoListTitle}>Things to Do</h3>
-      <List
-        className={styles.thingsToDoList}
-        spacing="xs"
-        size="sm"
-        center
-        icon={
-          <ThemeIcon color="teal" size={24} radius="xl">
-            <IconCircleCheck size={16} />
-          </ThemeIcon>
-        }
-      >
-        <List.Item>Coming soon...</List.Item>
-        <List.Item>I will personally be curating these lists</List.Item>
-        <List.Item>
-          So this might take me a week or two... maybe three
-        </List.Item>
-        <List.Item
-          icon={
-            <ThemeIcon color="blue" size={24} radius="xl">
-              <IconCircleDashed size={16} />
-            </ThemeIcon>
-          }
+      {pueblo.description_url && (
+        <Link
+          className={styles.decriptionURL}
+          href={pueblo.description_url}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Thanks for understanding 🫶
-        </List.Item>
-      </List>
+          Learn More
+        </Link>
+      )}
+      <ThingsToDoList puebloId={pueblo.id} />
     </div>
   );
 }

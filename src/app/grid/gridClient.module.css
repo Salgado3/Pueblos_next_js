@@ -3,10 +3,7 @@
   list-style: none;
 }
 .cardContainerList:hover {
-  box-shadow: 2.5px 2.5px 2.5px 2.5px rgba(97, 72, 219, 0.911);
-  transition-duration: 0.5s;
-  transition-property: transform;
-  transform: scale(1.005);
+  opacity: 0.8;
 }
 .unOrderedListContainer {
   display: grid;

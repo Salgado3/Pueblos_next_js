@@ -6,10 +6,16 @@
 
 .titleHeader,
 .imageContainer,
-.description {
+.description,
+.decriptionURL {
   align-self: center;
-  margin: 1rem 0;
+  padding: 1rem 0;
   width: 35vw;
+}
+
+.description {
+  border-top: 1px solid ghostwhite;
+  font-style: italic;
 }
 
 .titleHeader {
@@ -23,7 +29,7 @@
 
 .buttonContainer {
   display: flex;
-  margin: 1rem 0;
+  margin: 1.5rem 0;
 }
 .buttonContainer > button {
   margin: 0 0.5rem;
