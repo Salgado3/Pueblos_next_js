@@ -26,7 +26,6 @@ export const PueblosProvider = ({ children }: PueblosProviderProps) => {
   const [airportId, setAirportId] = useState<string[]>([]);
   const [airportName, setAirportName] = useState<string[]>([]);
   const [stateArray, setstateArray] = useState<string[]>([]);
-  console.log("Jaimes airport id or name", airportId, airportName);
   const { data: allPueblos, isLoading, isError, error } = usePueblos();
   if (isError || error) throw new Error(error.message);
 

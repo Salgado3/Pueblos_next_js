@@ -6,7 +6,7 @@ const FilterByStateSearch = () => {
 
   if (isLoading) return;
   const handleOnChange = (value: string[]) => {
-    console.log("jaimes value", value);
+
     setstateArray(value);
     return;
   };

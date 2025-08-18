@@ -27,7 +27,6 @@ const ThingsToDoList = ({ puebloId }: { puebloId: string }) => {
     );
   });
 
-  console.log("Jaimes data", data, puebloId);
   return (
     <>
       <h3 className={styles.thingsToDoListTitle}>Things to Do</h3>

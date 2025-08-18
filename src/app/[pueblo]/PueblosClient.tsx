@@ -55,7 +55,7 @@ export default function PueblosClient() {
   );
 
   const airport = airports?.find(
-    (airport) => airport.value === pueblo?.airport_id
+    (airport) => airport.value === selectedPueblo?.airport_id
   );
   const airportFullName = airport?.label;
   //@ts-ignore

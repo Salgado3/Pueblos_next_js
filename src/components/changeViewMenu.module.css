@@ -7,6 +7,9 @@
   padding-top: 1rem;
   flex-wrap: wrap;
 }
+.button {
+  margin: 0 0.025rem;
+}
 
 @media (max-width: 470px) {
   .container {

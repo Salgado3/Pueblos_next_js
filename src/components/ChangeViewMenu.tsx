@@ -4,10 +4,10 @@ import { IconMap2, IconLayoutGrid, IconListDetails } from "@tabler/icons-react";
 import { MouseEvent, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import BackLink from "./BackLink";
-
-import styles from "./changeViewMenu.module.css";
 import { useMediaQuery } from "@mantine/hooks";
 import FilterSearchDrawer from "./FilterSearchDrawer";
+
+import styles from "./changeViewMenu.module.css";
 
 export const ChangeViewMenu = () => {
   const router = useRouter();
