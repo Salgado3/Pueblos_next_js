@@ -37,6 +37,7 @@ updateCoordinates.js
 updatePueblos.js
 updateCategories.js
 seedPuebloDetails.js
+pueblo.ts
 # vercel
 .vercel
 

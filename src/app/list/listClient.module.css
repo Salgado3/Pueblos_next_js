@@ -23,11 +23,22 @@
   width: 80%;
 }
 
+.stateText {
+  font-weight: 600;
+}
+
+.cardContainer:hover {
+  text-decoration: none;
+  opacity: 0.8;
+  border: 1px solid ghostwhite;
+}
+
 @media (max-width: 600px) {
   .container {
     padding-top: 100px;
     padding-bottom: 120px;
   }
+
   .cardContainerLink {
     display: flex;
     justify-content: space-between;
@@ -40,9 +51,5 @@
 
   .imageContainer {
     width: 30%;
-  }
-
-  .cardContainer:hover {
-    opacity: 0.8;
   }
 }

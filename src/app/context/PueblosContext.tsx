@@ -11,6 +11,7 @@ interface PueblosContextValue {
   setAirportId: (id: string) => void;
   airportName: string;
   setAirportName: (name: string) => void;
+  setstateArray: (value: string[]) => void;
   isLoading: boolean;
 }
 //@ts-ignore
@@ -23,27 +24,45 @@ interface PueblosProviderProps {
 export const PueblosProvider = ({ children }: PueblosProviderProps) => {
   const [airportId, setAirportId] = useState("");
   const [airportName, setAirportName] = useState("");
+  const [stateArray, setstateArray] = useState<string[]>([]);
+
   const { data: allPueblos, isLoading, isError, error } = usePueblos();
   if (isError || error) throw new Error(error.message);
 
   const filteredPueblos = useMemo(() => {
-    if (!airportId) return allPueblos;
-    return (
-      //@ts-ignore
-      allPueblos?.filter((pueblo) => pueblo.airport_id === airportId) || []
-    );
-  }, [allPueblos, airportId]);
+    if (!Array.isArray(allPueblos)) {
+      return [];
+    }
+    let pueblosToFilter = allPueblos;
+
+    if (airportId) {
+      pueblosToFilter = pueblosToFilter?.filter(
+        (pueblo) => pueblo.airport_id === airportId
+      );
+    }
+
+    if (stateArray.length > 0) {
+      pueblosToFilter = pueblosToFilter?.filter((pueblo) =>
+        stateArray.includes(pueblo?.state || "")
+      );
+    }
+
+    // If no filters are active, return the full list.
+    return pueblosToFilter || [];
+  }, [allPueblos, airportId, stateArray]);
 
   return (
     <PueblosContext.Provider
       value={{
         //@ts-ignore
         allPueblos,
+        //@ts-ignore
         filteredPueblos,
         airportId,
         setAirportId,
         airportName,
         setAirportName,
+        setstateArray,
         isLoading,
       }}
     >

@@ -2,6 +2,7 @@
 import { usePueblosContext } from "../context/PueblosContext";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
+import { Text } from "@mantine/core";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
 import { useMediaQuery } from "@mantine/hooks";
 import LoadingOverlay from "@/components/LoadingOverlay";
@@ -38,7 +39,14 @@ const ListClient = () => {
             <h2 className={styles.titleHeader}>{item.title}</h2>
 
             {!isMobile && (
-              <p className={styles.description}>{item.description}</p>
+              <>
+                <span
+                  className={styles.stateText}
+                >{`Location: ${item.state}, ${item.country}`}</span>
+                <Text lineClamp={2} className={styles.description}>
+                  {item.description}
+                </Text>
+              </>
             )}
             {isMobile && (
               <p

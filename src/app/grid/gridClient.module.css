@@ -37,9 +37,14 @@
   padding: 1rem 0;
 }
 
+.locationText {
+  font-weight: 600;
+}
+
 .description {
-  padding: 0 1rem;
+  padding: 1rem;
   margin-bottom: 1rem;
+  overflow: auto;
 }
 
 @media (min-width: 600px) {

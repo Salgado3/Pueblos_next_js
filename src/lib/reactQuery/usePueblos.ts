@@ -20,7 +20,6 @@ const usePueblos = ():UseQueryResult<Database["public"]["Tables"]["pueblos_magic
         throw new Error(error.message); // Use the error message for better debugging
       }
 
-
       return data ?? [];
     },
     staleTime: Infinity, // 1 hour

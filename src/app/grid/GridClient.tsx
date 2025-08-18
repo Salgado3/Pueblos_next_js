@@ -40,19 +40,14 @@ const GridClient = () => {
           </div>
         </Link>
         <div className={styles.textContainer}>
-          <p>
-            photo by{" "}
-            <Link
-              href={item.photo_by_url || ""}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {item.photo_by}
-            </Link>
-          </p>
-          <p>{`Closest Airport: ${item.airport_id}`}</p>
+          <span
+            className={styles.locationText}
+          >{`Location: ${item.state}, ${item.country}`}</span>
+          <span
+            className={styles.locationText}
+          >{`Closest Airport: ${item.airport_id}`}</span>
 
-          <Text lineClamp={3} className={styles.description}>
+          <Text lineClamp={4} className={styles.description}>
             {item.description}
           </Text>
         </div>

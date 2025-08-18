@@ -1,0 +1,74 @@
+<!-- Authentic-inspired Papel Picado with Floral Cutouts -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 400" width="600" height="400" aria-label="Papel picado with floral cutouts">
+  <!-- pink sheet -->
+  <rect x="50" y="50" width="500" height="300" fill="#f78db5"></rect>
+
+  <!-- scalloped bottom edge -->
+  <g fill="#f78db5">
+    <circle cx="90" cy="350" r="25"></circle>
+    <circle cx="140" cy="350" r="25"></circle>
+    <circle cx="190" cy="350" r="25"></circle>
+    <circle cx="240" cy="350" r="25"></circle>
+    <circle cx="290" cy="350" r="25"></circle>
+    <circle cx="340" cy="350" r="25"></circle>
+    <circle cx="390" cy="350" r="25"></circle>
+    <circle cx="440" cy="350" r="25"></circle>
+    <circle cx="490" cy="350" r="25"></circle>
+    <circle cx="540" cy="350" r="25"></circle>
+  </g>
+
+  <!-- lace border holes -->
+  <g fill="white">
+    <!-- top row -->
+    <circle cx="90" cy="70" r="8"></circle>
+    <circle cx="140" cy="70" r="8"></circle>
+    <circle cx="190" cy="70" r="8"></circle>
+    <circle cx="240" cy="70" r="8"></circle>
+    <circle cx="290" cy="70" r="8"></circle>
+    <circle cx="340" cy="70" r="8"></circle>
+    <circle cx="390" cy="70" r="8"></circle>
+    <circle cx="440" cy="70" r="8"></circle>
+    <circle cx="490" cy="70" r="8"></circle>
+    <!-- bottom row -->
+    <circle cx="90" cy="330" r="8"></circle>
+    <circle cx="140" cy="330" r="8"></circle>
+    <circle cx="190" cy="330" r="8"></circle>
+    <circle cx="240" cy="330" r="8"></circle>
+    <circle cx="290" cy="330" r="8"></circle>
+    <circle cx="340" cy="330" r="8"></circle>
+    <circle cx="390" cy="330" r="8"></circle>
+    <circle cx="440" cy="330" r="8"></circle>
+    <circle cx="490" cy="330" r="8"></circle>
+    <!-- sides -->
+    <circle cx="70" cy="120" r="8"></circle>
+    <circle cx="70" cy="170" r="8"></circle>
+    <circle cx="70" cy="220" r="8"></circle>
+    <circle cx="70" cy="270" r="8"></circle>
+    <circle cx="530" cy="120" r="8"></circle>
+    <circle cx="530" cy="170" r="8"></circle>
+    <circle cx="530" cy="220" r="8"></circle>
+    <circle cx="530" cy="270" r="8"></circle>
+  </g>
+
+  <!-- central flower cutout -->
+  <g transform="translate(300,200)" fill="white">
+    <circle r="20"></circle>
+    <!-- petals -->
+    <ellipse rx="15" ry="50" transform="rotate(0) translate(0,-70)"></ellipse>
+    <ellipse rx="15" ry="50" transform="rotate(45) translate(0,-70)"></ellipse>
+    <ellipse rx="15" ry="50" transform="rotate(90) translate(0,-70)"></ellipse>
+    <ellipse rx="15" ry="50" transform="rotate(135) translate(0,-70)"></ellipse>
+    <ellipse rx="15" ry="50" transform="rotate(180) translate(0,-70)"></ellipse>
+    <ellipse rx="15" ry="50" transform="rotate(225) translate(0,-70)"></ellipse>
+    <ellipse rx="15" ry="50" transform="rotate(270) translate(0,-70)"></ellipse>
+    <ellipse rx="15" ry="50" transform="rotate(315) translate(0,-70)"></ellipse>
+  </g>
+
+  <!-- decorative smaller flowers -->
+  <g fill="white">
+    <circle cx="180" cy="160" r="12"></circle>
+    <circle cx="420" cy="160" r="12"></circle>
+    <circle cx="180" cy="240" r="12"></circle>
+    <circle cx="420" cy="240" r="12"></circle>
+  </g>
+</svg>
