@@ -24,12 +24,12 @@ const FilterSearchDrawer = () => {
   }
 
   return (
-    <div>
+    <div className={styles.drawerContainer}>
       <Drawer
-        className={styles.drawerContainer}
         opened={opened}
         onClose={close}
         title="Filters"
+        zIndex={1002}
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
       >
         <FilterByAirportSearch />
@@ -44,7 +44,7 @@ const FilterSearchDrawer = () => {
           Reset filters{" "}
         </Button>
       </Drawer>
-      <Button variant="default" onClick={open}>
+      <Button variant="default" onClick={open} className={styles.button}>
         Filter
       </Button>
     </div>

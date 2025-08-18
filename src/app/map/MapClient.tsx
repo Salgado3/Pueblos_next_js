@@ -32,8 +32,8 @@ const MapClient = () => {
       style={{
         height: "80%",
         width: "100%",
-        paddingTop: "120px",
-        paddingBottom: "120px",
+        marginTop: "100px",
+        marginBottom: "100px",
       }}
     >
       <TileLayer

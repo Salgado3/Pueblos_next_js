@@ -35,7 +35,7 @@ export const ChangeViewMenu = () => {
 
   if (pathname === "/login" || pathname === "/signup") return;
   return (
-    <div className={mainView ? styles.container : styles.auxViewContainer}>
+    <div className={styles.container}>
       {!isMobile && <BackLink />}
       <Button
         justify="center"
