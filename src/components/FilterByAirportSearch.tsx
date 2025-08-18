@@ -26,7 +26,10 @@ export const FilterByAirportSearch = () => {
       data={airportOptions}
       value={airportName}
       nothingFoundMessage="Nothing found..."
-      comboboxProps={{ transitionProps: { transition: "pop", duration: 200 } }}
+      comboboxProps={{
+        transitionProps: { transition: "pop", duration: 200 },
+        zIndex: "1002",
+      }}
       onChange={(value) => handleOnChange(value)}
     />
   );

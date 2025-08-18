@@ -1,5 +1,6 @@
 "use client";
 import { Text } from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
 import { usePueblosContext } from "../context/PueblosContext";
@@ -10,7 +11,7 @@ import styles from "./gridClient.module.css";
 
 const GridClient = () => {
   const { filteredPueblos, isLoading } = usePueblosContext();
-
+  const isMobile = useMediaQuery("(max-width: 600px)", true);
   if (isLoading) {
     return <LoadingOverlay />;
   }
@@ -23,7 +24,6 @@ const GridClient = () => {
     return (
       <li className={styles.cardContainerList} key={item.title + i}>
         <Link
-          //TODO set up dynamic links
           style={{ fontSize: "large" }}
           href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
           rel="noopener noreferrer"
@@ -47,9 +47,11 @@ const GridClient = () => {
             className={styles.locationText}
           >{`Closest Airport: ${item.airport_id}`}</span>
 
-          <Text lineClamp={4} className={styles.description}>
-            {item.description}
-          </Text>
+          {!isMobile && (
+            <Text lineClamp={4} className={styles.description}>
+              {item.description}
+            </Text>
+          )}
         </div>
       </li>
     );

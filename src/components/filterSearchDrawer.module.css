@@ -3,6 +3,23 @@
   flex-direction: column;
 }
 
+.titleContainer {
+  width: 100%;
+  display: flex;
+  font-size: 1rem;
+  flex-direction: row-reverse;
+  justify-content: center;
+  align-items: center;
+}
+
+.mantine-Drawer-header {
+  font-size: 2rem;
+}
+
+.titleImg {
+  margin-right: 0.5rem;
+}
+
 .drawerButton {
   margin-top: 1rem;
 }

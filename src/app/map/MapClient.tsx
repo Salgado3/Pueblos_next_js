@@ -30,10 +30,10 @@ const MapClient = () => {
       center={[23.0, -104.0]}
       zoom={6}
       style={{
-        height: "80%",
+        height: "90%",
         width: "100%",
-        marginTop: "100px",
-        marginBottom: "100px",
+        paddingTop: "100px",
+        marginBottom: "50px",
       }}
     >
       <TileLayer

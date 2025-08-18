@@ -63,9 +63,15 @@
     padding-top: 100px;
     padding-bottom: 120px;
   }
+
   .unOrderedListContainer {
     margin: 0 auto;
   }
+
+  .textContainer {
+    padding-bottom: 1rem;
+  }
+
   .cloudinaryImg {
     height: 15rem;
     width: 90%;

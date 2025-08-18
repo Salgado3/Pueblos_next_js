@@ -51,7 +51,10 @@ const FilterByStateSearch = () => {
         "Zacatecas",
       ]}
       hidePickedOptions
-      comboboxProps={{ transitionProps: { transition: "pop", duration: 200 } }}
+      comboboxProps={{
+        transitionProps: { transition: "pop", duration: 200 },
+        zIndex: "1002",
+      }}
     />
   );
 };

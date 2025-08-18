@@ -1,13 +1,14 @@
 "use client";
 
-import { Button, Drawer } from "@mantine/core";
+import { Button, Drawer, Title } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import FilterByStateSearch from "./FilterByStateSearch";
 import { FilterByAirportSearch } from "./FilterByAirportSearch";
 import { usePueblosContext } from "@/app/context/PueblosContext";
+import LoadingOverlay from "./LoadingOverlay";
+import Image from "next/image";
 
 import styles from "./filterSearchDrawer.module.css";
-import LoadingOverlay from "./LoadingOverlay";
 
 const FilterSearchDrawer = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -28,8 +29,22 @@ const FilterSearchDrawer = () => {
       <Drawer
         opened={opened}
         onClose={close}
-        title="Filters"
-        zIndex={1002}
+        closeButtonProps={{ "aria-label": "Close drawer" }}
+        title={
+          <div className={styles.titleContainer}>
+            <p>Filter View</p>
+            <Image
+              src="/axolotlSuitcase.png"
+              alt="axolotlSuitcase"
+              width={40}
+              height={40}
+              className={styles.titleImg}
+              aria-hidden
+            />
+          </div>
+        }
+        zIndex={1001}
+        padding={"xl"}
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
       >
         <FilterByAirportSearch />
