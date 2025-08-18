@@ -2,7 +2,7 @@ import { usePueblosContext } from "@/app/context/PueblosContext";
 import { MultiSelect } from "@mantine/core";
 
 const FilterByStateSearch = () => {
-  const { setstateArray, isLoading } = usePueblosContext();
+  const { stateArray, setstateArray, isLoading } = usePueblosContext();
 
   if (isLoading) return;
   const handleOnChange = (value: string[]) => {
@@ -12,9 +12,11 @@ const FilterByStateSearch = () => {
   };
   return (
     <MultiSelect
+      checkIconPosition="left"
       label="Filter by State"
       placeholder="Filter by State"
       onChange={(value) => handleOnChange(value)}
+      value={stateArray}
       data={[
         "Aguascalientes",
         "Baja California",

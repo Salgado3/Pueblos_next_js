@@ -1,10 +1,10 @@
 "use client";
 import { useState } from "react";
-import { Select } from "@mantine/core";
+import { MultiSelect } from "@mantine/core";
 import { airports } from "./airportData";
 import { usePueblosContext } from "@/app/context/PueblosContext";
 
-export const PueblosSearch = () => {
+export const FilterByAirportSearch = () => {
   const airportOptions = airports.map((airport) => ({
     label: airport.label,
     value: airport.value,
@@ -13,18 +13,21 @@ export const PueblosSearch = () => {
     usePueblosContext();
 
   if (isLoading) return;
+
+  const handleOnChange = (value: string[]) => {
+    setAirportName(value);
+    setAirportId(value);
+  };
   return (
-    <Select
-      checkIconPosition="right"
+    <MultiSelect
+      checkIconPosition="left"
+      label="Filter by Airport"
       placeholder="Filter by Airport"
-      comboboxProps={{ shadow: "md", width: 200, zIndex: "9999" }}
       data={airportOptions}
       value={airportName}
       nothingFoundMessage="Nothing found..."
-      onChange={(selectedAirportId) => {
-        setAirportName(selectedAirportId || "");
-        setAirportId(selectedAirportId || "");
-      }}
+      comboboxProps={{ transitionProps: { transition: "pop", duration: 200 } }}
+      onChange={(value) => handleOnChange(value)}
     />
   );
 };

@@ -35,7 +35,8 @@ const ProfileClient = () => {
   useEffect(() => {
     setHasMounted(true);
     const getUserLikes = async () => {
-      setVisited(visitedCount || 0);
+      //TODO fix
+      setVisited(0);
     };
 
     getUserLikes();

@@ -10,7 +10,7 @@ const NotFoundOverlay = ({ title }: { title: string }) => {
   const { airportId, setAirportId } = usePueblosContext();
   const handleClick = () => {
     if (airportId) {
-      setAirportId("");
+      setAirportId([]);
     }
     router.back();
   };

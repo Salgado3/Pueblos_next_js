@@ -1,5 +1,4 @@
 export const airports = [
-  { value: "", label: "All Airports" },
   { value: "ACA", label: "General Juan N. Álvarez International Airport" },
   { value: "AGU", label: "Jesús Terán Peredo International Airport (AGU) " },
   { value: "MMAL", label: "Agualeguas National Airport" },

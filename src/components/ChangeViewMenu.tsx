@@ -2,12 +2,12 @@
 import { Button } from "@mantine/core";
 import { IconMap2, IconLayoutGrid, IconListDetails } from "@tabler/icons-react";
 import { MouseEvent, useEffect, useState } from "react";
-import { useParams, usePathname, useRouter } from "next/navigation";
-import { PueblosSearch } from "./PueblosSearch";
+import { usePathname, useRouter } from "next/navigation";
 import BackLink from "./BackLink";
 
 import styles from "./changeViewMenu.module.css";
 import { useMediaQuery } from "@mantine/hooks";
+import FilterSearchDrawer from "./FilterSearchDrawer";
 
 export const ChangeViewMenu = () => {
   const router = useRouter();
@@ -70,7 +70,7 @@ export const ChangeViewMenu = () => {
       >
         <IconListDetails />
       </Button>
-      {mainView && <PueblosSearch />}
+      {mainView && <FilterSearchDrawer />}
     </div>
   );
 };
