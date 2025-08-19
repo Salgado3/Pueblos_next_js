@@ -7,9 +7,8 @@
 }
 .unOrderedListContainer {
   display: grid;
-  gap: 1rem;
+  gap: 0.25rem;
   grid-template-columns: 1fr; /* default: 1 column on mobile */
-  width: 95vw;
   margin: auto;
 }
 
@@ -41,6 +40,10 @@
   font-weight: 600;
 }
 
+.textContainer {
+  padding-bottom: 1rem;
+}
+
 .description {
   padding: 1rem;
   margin-bottom: 1rem;
@@ -66,10 +69,6 @@
 
   .unOrderedListContainer {
     margin: 0 auto;
-  }
-
-  .textContainer {
-    padding-bottom: 1rem;
   }
 
   .cloudinaryImg {

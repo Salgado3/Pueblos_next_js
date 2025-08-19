@@ -3,14 +3,14 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { QueryProvider } from "./query-provider";
 import { createTheme, MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
-import { ChangeViewMenu } from "@/components/ChangeViewMenu";
+import AppLayout from "@/components/AppLayout";
+
 import { PueblosProvider } from "./context/PueblosContext";
 
 import "./globals.css";
 import "@mantine/core/styles.css";
 // ‼️ import notifications styles after core package styles
 import "@mantine/notifications/styles.css";
-import NavBarWrapper from "@/components/NavBarWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -46,9 +46,7 @@ const RootLayout = async ({
           <Notifications />
           <QueryProvider>
             <PueblosProvider>
-              <NavBarWrapper />
-              <ChangeViewMenu />
-              {children}
+              <AppLayout>{children}</AppLayout>
             </PueblosProvider>
           </QueryProvider>
         </MantineProvider>

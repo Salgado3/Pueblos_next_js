@@ -46,12 +46,6 @@ const GridClient = () => {
           <span
             className={styles.locationText}
           >{`Closest Airport: ${item.airport_id}`}</span>
-
-          {!isMobile && (
-            <Text lineClamp={4} className={styles.description}>
-              {item.description}
-            </Text>
-          )}
         </div>
       </li>
     );

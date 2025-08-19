@@ -22,6 +22,7 @@ const ColorSchemeToggle = () => {
       variant="default"
       size="xl"
       aria-label="Toggle color scheme"
+      className={styles.container}
     >
       <IconSun className={cx(styles.icon, styles.light)} stroke={1.5} />
       <IconMoon className={cx(styles.icon, styles.dark)} stroke={1.5} />

@@ -1,0 +1,23 @@
+.titleContainer {
+  display: flex;
+  height: 60px;
+  align-items: center;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.25rem;
+  text-decoration: none;
+}
+
+.logoImg {
+  height: 1.8rem;
+  width: 1.8rem;
+  margin: 0 0.5rem;
+}
+
+.logoImgSunglasses {
+  height: 1.8rem;
+  width: 1.8rem;
+  margin: 0 0.5rem;
+}
