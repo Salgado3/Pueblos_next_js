@@ -56,7 +56,15 @@ const FilterSearchDrawer = () => {
           fullWidth
           onClick={handleReset}
         >
-          Reset filters{" "}
+          Reset filters
+        </Button>
+        <Button
+          className={styles.drawerButton}
+          variant="default"
+          fullWidth
+          onClick={close}
+        >
+          Done
         </Button>
       </Drawer>
       <Button variant="default" onClick={open} className={styles.button}>

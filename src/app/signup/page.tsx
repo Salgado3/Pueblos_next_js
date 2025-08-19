@@ -18,6 +18,7 @@ const SignupPage = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [captchaToken, setCaptchaToken] = useState("");
+  const [disableButton, setDisableButton] = useState(false);
 
   const router = useRouter();
   const supabase = createClient();
@@ -177,20 +178,22 @@ const SignupPage = () => {
           <span>Back to login</span>
           <IconArrowNarrowRight />
         </Link>
+        <Turnstile
+          options={{ size: "compact" }}
+          siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+          onSuccess={(token) => {
+            if (typeof token === "string") setCaptchaToken(token);
+          }}
+          onError={() => setDisableButton(true)}
+        />
         <div className={styles.buttonContainer}>
-          <Turnstile
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
-            onSuccess={(token) => {
-              if (typeof token === "string") setCaptchaToken(token);
-            }}
-          />
           <Button
             type="button"
             variant="filled"
             className={styles.button}
             onClick={handleSignup}
             loading={isLoading}
-            // disabled={!isFormValid}
+            disabled={disableButton}
             fullWidth
           >
             Sign up

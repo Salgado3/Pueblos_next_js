@@ -15,6 +15,7 @@ import styles from "./page.module.css";
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [disableButton, setDisableButton] = useState(false);
   const [loadingStatus, setIsLoadingStatus] = useState<{
     loading: boolean;
     button: "login" | "signup" | "";
@@ -142,19 +143,20 @@ export default function LoginPage() {
           <span>sign up here</span>
           <IconArrowNarrowRight />
         </Link>
+        <Turnstile
+          options={{ size: "compact" }}
+          siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+          onSuccess={(token) => {
+            if (typeof token === "string") setCaptchaToken(token);
+          }}
+          onError={() => setDisableButton(true)}
+        />
         <div className={styles.buttonGroup}>
-          <Turnstile
-            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
-            onSuccess={(token) => {
-              if (typeof token === "string") setCaptchaToken(token);
-            }}
-          />
           <Button
-            type="button"
             className={styles.button}
             onClick={handleLogin}
             loading={loadingStatus.loading && loadingStatus.button === "login"}
-            // disabled={isFormValid}
+            disabled={disableButton}
             fullWidth
           >
             Log in
