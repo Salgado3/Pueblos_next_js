@@ -8,6 +8,7 @@ import Image from "next/image";
 import { createClient } from "@/lib/supabase/utils/client";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 import styles from "./page.module.css";
 
@@ -18,6 +19,7 @@ export default function LoginPage() {
     loading: boolean;
     button: "login" | "signup" | "";
   }>({ loading: false, button: "" });
+  const [captchaToken, setCaptchaToken] = useState("");
   const isFormValid =
     email.length > 0 && email.includes("@") && password.length > 0;
   const router = useRouter();
@@ -82,6 +84,7 @@ export default function LoginPage() {
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
+      options: { captchaToken },
     });
 
     if (error) {
@@ -140,6 +143,12 @@ export default function LoginPage() {
           <IconArrowNarrowRight />
         </Link>
         <div className={styles.buttonGroup}>
+          <Turnstile
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+            onSuccess={(token) => {
+              if (typeof token === "string") setCaptchaToken(token);
+            }}
+          />
           <Button
             type="button"
             className={styles.button}

@@ -6,9 +6,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/utils/client";
 import { useRouter } from "next/navigation";
+import { IconArrowNarrowRight, IconCheck } from "@tabler/icons-react";
+import { Turnstile } from "@marsidev/react-turnstile";
 
 import styles from "./page.module.css";
-import { IconArrowNarrowRight, IconCheck } from "@tabler/icons-react";
 
 const SignupPage = () => {
   const [username, setUsername] = useState("");
@@ -16,6 +17,8 @@ const SignupPage = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [captchaToken, setCaptchaToken] = useState("");
+
   const router = useRouter();
   const supabase = createClient();
 
@@ -84,6 +87,7 @@ const SignupPage = () => {
       email,
       password,
       options: {
+        captchaToken,
         data: {
           display_name: username,
         },
@@ -174,6 +178,12 @@ const SignupPage = () => {
           <IconArrowNarrowRight />
         </Link>
         <div className={styles.buttonContainer}>
+          <Turnstile
+            siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
+            onSuccess={(token) => {
+              if (typeof token === "string") setCaptchaToken(token);
+            }}
+          />
           <Button
             type="button"
             variant="filled"

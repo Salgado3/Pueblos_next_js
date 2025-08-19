@@ -54,14 +54,16 @@ export default function PueblosClient() {
     decodeURIComponent(selectedPueblo).replace(/_/g, " ").toLowerCase()
   );
 
-  const airport = airports?.find(
-    (airport) => airport.value === selectedPueblo?.airport_id
-  );
-  const airportFullName = airport?.label;
   //@ts-ignore
   const pueblo = pueblosData?.find(
     (p: { title: string }) => normalize(p?.title.toLowerCase()) === name
   );
+
+  const airport = airports?.find(
+    (airport) => airport.value === pueblo?.airport_id
+  );
+  const airportFullName = airport?.label;
+  
   const { data: userActionsData, isLoading: userActionsIsLoading } =
     useFetchUserActions(userId as string);
 
