@@ -25,6 +25,7 @@ const AppLayout = ({
   return (
     <AppShell
       padding="md"
+      zIndex={1001}
       header={{ height: isMobile ? 60 : 60 }}
       navbar={{
         width: isUserLoggedIn ? 300 : 0,
@@ -66,7 +67,7 @@ const AppLayout = ({
       )}
       <AppShell.Main>
         <>
-          <BackLink />
+          {isUserLoggedIn && <BackLink />}
           {children}
         </>
       </AppShell.Main>

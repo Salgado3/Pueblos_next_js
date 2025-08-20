@@ -23,8 +23,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import styles from "./navbar.module.css";
 
 export default function Navbar({ action }: { action: () => void }) {
-  const [isDisabled, setIsDisabled] = useState("");
-  const [isActive, setInactive] = useState("");
+  const [isActive, setIsActive] = useState("");
   const { setAirportId, setAirportName, setstateArray, isLoading } =
     usePueblosContext();
 
@@ -40,9 +39,8 @@ export default function Navbar({ action }: { action: () => void }) {
   const isMobile = useMediaQuery("(max-width: 750px)", true);
 
   useEffect(() => {
-    if (isDisabled !== pathname) {
-      setIsDisabled(pathname);
-      setInactive(pathname);
+    if (isActive !== pathname) {
+      setIsActive(pathname);
     }
   }, [pathname]);
   const handleOnClick = ({
@@ -54,9 +52,14 @@ export default function Navbar({ action }: { action: () => void }) {
   }) => {
     event.preventDefault();
     //@ts-expect-error
-    setInactive(`/${event.target?.innerText.toLowerCase()}`);
+    const newPath = `/${event.target?.innerText.toLowerCase()}`;
+
+    if (isActive === newPath) {
+      return;
+    }
+
+    setIsActive(newPath);
     if (path) {
-      setIsDisabled(path);
       router.push(path);
       {
         isMobile &&
@@ -70,44 +73,67 @@ export default function Navbar({ action }: { action: () => void }) {
     await supabase.auth.signOut();
     router.push("/");
   };
-  const isUserLoggedIn = pathname === "/login" || pathname === "/signup";
+
   return (
     <div>
       <NavLink
+        styles={{
+          label: {
+            fontSize: "1rem",
+            fontWeight: "600",
+          },
+        }}
         leftSection={<IconUserCircle />}
         label="Profile"
-        disabled={isDisabled === "/profile"}
         onClick={(e) => handleOnClick({ event: e, path: "/profile" })}
         active={isActive === "/profile"}
         variant="filled"
       />
-      <NavLink leftSection={<IconView360 />} label="Change View">
+      <NavLink
+        styles={{
+          label: { fontSize: "1rem", fontWeight: "600" },
+        }}
+        leftSection={<IconView360 />}
+        label="Change View"
+      >
         <NavLink
+          styles={{
+            label: { fontSize: "1rem", fontWeight: "400" },
+          }}
           leftSection={<IconMap2 />}
           label="Map"
-          disabled={isDisabled === "/map"}
           onClick={(e) => handleOnClick({ event: e, path: "/map" })}
           active={isActive === "/map"}
           variant="filled"
         />
         <NavLink
+          styles={{
+            label: { fontSize: "1rem", fontWeight: "400" },
+          }}
           leftSection={<IconLayoutGrid />}
           label="Grid"
-          disabled={isDisabled === "/grid"}
           onClick={(e) => handleOnClick({ event: e, path: "/grid" })}
           active={isActive === "/grid"}
           variant="filled"
         />
         <NavLink
+          styles={{
+            label: { fontSize: "1rem", fontWeight: "400" },
+          }}
           leftSection={<IconListDetails />}
           label="List"
-          disabled={isDisabled === "/list"}
           onClick={(e) => handleOnClick({ event: e, path: "/list" })}
           active={isActive === "/list"}
           variant="filled"
         />
       </NavLink>
-      <NavLink leftSection={<IconFilterPin />} label="Add Filters">
+      <NavLink
+        styles={{
+          label: { fontSize: "1rem", fontWeight: "600" },
+        }}
+        leftSection={<IconFilterPin />}
+        label="Add Filters"
+      >
         <FilterByAirportSearch />
         <FilterByStateSearch />
         <Button
@@ -128,22 +154,29 @@ export default function Navbar({ action }: { action: () => void }) {
         )}
       </NavLink>
       <NavLink
+        styles={{
+          label: { fontSize: "1rem", fontWeight: "600" },
+        }}
         leftSection={<IconSettingsShare />}
         label="Settings"
-        disabled={isDisabled === "/settings"}
         onClick={(e) => handleOnClick({ event: e, path: "/settings" })}
         active={isActive === "/settings"}
         variant="filled"
       />
       <NavLink
+        styles={{
+          label: { fontSize: "1rem", fontWeight: "600" },
+        }}
         leftSection={<IconAdjustmentsAlt />}
         label="About"
-        disabled={isDisabled === "/about"}
         onClick={(e) => handleOnClick({ event: e, path: "/about" })}
         active={isActive === "/about"}
         variant="filled"
       />
       <NavLink
+        styles={{
+          label: { fontSize: "1rem", fontWeight: "600" },
+        }}
         leftSection={<IconLogout2 />}
         label="Log out"
         onClick={handleLogout}

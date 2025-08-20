@@ -21,9 +21,15 @@
 
 .titleContainer {
   width: 80%;
+  display: flex;
+  flex-direction: column;
 }
 
 .stateText {
+  font-weight: 600;
+}
+
+.airportText {
   font-weight: 600;
 }
 

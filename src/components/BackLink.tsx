@@ -8,8 +8,9 @@ const BackLink = () => {
   const router = useRouter();
   return (
     <Button
+      style={{ fontSize: "1rem", fontWeight: "600" }}
       variant="transparent"
-      color="blue"
+      color="#DF0A1B"
       leftSection={<IconArrowNarrowLeft />}
       onClick={() => router.back()}
     >

@@ -15,7 +15,9 @@ const ListClient = () => {
 
   if (isLoading) return <LoadingOverlay />;
   if (filteredPueblos.length === 0)
-    return <NotFoundOverlay title="Looks like nothing is here" showButton={false}/>;
+    return (
+      <NotFoundOverlay title="Looks like nothing is here" showButton={false} />
+    );
 
   const puebloData = filteredPueblos?.map((item, i) => {
     if (!item?.title) return;
@@ -31,27 +33,24 @@ const ListClient = () => {
               puebloTitle={item.title}
               publicId={item.cloudinary_id || ""}
               className={styles.cloudinaryImage}
-              width={isMobile ? 75 : 400}
-              height={isMobile ? 75 : 400}
+              width={isMobile ? 75 : 100}
+              height={isMobile ? 75 : 100}
             />
           </div>
           <div className={styles.titleContainer}>
             <h2 className={styles.titleHeader}>{item.title}</h2>
-
+            <span
+              className={styles.stateText}
+            >{`Location: ${item.state}, ${item.country}`}</span>
+            <span
+              className={styles.airportText}
+            >{`Nearest Airport: ${item.airport_id}`}</span>
             {!isMobile && (
               <>
-                <span
-                  className={styles.stateText}
-                >{`Location: ${item.state}, ${item.country}`}</span>
-                <Text lineClamp={2} className={styles.description}>
+                <Text lineClamp={1} className={styles.description}>
                   {item.description}
                 </Text>
               </>
-            )}
-            {isMobile && (
-              <p
-                className={styles.description}
-              >{`Nearest Airport: ${item.airport_id}`}</p>
             )}
           </div>
         </Link>

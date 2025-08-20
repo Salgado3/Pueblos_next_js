@@ -31,7 +31,6 @@
 
 @media only screen and (max-width: 600px) {
   .cardContainer {
-    margin-top: 10rem;
     width: 80vw;
   }
   .title {
