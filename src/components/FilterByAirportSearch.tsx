@@ -20,6 +20,7 @@ export const FilterByAirportSearch = () => {
   };
   return (
     <MultiSelect
+      style={{ marginRight: "1rem" }}
       checkIconPosition="left"
       label="Filter by Airport"
       placeholder="Filter by Airport"

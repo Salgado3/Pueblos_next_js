@@ -38,6 +38,11 @@
   margin: 0 0.5rem;
 }
 
+.drawerButton {
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
 .link {
   text-decoration: none;
   color: #2563eb; /* Tailwind blue-600 */

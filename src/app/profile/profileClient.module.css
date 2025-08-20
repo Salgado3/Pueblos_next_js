@@ -2,9 +2,6 @@
   display: flex;
   justify-content: flex-end;
 }
-@media (max-width: 600px) {
-  .container {
-    padding-top: 100px;
-    padding-bottom: 130px;
-  }
-}
+/* @media (max-width: 600px) {
+
+} */

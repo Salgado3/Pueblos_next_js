@@ -14,9 +14,7 @@ import {
 } from "@tabler/icons-react";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
-
 import "leaflet/dist/leaflet.css";
-import styles from "./pueblosClient.module.css";
 import { createClient } from "@/lib/supabase/utils/client";
 import { useEffect, useState } from "react";
 import { airports } from "@/components/airportData";
@@ -24,6 +22,8 @@ import useUpdateUserPuebloAction from "@/lib/reactQuery/useUpdateUserPuebloActio
 import { useQuery } from "@tanstack/react-query";
 import useFetchUserActions from "@/lib/reactQuery/useFetchUserActions";
 import ThingsToDoList from "./components/ThingsToDoList";
+
+import styles from "./pueblosClient.module.css";
 
 export default function PueblosClient() {
   const params = useParams();
@@ -147,7 +147,7 @@ export default function PueblosClient() {
             <Marker
               key={pueblo?.id}
               title={pueblo.title || ""}
-              zIndexOffset={1000}
+              zIndexOffset={99}
               position={[pueblo.latitude, pueblo.longitude]}
               icon={
                 new L.Icon({

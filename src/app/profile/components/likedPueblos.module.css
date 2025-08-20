@@ -64,9 +64,6 @@
 }
 
 @media (max-width: 600px) {
-  .container {
-    overflow: auto;
-  }
   .unorderedListContainer {
     grid-template-columns: repeat(2, 1fr);
   }

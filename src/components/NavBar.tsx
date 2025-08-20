@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { Button, NavLink } from "@mantine/core";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -12,18 +11,16 @@ import {
   IconUserCircle,
   IconView360,
   IconFilterPin,
+  IconAdjustmentsAlt,
 } from "@tabler/icons-react";
-
-import { MouseEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/utils/client";
-import styles from "./navbar.module.css";
-import ColorSchemeToggle from "./ColorSchemeToggle";
-import Image from "next/image";
 import FilterByStateSearch from "./FilterByStateSearch";
 import { FilterByAirportSearch } from "./FilterByAirportSearch";
 import { usePueblosContext } from "@/app/context/PueblosContext";
 import { useMediaQuery } from "@mantine/hooks";
-import BackLink from "./BackLink";
+
+import styles from "./navbar.module.css";
 
 export default function Navbar({ action }: { action: () => void }) {
   const [isDisabled, setIsDisabled] = useState("");
@@ -42,6 +39,12 @@ export default function Navbar({ action }: { action: () => void }) {
   const supabase = createClient();
   const isMobile = useMediaQuery("(max-width: 750px)", true);
 
+  useEffect(() => {
+    if (isDisabled !== pathname) {
+      setIsDisabled(pathname);
+      setInactive(pathname);
+    }
+  }, [pathname]);
   const handleOnClick = ({
     event,
     path,
@@ -51,10 +54,16 @@ export default function Navbar({ action }: { action: () => void }) {
   }) => {
     event.preventDefault();
     //@ts-expect-error
-    setInactive(event.target?.innerText);
+    setInactive(`/${event.target?.innerText.toLowerCase()}`);
     if (path) {
       setIsDisabled(path);
       router.push(path);
+      {
+        isMobile &&
+          setTimeout(() => {
+            action();
+          }, 1000);
+      }
     }
   };
   const handleLogout = async () => {
@@ -64,20 +73,12 @@ export default function Navbar({ action }: { action: () => void }) {
   const isUserLoggedIn = pathname === "/login" || pathname === "/signup";
   return (
     <div>
-      <BackLink />
-      <NavLink
-        label="About"
-        disabled={isDisabled === "/about"}
-        onClick={(e) => handleOnClick({ event: e, path: "/about" })}
-        active={isActive === "About"}
-        variant="filled"
-      />
       <NavLink
         leftSection={<IconUserCircle />}
         label="Profile"
         disabled={isDisabled === "/profile"}
         onClick={(e) => handleOnClick({ event: e, path: "/profile" })}
-        active={isActive === "Profile"}
+        active={isActive === "/profile"}
         variant="filled"
       />
       <NavLink leftSection={<IconView360 />} label="Change View">
@@ -86,7 +87,7 @@ export default function Navbar({ action }: { action: () => void }) {
           label="Map"
           disabled={isDisabled === "/map"}
           onClick={(e) => handleOnClick({ event: e, path: "/map" })}
-          active={isActive === "Map"}
+          active={isActive === "/map"}
           variant="filled"
         />
         <NavLink
@@ -94,7 +95,7 @@ export default function Navbar({ action }: { action: () => void }) {
           label="Grid"
           disabled={isDisabled === "/grid"}
           onClick={(e) => handleOnClick({ event: e, path: "/grid" })}
-          active={isActive === "Grid"}
+          active={isActive === "/grid"}
           variant="filled"
         />
         <NavLink
@@ -102,7 +103,7 @@ export default function Navbar({ action }: { action: () => void }) {
           label="List"
           disabled={isDisabled === "/list"}
           onClick={(e) => handleOnClick({ event: e, path: "/list" })}
-          active={isActive === "List"}
+          active={isActive === "/list"}
           variant="filled"
         />
       </NavLink>
@@ -112,36 +113,42 @@ export default function Navbar({ action }: { action: () => void }) {
         <Button
           className={styles.drawerButton}
           variant="default"
-          fullWidth
           onClick={handleFilterReset}
         >
           Reset filters
         </Button>
+        {isMobile && (
+          <Button
+            className={styles.drawerButton}
+            variant="default"
+            onClick={action}
+          >
+            Close Drawer
+          </Button>
+        )}
       </NavLink>
       <NavLink
         leftSection={<IconSettingsShare />}
         label="Settings"
         disabled={isDisabled === "/settings"}
         onClick={(e) => handleOnClick({ event: e, path: "/settings" })}
-        active={isActive === "Settings"}
+        active={isActive === "/settings"}
+        variant="filled"
+      />
+      <NavLink
+        leftSection={<IconAdjustmentsAlt />}
+        label="About"
+        disabled={isDisabled === "/about"}
+        onClick={(e) => handleOnClick({ event: e, path: "/about" })}
+        active={isActive === "/about"}
         variant="filled"
       />
       <NavLink
         leftSection={<IconLogout2 />}
         label="Log out"
         onClick={handleLogout}
-        color="red"
+        style={{ marginTop: "3rem" }}
       />
-      {isMobile && (
-        <Button
-          className={styles.drawerButton}
-          variant="default"
-          fullWidth
-          onClick={action}
-        >
-          Close Drawer
-        </Button>
-      )}
     </div>
   );
 }

@@ -30,7 +30,7 @@ const MapClient = () => {
       center={[23.0, -104.0]}
       zoom={6}
       style={{
-        height: "90%",
+        height: "80vh",
         width: "100%",
         paddingTop: "100px",
         marginBottom: "50px",
@@ -45,7 +45,7 @@ const MapClient = () => {
           <Marker
             key={item?.id}
             title={item.title}
-            zIndexOffset={999}
+            zIndexOffset={99}
             position={[item.latitude, item.longitude]}
             icon={
               new L.Icon({

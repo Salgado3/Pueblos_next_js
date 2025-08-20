@@ -6,12 +6,12 @@ const FilterByStateSearch = () => {
 
   if (isLoading) return;
   const handleOnChange = (value: string[]) => {
-
     setstateArray(value);
     return;
   };
   return (
     <MultiSelect
+      style={{ paddingRight: "1rem" }}
       checkIconPosition="left"
       label="Filter by State"
       placeholder="Filter by State"

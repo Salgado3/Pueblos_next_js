@@ -3,10 +3,11 @@ import { AppShell, Burger, Title, useComputedColorScheme } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-
-import styles from "./appLayout.module.css";
 import ColorSchemeToggle from "./ColorSchemeToggle";
 import NavBar from "./NavBar";
+import BackLink from "./BackLink";
+
+import styles from "./appLayout.module.css";
 
 const AppLayout = ({
   children,
@@ -31,7 +32,7 @@ const AppLayout = ({
         collapsed: { mobile: !opened },
       }}
     >
-      <AppShell.Header>
+      <AppShell.Header zIndex={1000}>
         <div className={styles.titleContainer}>
           {isUserLoggedIn && (
             <Burger
@@ -63,8 +64,13 @@ const AppLayout = ({
           <NavBar action={toggle} />
         </AppShell.Navbar>
       )}
-      <AppShell.Main>{children}</AppShell.Main>
-      <AppShell.Footer withBorder>Footer</AppShell.Footer>
+      <AppShell.Main>
+        <>
+          <BackLink />
+          {children}
+        </>
+      </AppShell.Main>
+      <AppShell.Footer withBorder></AppShell.Footer>
     </AppShell>
   );
 };
