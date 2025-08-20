@@ -15,7 +15,7 @@ const ListClient = () => {
 
   if (isLoading) return <LoadingOverlay />;
   if (filteredPueblos.length === 0)
-    return <NotFoundOverlay title="Looks like nothing is here" />;
+    return <NotFoundOverlay title="Looks like nothing is here" showButton={false}/>;
 
   const puebloData = filteredPueblos?.map((item, i) => {
     if (!item?.title) return;

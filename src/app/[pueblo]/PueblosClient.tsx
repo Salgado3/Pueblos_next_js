@@ -63,7 +63,7 @@ export default function PueblosClient() {
     (airport) => airport.value === pueblo?.airport_id
   );
   const airportFullName = airport?.label;
-  
+
   const { data: userActionsData, isLoading: userActionsIsLoading } =
     useFetchUserActions(userId as string);
 
@@ -74,7 +74,9 @@ export default function PueblosClient() {
   if (pueblosIsLoading || authIsLoading || userActionsIsLoading)
     return <LoadingOverlay />;
   if (pueblosError || !pueblo?.id)
-    return <NotFoundOverlay title="Looks like nothing is here" />;
+    return (
+      <NotFoundOverlay title="Looks like nothing is here" showButton={false} />
+    );
 
   // Derive the boolean flags from the fetched data
   const isLiked = userActionsData?.some(

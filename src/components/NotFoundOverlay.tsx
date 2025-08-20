@@ -10,7 +10,7 @@ const NotFoundOverlay = ({
   showButton = true,
 }: {
   title: string;
-  showButton: boolean;
+  showButton?: boolean;
 }) => {
   const router = useRouter();
   const { airportId, setAirportId } = usePueblosContext();
