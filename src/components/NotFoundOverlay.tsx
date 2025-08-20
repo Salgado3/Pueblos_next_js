@@ -5,7 +5,13 @@ import { usePueblosContext } from "@/app/context/PueblosContext";
 
 import styles from "./notFoundOverlay.module.css";
 
-const NotFoundOverlay = ({ title }: { title: string }) => {
+const NotFoundOverlay = ({
+  title,
+  showButton = true,
+}: {
+  title: string;
+  showButton: boolean;
+}) => {
   const router = useRouter();
   const { airportId, setAirportId } = usePueblosContext();
   const handleClick = () => {
@@ -25,7 +31,7 @@ const NotFoundOverlay = ({ title }: { title: string }) => {
         aria-hidden
       />
       <h3 className={styles.notFoundtext}>{title}</h3>
-      <button onClick={handleClick}>Go Back</button>
+      {showButton && <button onClick={handleClick}>Go Back</button>}
     </div>
   );
 };

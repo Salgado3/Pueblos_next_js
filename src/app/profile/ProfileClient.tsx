@@ -1,12 +1,21 @@
 import { createClient } from "@/lib/supabase/utils/client";
 import React, { useEffect, useState } from "react";
-
-import { Title } from "@mantine/core";
-import styles from "./profileClient.module.css";
+import {
+  IconListCheck,
+  IconPhotoPlus,
+  IconHeartPlus,
+  IconMapStar,
+} from "@tabler/icons-react";
 import ProgressRing from "./components/ProgressRing";
 import LikedPueblos from "./components/LikedPueblos";
 import useFetchUserActions from "@/lib/reactQuery/useFetchUserActions";
 import { useQuery } from "@tanstack/react-query";
+import VisitedPueblos from "./components/VisitedPueblos";
+import NotFoundOverlay from "@/components/NotFoundOverlay";
+import { Tabs, Title } from "@mantine/core";
+
+import styles from "./profileClient.module.css";
+
 const ProfileClient = () => {
   const supabase = createClient();
   const [hasMounted, setHasMounted] = useState(false);
@@ -51,17 +60,65 @@ const ProfileClient = () => {
   ).length;
 
   if (!hasMounted) return null;
-
   return (
-    <div className={styles.container}>
-      <div className={styles.visitedContainer}>
-        <Title order={2}>Visited</Title>
-        <ProgressRing valueCount={visited} />
-      </div>
+    <Tabs radius="lg" defaultValue="loved pueblos">
+      <Tabs.List justify="center">
+        <Tabs.Tab
+          value="loved pueblos"
+          leftSection={<IconHeartPlus size={12} />}
+        >
+          Loved
+        </Tabs.Tab>
+        <Tabs.Tab
+          value="Visited Pueblos"
+          leftSection={<IconMapStar size={12} />}
+        >
+          Visited
+        </Tabs.Tab>
+        <Tabs.Tab
+          value="things to do"
+          leftSection={<IconListCheck size={14} />}
+        >
+          Things To Do
+        </Tabs.Tab>
+        <Tabs.Tab value="new pueblo" leftSection={<IconPhotoPlus size={14} />}>
+          Submit A Pueblo
+        </Tabs.Tab>
+      </Tabs.List>
 
-      <LikedPueblos />
-    </div>
+      <Tabs.Panel value="loved pueblos">
+        <LikedPueblos />
+      </Tabs.Panel>
+
+      <Tabs.Panel value="Visited Pueblos">
+        <VisitedPueblos />
+      </Tabs.Panel>
+      <Tabs.Panel value="things to do">
+        <NotFoundOverlay
+          title={"Coming soon! Check back later."}
+          showButton={false}
+        />
+      </Tabs.Panel>
+      <Tabs.Panel value="new pueblo">
+        <NotFoundOverlay
+          title={
+            "Coming soon! Add your very own pueblo from any part of the world!"
+          }
+          showButton={false}
+        />
+      </Tabs.Panel>
+    </Tabs>
   );
+  // return (
+  //   <div className={styles.container}>
+  //     <div className={styles.visitedContainer}>
+  //       <Title order={2}>Visited</Title>
+  //       <ProgressRing valueCount={visited} />
+  //     </div>
+
+  //     <LikedPueblos />
+  //   </div>
+  // );
 };
 
 export default ProfileClient;
