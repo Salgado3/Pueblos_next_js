@@ -61,19 +61,16 @@ const ProfileClient = () => {
 
   if (!hasMounted) return null;
   return (
-    <Tabs radius="lg" defaultValue="loved pueblos">
+    <Tabs radius="sm" variant="outline" defaultValue="Loved_Pueblos">
       <Tabs.List justify="center">
         <Tabs.Tab
-          value="loved pueblos"
+          value="Loved_Pueblos"
           leftSection={<IconHeartPlus size={12} />}
         >
-          Loved
+          Loved Pueblos
         </Tabs.Tab>
-        <Tabs.Tab
-          value="Visited Pueblos"
-          leftSection={<IconMapStar size={12} />}
-        >
-          Visited
+        <Tabs.Tab value="Visited" leftSection={<IconMapStar size={12} />}>
+          Visited Pueblos
         </Tabs.Tab>
         <Tabs.Tab
           value="things to do"
@@ -86,11 +83,11 @@ const ProfileClient = () => {
         </Tabs.Tab>
       </Tabs.List>
 
-      <Tabs.Panel value="loved pueblos">
+      <Tabs.Panel value="Loved_Pueblos">
         <LikedPueblos />
       </Tabs.Panel>
 
-      <Tabs.Panel value="Visited Pueblos">
+      <Tabs.Panel value="Visited">
         <VisitedPueblos />
       </Tabs.Panel>
       <Tabs.Panel value="things to do">
