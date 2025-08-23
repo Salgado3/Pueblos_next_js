@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, NavLink } from "@mantine/core";
+import { NavLink } from "@mantine/core";
 import { usePathname, useRouter } from "next/navigation";
 import {
   IconMap2,
@@ -15,24 +15,10 @@ import {
 } from "@tabler/icons-react";
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/utils/client";
-import FilterByStateSearch from "./FilterByStateSearch";
-import { FilterByAirportSearch } from "./FilterByAirportSearch";
-import { usePueblosContext } from "@/app/context/PueblosContext";
 import { useMediaQuery } from "@mantine/hooks";
-
-import styles from "./navbar.module.css";
 
 export default function Navbar({ action }: { action: () => void }) {
   const [isActive, setIsActive] = useState("");
-  const { setAirportId, setAirportName, setstateArray, isLoading } =
-    usePueblosContext();
-
-  const handleFilterReset = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    setAirportId([]);
-    setAirportName([]);
-    setstateArray([]);
-  };
   const pathname = usePathname();
   const router = useRouter();
   const supabase = createClient();
@@ -78,6 +64,16 @@ export default function Navbar({ action }: { action: () => void }) {
     <div>
       <NavLink
         styles={{
+          label: { fontSize: "1rem", fontWeight: "600" },
+        }}
+        leftSection={<IconAdjustmentsAlt />}
+        label="About"
+        onClick={(e) => handleOnClick({ event: e, path: "/about" })}
+        active={isActive === "/about"}
+        variant="filled"
+      />
+      <NavLink
+        styles={{
           label: {
             fontSize: "1rem",
             fontWeight: "600",
@@ -94,7 +90,7 @@ export default function Navbar({ action }: { action: () => void }) {
           label: { fontSize: "1rem", fontWeight: "600" },
         }}
         leftSection={<IconView360 />}
-        label="Change View"
+        label="Find Pueblos"
       >
         <NavLink
           styles={{
@@ -127,32 +123,7 @@ export default function Navbar({ action }: { action: () => void }) {
           variant="filled"
         />
       </NavLink>
-      <NavLink
-        styles={{
-          label: { fontSize: "1rem", fontWeight: "600" },
-        }}
-        leftSection={<IconFilterPin />}
-        label="Add Filters"
-      >
-        <FilterByAirportSearch />
-        <FilterByStateSearch />
-        <Button
-          className={styles.drawerButton}
-          variant="default"
-          onClick={handleFilterReset}
-        >
-          Reset filters
-        </Button>
-        {isMobile && (
-          <Button
-            className={styles.drawerButton}
-            variant="default"
-            onClick={action}
-          >
-            Close Drawer
-          </Button>
-        )}
-      </NavLink>
+
       <NavLink
         styles={{
           label: { fontSize: "1rem", fontWeight: "600" },
@@ -163,16 +134,7 @@ export default function Navbar({ action }: { action: () => void }) {
         active={isActive === "/settings"}
         variant="filled"
       />
-      <NavLink
-        styles={{
-          label: { fontSize: "1rem", fontWeight: "600" },
-        }}
-        leftSection={<IconAdjustmentsAlt />}
-        label="About"
-        onClick={(e) => handleOnClick({ event: e, path: "/about" })}
-        active={isActive === "/about"}
-        variant="filled"
-      />
+
       <NavLink
         styles={{
           label: { fontSize: "1rem", fontWeight: "600" },
@@ -180,7 +142,7 @@ export default function Navbar({ action }: { action: () => void }) {
         leftSection={<IconLogout2 />}
         label="Log out"
         onClick={handleLogout}
-        style={{ marginTop: "3rem" }}
+        style={{ marginTop: "2rem" }}
       />
     </div>
   );

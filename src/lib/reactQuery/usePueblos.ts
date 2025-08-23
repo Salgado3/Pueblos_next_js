@@ -14,7 +14,7 @@ const usePueblos = ():UseQueryResult<Database["public"]["Tables"]["pueblos_magic
     queryFn: async ()=> {
       const { data, error } = await supabase
         .from("pueblos_magicos")
-        .select("*")
+        .select("airport_id, cloudinary_id, country, description, description_url, image, latitude, longitude, photo_by, photo_by_url, state, title, id")
         .order("title", { ascending: true });
       if (error) {
         throw new Error(error.message); // Use the error message for better debugging

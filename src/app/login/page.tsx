@@ -82,6 +82,7 @@ export default function LoginPage() {
     }
     const id = showLoadingNotification();
     setIsLoadingStatus({ loading: true, button: "login" });
+    //TODO fix other error messages when no redirecting
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
@@ -95,8 +96,8 @@ export default function LoginPage() {
     updateSuccessNotification(id, "Login successful!", "Redirecting.");
 
     setIsLoadingStatus({ loading: false, button: "" });
-    router.replace("/");
     await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
+    router.push("/");
   };
 
   return (
