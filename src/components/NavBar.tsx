@@ -28,7 +28,7 @@ export default function Navbar({ action }: { action: () => void }) {
     if (isActive !== pathname) {
       setIsActive(pathname);
     }
-  }, [pathname]);
+  }, [pathname, isActive]);
   const handleOnClick = ({
     event,
     path,

@@ -91,13 +91,14 @@ export default function LoginPage() {
 
     if (error) {
       updateErrorNotification(id, "Invalid email or password.");
+      return;
     }
 
     updateSuccessNotification(id, "Login successful!", "Redirecting.");
 
     setIsLoadingStatus({ loading: false, button: "" });
     await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
-    router.push("/");
+    router.replace("/");
   };
 
   return (

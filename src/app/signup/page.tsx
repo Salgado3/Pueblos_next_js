@@ -100,6 +100,7 @@ const SignupPage = () => {
         id,
         "An error occurred during sign up. Please try again."
       );
+      return;
     }
     // The user is NOT logged in after sign-up, so we don't redirect.
     // Instead, we show a success message and prompt them to check their email.
