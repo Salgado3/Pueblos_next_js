@@ -6,6 +6,7 @@ import Image from "next/image";
 import ColorSchemeToggle from "./ColorSchemeToggle";
 import NavBar from "./NavBar";
 import BackLink from "./BackLink";
+import FilterNavBar from "./FilterNavBar";
 
 import styles from "./appLayout.module.css";
 
@@ -18,6 +19,8 @@ const AppLayout = ({
   const isMobile = useMediaQuery("(max-width: 750px)", true);
   const pathname = usePathname();
   const isUserLoggedIn = pathname !== "/login" && pathname !== "/signup";
+  const isPuebloView =
+    pathname === "/grid" || pathname === "/map" || pathname === "/list";
   const computedColorScheme = useComputedColorScheme("light", {
     getInitialValueInEffect: true,
   });
@@ -67,7 +70,10 @@ const AppLayout = ({
       )}
       <AppShell.Main>
         <>
-          {isUserLoggedIn && <BackLink />}
+          <div>
+            {isUserLoggedIn && <BackLink />}
+            {isPuebloView && <FilterNavBar />}
+          </div>
           {children}
         </>
       </AppShell.Main>

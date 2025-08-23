@@ -61,7 +61,7 @@ const ProfileClient = () => {
 
   if (!hasMounted) return null;
   return (
-    <Tabs radius="sm" variant="outline" defaultValue="Loved_Pueblos">
+    <Tabs radius="md" variant="pills" defaultValue="Loved_Pueblos">
       <Tabs.List justify="center">
         <Tabs.Tab
           value="Loved_Pueblos"
