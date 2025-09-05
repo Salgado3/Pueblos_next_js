@@ -1,0 +1,19 @@
+.list {
+  display: flex;
+  margin-left: 1rem;
+}
+
+.title {
+  margin-left: 1rem;
+  padding: 0.75rem 0;
+}
+
+.listItem {
+  margin-left: 1rem;
+  padding: 0.25rem 0;
+}
+
+.listItem:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -14,6 +14,7 @@ import VisitedPueblos from "./components/VisitedPueblos";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
 import { Tabs, Title } from "@mantine/core";
 
+import ThingsToDoPueblos from "./components/ThingsToDoPueblos";
 import styles from "./profileClient.module.css";
 
 const ProfileClient = () => {
@@ -91,10 +92,7 @@ const ProfileClient = () => {
         <VisitedPueblos />
       </Tabs.Panel>
       <Tabs.Panel value="things to do">
-        <NotFoundOverlay
-          title={"Coming soon! Check back later."}
-          showButton={false}
-        />
+        <ThingsToDoPueblos />
       </Tabs.Panel>
       <Tabs.Panel value="new pueblo">
         <NotFoundOverlay

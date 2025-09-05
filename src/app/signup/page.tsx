@@ -183,6 +183,9 @@ const SignupPage = () => {
           options={{ size: "compact" }}
           siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
           onSuccess={(token) => {
+            if (disableButton) {
+              setDisableButton(false);
+            }
             if (typeof token === "string") setCaptchaToken(token);
           }}
           onError={() => setDisableButton(true)}

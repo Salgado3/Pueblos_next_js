@@ -1,4 +1,4 @@
-import usePuebloDetails from "@/lib/reactQuery/usePuebloDetails";
+import usePueblosDetails from "@/lib/reactQuery/usePueblosDetails";
 import { List, ThemeIcon } from "@mantine/core";
 import { IconCircleCheck, IconCircleDashed } from "@tabler/icons-react";
 
@@ -7,7 +7,7 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 import Link from "next/link";
 
 const ThingsToDoList = ({ puebloId }: { puebloId: string }) => {
-  const { data, isLoading, error } = usePuebloDetails(puebloId);
+  const { data, isLoading, error } = usePueblosDetails([puebloId]);
   if (isLoading) return <LoadingOverlay />;
 
   if (error) return null;

@@ -5,11 +5,13 @@ import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/utils/client";
 import { useQuery } from "@tanstack/react-query";
-
-import styles from "./visitedPueblos.module.css";
 import { Title } from "@mantine/core";
 import Link from "next/link";
 import useFetchUserActions from "@/lib/reactQuery/useFetchUserActions";
+import useVisitedPueblos from "@/lib/reactQuery/useVisitedPueblos";
+
+import styles from "./visitedPueblos.module.css";
+
 
 const VisitedPueblos = () => {
   // Use a useQuery hook to manage auth state and get the userId
@@ -44,20 +46,7 @@ const VisitedPueblos = () => {
     data: visitedPueblosData,
     isLoading: visitedPueblosIsLoading,
     error: visitedPueblosError,
-  } = useQuery({
-    queryKey: ["visited_pueblos", visitedPueblosId],
-    queryFn: async () => {
-      const supabase = createClient();
-      const { data, error } = await supabase
-        .from("pueblos_magicos")
-        .select("*")
-        .in("id", visitedPueblosId);
-      if (error) throw error;
-      return data;
-    },
-    // The query will only run when visitedPueblosId is available and not empty
-    enabled: !!visitedPueblosId && visitedPueblosId.length > 0,
-  });
+  } = useVisitedPueblos(visitedPueblosId);
 
   if (authIsLoading || userActionsIsLoading || visitedPueblosIsLoading) {
     return <LoadingOverlay />;
@@ -67,7 +56,7 @@ const VisitedPueblos = () => {
     return <p>An error occurred while fetching your pueblos.</p>;
   }
 
-  if (!visitedPueblosData || visitedPueblosData.length === 0) {
+  if (!visitedPueblosData || visitedPueblosData?.length === 0) {
     return <p>The Pueblos you love will display here..</p>;
   }
 
@@ -79,7 +68,7 @@ const VisitedPueblos = () => {
         </Title>
         <Image
           className={styles.titleContainerImg}
-          src="/axolotlSuitcase.png"
+          src="/axolotlLove.png"
           alt="axolotl holding a heart"
           width={30}
           height={35}

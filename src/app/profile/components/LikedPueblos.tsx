@@ -4,13 +4,13 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/utils/client";
-import { Key } from "react";
 import { useQuery } from "@tanstack/react-query";
-
-import styles from "./likedPueblos.module.css";
 import { Title } from "@mantine/core";
 import Link from "next/link";
 import useFetchUserActions from "@/lib/reactQuery/useFetchUserActions";
+import useLovedPueblos from "@/lib/reactQuery/useLovedPueblos";
+
+import styles from "./likedPueblos.module.css";
 
 const LikedPueblos = () => {
   // Use a useQuery hook to manage auth state and get the userId
@@ -45,20 +45,7 @@ const LikedPueblos = () => {
     data: likedPueblosData,
     isLoading: likedPueblosIsLoading,
     error: likedPueblosError,
-  } = useQuery({
-    queryKey: ["liked_pueblos", likedPuebloIds],
-    queryFn: async () => {
-      const supabase = createClient();
-      const { data, error } = await supabase
-        .from("pueblos_magicos")
-        .select("*")
-        .in("id", likedPuebloIds);
-      if (error) throw error;
-      return data;
-    },
-    // The query will only run when likedPuebloIds is available and not empty
-    enabled: !!likedPuebloIds && likedPuebloIds.length > 0,
-  });
+  } = useLovedPueblos(likedPuebloIds);
 
   if (authIsLoading || userActionsIsLoading || likedPueblosIsLoading) {
     return <LoadingOverlay />;
