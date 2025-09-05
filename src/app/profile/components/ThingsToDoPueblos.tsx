@@ -36,7 +36,7 @@ const ThingsToDoPueblos = () => {
   if (authIsLoading || userActionsIsLoading || isLoading) {
     return <LoadingOverlay />;
   }
-  console.log("jaimes √", userActionsData);
+
   if (
     error ||
     userActionsError ||
@@ -93,7 +93,6 @@ const ThingsToDoPueblos = () => {
     );
   });
 
-  console.log("Jaimes id and things to do", puebloIds, data);
   return listItems;
 };
 
