@@ -54,8 +54,8 @@ export default function PueblosClient() {
     decodeURIComponent(selectedPueblo).replace(/_/g, " ").toLowerCase()
   );
 
-  //@ts-ignore
   const pueblo = pueblosData?.find(
+    //@ts-ignore
     (p: { title: string }) => normalize(p?.title.toLowerCase()) === name
   );
 
