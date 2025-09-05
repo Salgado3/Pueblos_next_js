@@ -12,7 +12,6 @@ import useVisitedPueblos from "@/lib/reactQuery/useVisitedPueblos";
 
 import styles from "./visitedPueblos.module.css";
 
-
 const VisitedPueblos = () => {
   // Use a useQuery hook to manage auth state and get the userId
   const { data: authData, isLoading: authIsLoading } = useQuery({
@@ -88,6 +87,7 @@ const VisitedPueblos = () => {
                 href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
                 rel="noopener noreferrer"
               >
+                <div className={styles.overlay}>{item.title}</div>
                 <CloudinaryImage
                   puebloTitle={item.title}
                   publicId={item.cloudinary_id}

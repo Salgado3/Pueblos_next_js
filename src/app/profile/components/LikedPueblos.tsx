@@ -77,16 +77,13 @@ const LikedPueblos = () => {
       <ul className={styles.unorderedListContainer}>
         {likedPueblosData.map((item: any) => {
           return (
-            <li
-              key={item.id}
-              className={styles.listContainer}
-              title={item.title}
-            >
+            <li key={item.id} className={styles.listContainer}>
               <Link
                 className={styles.cardContainerLink}
                 href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
                 rel="noopener noreferrer"
               >
+                <div className={styles.overlay}>{item.title}</div>
                 <CloudinaryImage
                   puebloTitle={item.title}
                   publicId={item.cloudinary_id}
