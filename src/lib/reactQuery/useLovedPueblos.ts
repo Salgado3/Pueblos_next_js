@@ -2,7 +2,7 @@ import { createClient } from "../supabase/utils/client";
 import { type Database } from "../../../database.types";
 import { UseQueryResult, useQuery } from "@tanstack/react-query";
 
-const useLovedPueblos = (likedPuebloIds: string[]):UseQueryResult<Database["public"]["Tables"]["pueblos_magicos"]["Row"][] | Error> => {
+const useLovedPueblos = (likedPuebloIds: string[]):UseQueryResult<Database["public"]["Tables"]["pueblos_magicos"]["Row"][]> => {
 
   return useQuery({
     queryKey: ["liked_pueblos", likedPuebloIds],

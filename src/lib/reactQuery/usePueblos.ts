@@ -6,7 +6,7 @@ import { type Database } from "../../../database.types";
 
 
 
-const usePueblos = ():UseQueryResult<Database["public"]["Tables"]["pueblos_magicos"]["Row"][] | Error> => {
+const usePueblos = ():UseQueryResult<Database["public"]["Tables"]["pueblos_magicos"]["Row"][]> => {
   const supabase = createClient();
   //@ts-ignore
   return useQuery({
