@@ -91,6 +91,8 @@ export default function LoginPage() {
 
     if (error) {
       updateErrorNotification(id, "Invalid email or password.");
+      setIsLoadingStatus({ loading: false, button: "" });
+
       return;
     }
 
