@@ -6,6 +6,9 @@ import Link from "next/link";
 import { usePueblosContext } from "../context/PueblosContext";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
+import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
+import { BlurFade } from "@/components/magicui/blur-fade";
+import MobileGridClient from "./MobileGridClient";
 
 import styles from "./gridClient.module.css";
 
@@ -21,42 +24,57 @@ const GridClient = () => {
       <NotFoundOverlay title="Looks like nothing is here" showButton={false} />
     );
 
+  if (isMobile) {
+    return <MobileGridClient />;
+  }
+
   const puebloData = filteredPueblos?.map((item, i) => {
     if (!item.title) return;
+    const spanPattern = [
+      "col-span-3 lg:col-span-2", // true (wide)
+      "col-span-4 lg:col-span-1", // false (narrow)
+      "col-span-4 lg:col-span-1", // false
+      "col-span-3 lg:col-span-2", // true
+      "col-span-3 lg:col-span-2", // true
+      "col-span-2 lg:col-span-1", // false
+      "col-span-2 lg:col-span-1", // false
+      "col-span-3 lg:col-span-2", // true
+    ];
+    const className = spanPattern[i % spanPattern.length];
     return (
-      <li className={styles.cardContainerList} key={item.title + i}>
-        <Link
-          style={{ fontSize: "large" }}
-          href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
-          rel="noopener noreferrer"
-        >
-          <h2 className={styles.titleHeader}>{item.title}</h2>
-          <div className={styles.imageContainer}>
-            {item.title && item.cloudinary_id && (
+      <BentoCard
+        name={item.title}
+        className={className}
+        //@ts-ignore
+        description={
+          <div>
+            <span>{`Location: ${item.state}, ${item.country}`}</span>
+            <span>{`Closest Airport: ${item.airport_id}`}</span>
+          </div>
+        }
+        background={
+          <BlurFade key={item.id} delay={0.25 + i * 0.05} inView>
+            <div className="relative h-60 w-full">
               <CloudinaryImage
                 puebloTitle={item.title}
                 className={styles.cloudinaryImg}
-                publicId={item.cloudinary_id}
+                publicId={item.cloudinary_id || ""}
               />
-            )}
-          </div>
-        </Link>
-        <div className={styles.textContainer}>
-          <span
-            className={styles.locationText}
-          >{`Location: ${item.state}, ${item.country}`}</span>
-          <span
-            className={styles.locationText}
-          >{`Closest Airport: ${item.airport_id}`}</span>
-        </div>
-      </li>
+            </div>
+          </BlurFade>
+        }
+        Icon={"symbol"}
+        href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
+        cta={"Learn more"}
+        key={i}
+      />
     );
   });
 
   return (
-    <div className={styles.container}>
-      <ul className={styles.unOrderedListContainer}>{puebloData}</ul>
-    </div>
+    <BentoGrid className="columns-2 sm:columns-3 lg:columns-4 gap-4">
+      {puebloData}
+    </BentoGrid>
   );
 };
 
