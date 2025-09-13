@@ -22,9 +22,8 @@
   font-size: 2rem;
 }
 
-.image {
+.imageContainer img {
   width: inherit;
-  border-radius: 12px;
 }
 
 .buttonContainer {

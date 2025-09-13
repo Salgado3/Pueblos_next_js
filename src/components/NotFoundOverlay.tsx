@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { usePueblosContext } from "@/app/context/PueblosContext";
+import LoadingOverlay from "./LoadingOverlay";
 
 import styles from "./notFoundOverlay.module.css";
 
@@ -13,7 +14,10 @@ const NotFoundOverlay = ({
   showButton?: boolean;
 }) => {
   const router = useRouter();
-  const { airportId, setAirportId } = usePueblosContext();
+  const { airportId, setAirportId, isLoading } = usePueblosContext();
+  if (isLoading) {
+    return <LoadingOverlay />;
+  }
   const handleClick = () => {
     if (airportId) {
       setAirportId([]);

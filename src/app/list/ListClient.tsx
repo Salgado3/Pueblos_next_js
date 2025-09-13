@@ -6,6 +6,7 @@ import { Text } from "@mantine/core";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
 import { useMediaQuery } from "@mantine/hooks";
 import LoadingOverlay from "@/components/LoadingOverlay";
+import { BlurFade } from "@/components/magicui/blur-fade";
 
 import styles from "./listClient.module.css";
 
@@ -22,39 +23,41 @@ const ListClient = () => {
   const puebloData = filteredPueblos?.map((item, i) => {
     if (!item?.title) return;
     return (
-      <li className={styles.cardContainer} key={item.title + i}>
-        <Link
-          className={styles.cardContainerLink}
-          href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
-          rel="noopener noreferrer"
-        >
-          <div className={styles.imageContainer}>
-            <CloudinaryImage
-              puebloTitle={item.title}
-              publicId={item.cloudinary_id || ""}
-              className={styles.cloudinaryImage}
-              width={isMobile ? 75 : 100}
-              height={isMobile ? 75 : 100}
-            />
-          </div>
-          <div className={styles.titleContainer}>
-            <h2 className={styles.titleHeader}>{item.title}</h2>
-            <span
-              className={styles.stateText}
-            >{`Location: ${item.state}, ${item.country}`}</span>
-            <span
-              className={styles.airportText}
-            >{`Nearest Airport: ${item.airport_id}`}</span>
-            {!isMobile && (
-              <>
-                <Text lineClamp={1} className={styles.description}>
-                  {item.description}
-                </Text>
-              </>
-            )}
-          </div>
-        </Link>
-      </li>
+      <BlurFade key={item.id} delay={0.05 + i * 0.05} inView>
+        <li className={styles.cardContainer} key={item.title + i}>
+          <Link
+            className={styles.cardContainerLink}
+            href={`/${item.title.toLowerCase().replace(/\s+/g, "_")}`}
+            rel="noopener noreferrer"
+          >
+            <div className={styles.imageContainer}>
+              <CloudinaryImage
+                puebloTitle={item.title}
+                publicId={item.cloudinary_id || ""}
+                className={styles.cloudinaryImage}
+                width={isMobile ? 75 : 100}
+                height={isMobile ? 75 : 100}
+              />
+            </div>
+            <div className={styles.titleContainer}>
+              <h2 className={styles.titleHeader}>{item.title}</h2>
+              <span
+                className={styles.stateText}
+              >{`Location: ${item.state}, ${item.country}`}</span>
+              <span
+                className={styles.airportText}
+              >{`Nearest Airport: ${item.airport_id}`}</span>
+              {!isMobile && (
+                <>
+                  <Text lineClamp={1} className={styles.description}>
+                    {item.description}
+                  </Text>
+                </>
+              )}
+            </div>
+          </Link>
+        </li>
+      </BlurFade>
     );
   });
 

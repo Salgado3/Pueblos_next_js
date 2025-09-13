@@ -12,6 +12,7 @@ import {
   IconHeartPlus,
   IconMapStar,
 } from "@tabler/icons-react";
+import { PixelImage } from "@/components/magicui/pixel-image";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
 import "leaflet/dist/leaflet.css";
@@ -101,11 +102,13 @@ export default function PueblosClient() {
     <div className={styles.cardContainer} key={pueblo.title}>
       <h2 className={styles.titleHeader}>{pueblo.title}</h2>
       <div className={styles.imageContainer}>
-        <CloudinaryImage
-          puebloTitle={pueblo.title || ""}
-          className={styles.image}
-          publicId={pueblo.cloudinary_id || ""}
+        <PixelImage
+          src={pueblo.image || "/imageNotFound.png"}
+          grid="6x4"
+          grayscaleAnimation={true}
+          pixelFadeInDuration={1000}
         />
+
         <div className={styles.buttonContainer}>
           <Button
             variant={isLiked ? "filled" : "outline"}
