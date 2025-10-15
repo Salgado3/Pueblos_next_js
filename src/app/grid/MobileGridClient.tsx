@@ -1,13 +1,12 @@
 "use client";
-import { useMediaQuery } from "@mantine/hooks";
 import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
 import { usePueblosContext } from "../context/PueblosContext";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
+import { BlurFade } from "@/components/magicui/blur-fade";
 
 import styles from "./gridClient.module.css";
-import { BlurFade } from "@/components/magicui/blur-fade";
 
 const MobileGridClient = () => {
   const { filteredPueblos, isLoading } = usePueblosContext();

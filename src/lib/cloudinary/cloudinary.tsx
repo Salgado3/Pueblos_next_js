@@ -51,7 +51,7 @@ const CloudinaryImage = ({
       blurDataURL={blurDataURL}
       onError={() => setHasError(true)}
       loading="lazy"
-      style={{ maxWidth: "100%", maxHeight: "100%" }}
+      style={{ maxWidth: "100%", maxHeight: "100%", borderRadius: "1rem" }}
     />
   );
 };
