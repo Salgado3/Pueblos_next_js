@@ -90,7 +90,7 @@ export default function Navbar({ action }: { action: () => void }) {
           label: { fontSize: "1rem", fontWeight: "600" },
         }}
         leftSection={<IconView360 />}
-        label="Find Pueblos"
+        label="View Pueblos"
       >
         <NavLink
           styles={{
@@ -123,8 +123,8 @@ export default function Navbar({ action }: { action: () => void }) {
           variant="filled"
         />
       </NavLink>
-
-      <NavLink
+      {/* //TODO create setting page */}
+      {/* <NavLink
         styles={{
           label: { fontSize: "1rem", fontWeight: "600" },
         }}
@@ -133,16 +133,20 @@ export default function Navbar({ action }: { action: () => void }) {
         onClick={(e) => handleOnClick({ event: e, path: "/settings" })}
         active={isActive === "/settings"}
         variant="filled"
-      />
+      /> */}
 
       <NavLink
         styles={{
-          label: { fontSize: "1rem", fontWeight: "600" },
+          label: {
+            fontSize: "1rem",
+            fontWeight: "600",
+            marginTop: "4rem",
+            color: "red",
+          },
         }}
         leftSection={<IconLogout2 />}
         label="Log out"
         onClick={handleLogout}
-        style={{ marginTop: "2rem" }}
       />
     </div>
   );
