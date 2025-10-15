@@ -56,13 +56,16 @@ const BentoCard = ({
     {...props}
   >
     <div>{background}</div>
-    <div className="p-4">
-      <div className="pointer-events-none z-10 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10">
+    <div className="p-2">
+      <div
+        className="pointer-events-none z-10 mb-4 flex transform-gpu flex-col gap-1 transition-all duration-300 lg:group-hover:-translate-y-10"
+        style={{ marginLeft: ".5rem" }}
+      >
         {/* <Icon className="h-12 w-12 origin-left transform-gpu text-neutral-700 transition-all duration-300 ease-in-out group-hover:scale-75" /> */}
-        <h3 className="text-xl font-semibold text-neutral-700 dark:text-neutral-300">
+        <h3 className="text-xl font-semibold text-neutral-700 dark:text-neutral-300 m-2">
           {name}
         </h3>
-        <div className="max-w-lg text-neutral-400">{description}</div>
+        <div className="max-w-lg text-neutral-400 m-2">{description}</div>
       </div>
 
       <div
@@ -92,10 +95,10 @@ const BentoCard = ({
       <Button
         variant="link"
         asChild
-        size="sm"
+        size="lg"
         className="pointer-events-auto p-0"
       >
-        <a href={href}>
+        <a href={href} style={{ marginLeft: ".5rem", fontWeight: "600" }}>
           {cta}
           <ArrowRightIcon className="ms-2 h-4 w-4 rtl:rotate-180" />
         </a>

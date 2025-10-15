@@ -7,6 +7,7 @@ import NotFoundOverlay from "@/components/NotFoundOverlay";
 import { useMediaQuery } from "@mantine/hooks";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import { BlurFade } from "@/components/magicui/blur-fade";
+import BackToTopButton from "@/components/BackToTop";
 
 import styles from "./listClient.module.css";
 
@@ -64,6 +65,7 @@ const ListClient = () => {
   return (
     <div className={styles.container}>
       <ul>{puebloData}</ul>
+      <BackToTopButton />
     </div>
   );
 };

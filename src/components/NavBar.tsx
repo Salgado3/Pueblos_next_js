@@ -38,7 +38,7 @@ export default function Navbar({ action }: { action: () => void }) {
   }) => {
     event.preventDefault();
     //@ts-expect-error
-    const newPath = `/${event.target?.innerText.toLowerCase()}`;
+    const newPath = `/${event?.target?.innerText.toLowerCase()}`;
 
     if (isActive === newPath) {
       return;

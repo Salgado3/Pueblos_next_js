@@ -1,6 +1,5 @@
 import { Card, Title } from "@mantine/core";
 import Image from "next/image";
-import { Meteors } from "@/components/magicui/meteors";
 import { TextAnimate } from "@/components/magicui/text-animate";
 
 import styles from "./page.module.css";
@@ -8,7 +7,6 @@ import styles from "./page.module.css";
 const page = () => {
   return (
     <>
-      <Meteors number={20} />
       <Card className={styles.cardContainer}>
         <div className={styles.cardTitleContainer}>
           <Image
