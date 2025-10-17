@@ -100,7 +100,7 @@ export default function LoginPage() {
 
     setIsLoadingStatus({ loading: false, button: "" });
     await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
-    router.replace("/");
+    router.push("/");
   };
 
   return (

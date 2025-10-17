@@ -36,6 +36,7 @@ const MobileGridClient = () => {
                   puebloTitle={item.title}
                   className={styles.cloudinaryImg}
                   publicId={item.cloudinary_id}
+                  borderRadius="1rem"
                 />
               )}
             </div>

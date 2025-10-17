@@ -9,12 +9,14 @@ const CloudinaryImage = ({
   className,
   width = 300,
   height = 300,
+  borderRadius = "0",
 }: {
   puebloTitle: string;
   publicId: string;
   className?: string;
   width?: number;
   height?: number;
+  borderRadius?: string;
 }) => {
   const [hasError, setHasError] = useState(false);
 
@@ -51,7 +53,11 @@ const CloudinaryImage = ({
       blurDataURL={blurDataURL}
       onError={() => setHasError(true)}
       loading="lazy"
-      style={{ maxWidth: "100%", maxHeight: "100%", borderRadius: "1rem" }}
+      style={{
+        maxWidth: "100%",
+        maxHeight: "100%",
+        borderRadius: borderRadius,
+      }}
     />
   );
 };
