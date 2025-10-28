@@ -85,15 +85,10 @@ export default function LoginPage() {
     //TODO fix other error messages when no redirecting
     const { error } = await supabase.auth.signInWithOtp({
       email,
-      options: { emailRedirectTo: "https://queridopueblo.net", captchaToken },
+      options: { emailRedirectTo: "", captchaToken },
     });
 
-    // const { error } = await supabase.auth.signInWithPassword({
-    //   email,
-    //   password,
-    //   options: { captchaToken },
-    // });
-
+  
     if (error) {
       updateErrorNotification(id, "Invalid email, try again");
       setIsLoadingStatus({ loading: false, button: "" });
@@ -137,11 +132,6 @@ export default function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.currentTarget.value)}
         />
-  
-        {/* <Link href={"/signup"} className={styles.link}>
-          <span>sign up here</span>
-          <IconArrowNarrowRight />
-        </Link> */}
         <Turnstile
           options={{ size: "compact" }}
           siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
@@ -161,7 +151,7 @@ export default function LoginPage() {
             disabled={disableButton}
             fullWidth
           >
-            Log in
+            Send Magic Link
           </Button>
         </div>
       </Card>
