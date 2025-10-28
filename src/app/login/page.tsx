@@ -70,11 +70,11 @@ export default function LoginPage() {
   };
 
   const handleLogin = async () => {
-    if (!email || !password) {
+    if (!email) {
       notifications.show({
         withCloseButton: true,
-        title: "Validation Error",
-        message: "Email and password are required.",
+        title: "Error",
+        message: "Valid Email Required",
         color: "red",
         position: "bottom-center",
       });
@@ -83,20 +83,25 @@ export default function LoginPage() {
     const id = showLoadingNotification();
     setIsLoadingStatus({ loading: true, button: "login" });
     //TODO fix other error messages when no redirecting
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error } = await supabase.auth.signInWithOtp({
       email,
-      password,
-      options: { captchaToken },
+      options: { emailRedirectTo: "https://queridopueblo.net", captchaToken },
     });
 
+    // const { error } = await supabase.auth.signInWithPassword({
+    //   email,
+    //   password,
+    //   options: { captchaToken },
+    // });
+
     if (error) {
-      updateErrorNotification(id, "Invalid email or password.");
+      updateErrorNotification(id, "Invalid email, try again");
       setIsLoadingStatus({ loading: false, button: "" });
 
       return;
     }
 
-    updateSuccessNotification(id, "Login successful!", "Redirecting.");
+    updateSuccessNotification(id, "A link to login has been sent to your email", "Please check your spam folder if you do not see it in your inbox");
 
     setIsLoadingStatus({ loading: false, button: "" });
     await queryClient.invalidateQueries({ queryKey: ["pueblos"] });
@@ -132,21 +137,11 @@ export default function LoginPage() {
           value={email}
           onChange={(e) => setEmail(e.currentTarget.value)}
         />
-        <PasswordInput
-          className={styles.passwordInput}
-          id="password"
-          label="Password"
-          description=""
-          placeholder="Please enter password"
-          name="password"
-          required
-          value={password}
-          onChange={(e) => setPassword(e.currentTarget.value)}
-        />
-        <Link href={"/signup"} className={styles.link}>
+  
+        {/* <Link href={"/signup"} className={styles.link}>
           <span>sign up here</span>
           <IconArrowNarrowRight />
-        </Link>
+        </Link> */}
         <Turnstile
           options={{ size: "compact" }}
           siteKey={process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY || ""}
