@@ -1,28 +1,24 @@
 "use client";
-import { PasswordInput, TextInput, Card, Title, Button } from "@mantine/core";
+import { TextInput, Card, Title, Button } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import { useQueryClient } from "@tanstack/react-query";
-import { IconArrowNarrowRight, IconCheck } from "@tabler/icons-react";
+import { IconCheck } from "@tabler/icons-react";
 import { useState } from "react";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/utils/client";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { Turnstile } from "@marsidev/react-turnstile";
 
 import styles from "./page.module.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [disableButton, setDisableButton] = useState(false);
   const [loadingStatus, setIsLoadingStatus] = useState<{
     loading: boolean;
     button: "login" | "signup" | "";
   }>({ loading: false, button: "" });
   const [captchaToken, setCaptchaToken] = useState("");
-  const isFormValid =
-    email.length > 0 && email.includes("@") && password.length > 0;
   const router = useRouter();
   const supabase = createClient();
   const queryClient = useQueryClient();
@@ -88,7 +84,6 @@ export default function LoginPage() {
       options: { emailRedirectTo: "", captchaToken },
     });
 
-  
     if (error) {
       updateErrorNotification(id, "Invalid email, try again");
       setIsLoadingStatus({ loading: false, button: "" });
@@ -96,7 +91,11 @@ export default function LoginPage() {
       return;
     }
 
-    updateSuccessNotification(id, "A link to login has been sent to your email", "Please check your spam folder if you do not see it in your inbox");
+    updateSuccessNotification(
+      id,
+      "A link to login has been sent to your email",
+      "Please check your spam folder if you do not see it in your inbox"
+    );
 
     setIsLoadingStatus({ loading: false, button: "" });
     await queryClient.invalidateQueries({ queryKey: ["pueblos"] });

@@ -104,6 +104,7 @@ export const PixelImage = ({
             transitionDuration: `${pixelFadeInDuration}ms`,
           }}
         >
+          {/* TODO update to next/image */}
           <img
             src={src}
             alt={`Pixel image piece ${index + 1}`}
