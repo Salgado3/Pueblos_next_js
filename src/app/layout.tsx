@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   title: "Pueblos Magicos",
   description: "The Magical Towns of Mexico",
   icons: {
-    icon: "/axolotlPlane2",
+    icon: "/axolotlPlane2.png",
   },
 };
 
