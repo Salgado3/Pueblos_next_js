@@ -51,7 +51,7 @@ const MapClient = () => {
             position={[item.latitude, item.longitude]}
             icon={
               new L.Icon({
-                iconUrl: "/axolotlPinwheel.png",
+                iconUrl: "/pueblosMagicos32px.png",
                 iconSize: [30, 30],
                 iconAnchor: [-10, 20],
               })

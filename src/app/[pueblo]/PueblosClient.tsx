@@ -1,14 +1,12 @@
 "use client";
 import L from "leaflet";
 import { MapContainer, Marker, TileLayer } from "react-leaflet";
-import { Button, List, ThemeIcon } from "@mantine/core";
+import { Button } from "@mantine/core";
 import { useParams } from "next/navigation";
 import usePueblos from "@/lib/reactQuery/usePueblos";
-import CloudinaryImage from "@/lib/cloudinary/cloudinary";
 import Link from "next/link";
 import {
-  IconCircleCheck,
-  IconCircleDashed,
+  IconExternalLink,
   IconHeartPlus,
   IconMapStar,
 } from "@tabler/icons-react";
@@ -17,7 +15,6 @@ import LoadingOverlay from "@/components/LoadingOverlay";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
 import "leaflet/dist/leaflet.css";
 import { createClient } from "@/lib/supabase/utils/client";
-import { useEffect, useState } from "react";
 import { airports } from "@/components/airportData";
 import useUpdateUserPuebloAction from "@/lib/reactQuery/useUpdateUserPuebloAction";
 import { useQuery } from "@tanstack/react-query";
@@ -26,7 +23,7 @@ import ThingsToDoList from "./components/ThingsToDoList";
 
 import styles from "./pueblosClient.module.css";
 
-export default function PueblosClient() {
+const PueblosClient = () => {
   const params = useParams();
   const selectedPueblo = params?.pueblo as string;
   const {
@@ -106,7 +103,7 @@ export default function PueblosClient() {
           src={pueblo.image || "/imageNotFound.png"}
           grid="6x4"
           grayscaleAnimation={true}
-          pixelFadeInDuration={1000}
+          pixelFadeInDuration={1500}
         />
 
         <div className={styles.buttonContainer}>
@@ -164,27 +161,43 @@ export default function PueblosClient() {
             ></Marker>
           </MapContainer>
         )}
-        <Link
-          href={`https://www.google.com/maps/search/?api=1&query=${pueblo.latitude},${pueblo.longitude}`}
-          target="_blank"
-          rel="noopener noreferrer"
+
+        <Button
+          variant="subtle"
+          color="red"
+          className={styles.externalLinkContainer}
+          rightSection={<IconExternalLink />}
         >
-          <p>View on Google Maps</p>
-        </Link>
+          <Link
+            href={`https://www.google.com/maps/search/?api=1&query=${pueblo.latitude},${pueblo.longitude}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>View on Google Maps</span>
+          </Link>
+        </Button>
         {airportFullName && <p>{`Nearest Airport: ${airportFullName}`}</p>}
       </div>
       <p className={styles.description}>{pueblo.description}</p>
       {pueblo.description_url && (
-        <Link
-          className={styles.decriptionURL}
-          href={pueblo.description_url}
-          target="_blank"
-          rel="noopener noreferrer"
+        <Button
+          variant="subtle"
+          color="red"
+          className={styles.externalLinkContainer}
+          rightSection={<IconExternalLink />}
         >
-          Learn More
-        </Link>
+          <Link
+            href={pueblo.description_url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span>Learn more</span>
+          </Link>
+        </Button>
       )}
       <ThingsToDoList puebloId={pueblo.id} />
     </div>
   );
-}
+};
+
+export default PueblosClient;

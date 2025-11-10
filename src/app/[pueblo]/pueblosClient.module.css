@@ -6,11 +6,10 @@
 
 .titleHeader,
 .imageContainer,
-.description,
-.decriptionURL {
+.description {
   align-self: center;
   padding: 1rem 0;
-  width: 35vw;
+  width: 40vw;
 }
 
 .description {
@@ -24,6 +23,11 @@
 
 .imageContainer img {
   width: inherit;
+}
+
+.externalLinkContainer {
+  width: fit-content;
+  align-self: center;
 }
 
 .buttonContainer {
@@ -40,7 +44,7 @@
 }
 
 .map {
-  height: 30vh;
+  height: 50vh;
   width: inherit;
   border-radius: 12px;
   margin: 1rem 0;
@@ -50,7 +54,7 @@
 .thingsToDoList {
   margin-bottom: 0.5rem;
   align-self: center;
-  width: 35vw;
+  width: 40vw;
 }
 
 @media (max-width: 500px) {

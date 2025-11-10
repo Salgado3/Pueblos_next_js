@@ -1,10 +1,10 @@
 import usePueblosDetails from "@/lib/reactQuery/usePueblosDetails";
 import { List, ThemeIcon } from "@mantine/core";
-import { IconCircleCheck, IconCircleDashed } from "@tabler/icons-react";
-
-import styles from "./thingsToDoList.module.css";
+import { IconCircleCheck } from "@tabler/icons-react";
 import LoadingOverlay from "@/components/LoadingOverlay";
 import Link from "next/link";
+
+import styles from "./thingsToDoList.module.css";
 
 const ThingsToDoList = ({ puebloId }: { puebloId: string }) => {
   const { data, isLoading, error } = usePueblosDetails([puebloId]);
@@ -15,7 +15,7 @@ const ThingsToDoList = ({ puebloId }: { puebloId: string }) => {
   const listItems = data?.map((item, i) => {
     if (!item?.title) return;
     return (
-      <List.Item key={item.id}>
+      <List.Item key={item.id + i}>
         <Link
           href={item.url_link || "/"}
           target="_blank"
