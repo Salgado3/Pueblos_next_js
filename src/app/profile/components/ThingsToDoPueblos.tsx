@@ -1,6 +1,3 @@
-import ThingsToDoList from "@/app/[pueblo]/components/ThingsToDoList";
-import { usePueblosContext } from "@/app/context/PueblosContext";
-import NotFoundOverlay from "@/components/NotFoundOverlay";
 import useFetchUserActions from "@/lib/reactQuery/useFetchUserActions";
 import usePueblosDetails from "@/lib/reactQuery/usePueblosDetails";
 import { createClient } from "@/lib/supabase/utils/client";

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { QueryProvider } from "./query-provider";
-import { createTheme, MantineProvider } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { Notifications } from "@mantine/notifications";
 import AppLayout from "@/components/AppLayout";
 
@@ -29,10 +29,6 @@ export const metadata: Metadata = {
     icon: "/axolotlPlane2.png",
   },
 };
-
-const theme = createTheme({
-  /** Put your mantine theme override here */
-});
 
 const RootLayout = async ({
   children,

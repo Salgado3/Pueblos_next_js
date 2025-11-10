@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Drawer, Title } from "@mantine/core";
+import { Button, Drawer } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import FilterByStateSearch from "./FilterByStateSearch";
 import { FilterByAirportSearch } from "./FilterByAirportSearch";

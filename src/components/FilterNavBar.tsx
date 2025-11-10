@@ -1,6 +1,5 @@
 "use client";
 
-import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import LoadingOverlay from "./LoadingOverlay";
 import { usePueblosContext } from "@/app/context/PueblosContext";
 import { Button, NavLink } from "@mantine/core";
@@ -11,8 +10,6 @@ import FilterByStateSearch from "./FilterByStateSearch";
 import styles from "./filterNavBar.module.css";
 
 const FilterNavBar = () => {
-  const isMobile = useMediaQuery("(max-width: 600px)", true);
-  const [opened, { toggle }] = useDisclosure();
   const { setAirportId, setAirportName, setstateArray, isLoading } =
     usePueblosContext();
 

@@ -6,24 +6,21 @@ import {
   IconHeartPlus,
   IconMapStar,
 } from "@tabler/icons-react";
-import ProgressRing from "./components/ProgressRing";
 import LikedPueblos from "./components/LikedPueblos";
-import useFetchUserActions from "@/lib/reactQuery/useFetchUserActions";
 import { useQuery } from "@tanstack/react-query";
 import VisitedPueblos from "./components/VisitedPueblos";
 import NotFoundOverlay from "@/components/NotFoundOverlay";
-import { Tabs, Title } from "@mantine/core";
+import { Tabs } from "@mantine/core";
 
 import ThingsToDoPueblos from "./components/ThingsToDoPueblos";
-import styles from "./profileClient.module.css";
 
 const ProfileClient = () => {
   const supabase = createClient();
   const [hasMounted, setHasMounted] = useState(false);
-  const [visited, setVisited] = useState(0);
+  // const [visited, setVisited] = useState(0);
   const {
     data: authData,
-    isLoading: authIsLoading,
+    // isLoading: authIsLoading,
     error,
   } = useQuery({
     queryKey: ["user"],
@@ -36,17 +33,17 @@ const ProfileClient = () => {
     staleTime: 1000 * 60 * 5, // Cache the user for 5 minutes
   });
 
-  const {
-    data: userActionsData,
-    isLoading: userActionsIsLoading,
-    error: userActionsError,
-  } = useFetchUserActions(authData?.user?.id || "");
+  // const {
+  //   data: userActionsData,
+  //   isLoading: userActionsIsLoading,
+  //   error: userActionsError,
+  // } = useFetchUserActions(authData?.user?.id || "");
 
   useEffect(() => {
     setHasMounted(true);
     const getUserLikes = async () => {
       //TODO fix
-      setVisited(0);
+      // setVisited(0);
     };
 
     getUserLikes();
@@ -55,10 +52,10 @@ const ProfileClient = () => {
   if (error && authData?.user !== null) throw error;
   if (!authData?.user?.id) return null;
 
-  if (userActionsError) throw new Error(userActionsError.message);
-  const visitedCount = userActionsData?.filter(
-    (item) => item.action_type === "visited"
-  ).length;
+  // if (userActionsError) throw new Error(userActionsError.message);
+  // const visitedCount = userActionsData?.filter(
+  //   (item) => item.action_type === "visited"
+  // ).length;
 
   if (!hasMounted) return null;
   return (

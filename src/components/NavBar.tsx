@@ -6,11 +6,9 @@ import {
   IconMap2,
   IconLayoutGrid,
   IconListDetails,
-  IconSettingsShare,
   IconLogout2,
   IconUserCircle,
   IconView360,
-  IconFilterPin,
   IconAdjustmentsAlt,
 } from "@tabler/icons-react";
 import { useEffect, useState } from "react";

@@ -42,7 +42,7 @@ export const PixelImage = ({
 
   const MIN_GRID = 1;
   const MAX_GRID = 16;
-
+  //@ts-expect-error
   const { rows, cols } = useMemo(() => {
     const isValidGrid = (grid?: Grid) => {
       if (!grid) return false;

@@ -1,5 +1,5 @@
 "use client";
-import { AppShell, Burger, Title, useComputedColorScheme } from "@mantine/core";
+import { AppShell, Burger, Title } from "@mantine/core";
 import { useDisclosure, useMediaQuery } from "@mantine/hooks";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
@@ -21,9 +21,6 @@ const AppLayout = ({
   const isUserLoggedIn = pathname !== "/login" && pathname !== "/signup";
   const isPuebloView =
     pathname === "/grid" || pathname === "/map" || pathname === "/list";
-  const computedColorScheme = useComputedColorScheme("light", {
-    getInitialValueInEffect: true,
-  });
 
   return (
     <AppShell

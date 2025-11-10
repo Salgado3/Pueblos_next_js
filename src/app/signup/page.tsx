@@ -1,11 +1,10 @@
 "use client";
 import { useState } from "react";
-import { Button, Card, PasswordInput, TextInput, Title } from "@mantine/core";
+import { Button, Card, PasswordInput, TextInput } from "@mantine/core";
 import { notifications } from "@mantine/notifications";
 import Link from "next/link";
 import Image from "next/image";
 import { createClient } from "@/lib/supabase/utils/client";
-import { useRouter } from "next/navigation";
 import { IconArrowNarrowRight, IconCheck } from "@tabler/icons-react";
 import { Turnstile } from "@marsidev/react-turnstile";
 
@@ -20,15 +19,8 @@ const SignupPage = () => {
   const [captchaToken, setCaptchaToken] = useState("");
   const [disableButton, setDisableButton] = useState(false);
 
-  const router = useRouter();
   const supabase = createClient();
 
-  const isFormValid =
-    username.length > 0 &&
-    email.length > 0 &&
-    email.includes("@") &&
-    password.length > 0 &&
-    password === confirmPassword;
   const showLoadingNotification = () => {
     return notifications.show({
       loading: true,

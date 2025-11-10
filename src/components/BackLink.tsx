@@ -2,7 +2,7 @@
 import { Button } from "@mantine/core";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { IconArrowNarrowLeft, IconCheck } from "@tabler/icons-react";
+import { IconArrowNarrowLeft } from "@tabler/icons-react";
 
 const BackLink = () => {
   const router = useRouter();

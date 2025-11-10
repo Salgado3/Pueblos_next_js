@@ -1,5 +1,4 @@
 "use client";
-import { useState } from "react";
 import { MultiSelect } from "@mantine/core";
 import { airports } from "./airportData";
 import { usePueblosContext } from "@/app/context/PueblosContext";
