@@ -46,7 +46,7 @@ export default function LoginPage() {
       message: message,
       icon: <IconCheck size={18} />,
       loading: false,
-      autoClose: 4000,
+      autoClose: false,
       withCloseButton: true,
       position: "bottom-center",
     });
@@ -94,7 +94,7 @@ export default function LoginPage() {
     updateSuccessNotification(
       id,
       "A link to login has been sent to your email",
-      "Please check your spam folder if you do not see it in your inbox"
+      "Please check your spam folder if you do not see it in your inbox <3"
     );
 
     setIsLoadingStatus({ loading: false, button: "" });

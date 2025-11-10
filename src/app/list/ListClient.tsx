@@ -38,7 +38,7 @@ const ListClient = () => {
                 className={styles.cloudinaryImage}
                 width={isMobile ? 75 : 100}
                 height={isMobile ? 75 : 100}
-                borderRadius={isMobile ? "1rem" : "0"}
+                borderRadius={isMobile ? "1rem" : "15px"}
               />
             </div>
             <div className={styles.titleContainer}>
