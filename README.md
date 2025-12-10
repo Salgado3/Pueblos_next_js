@@ -35,14 +35,6 @@ On the technical side, I did get a better feel for the MVC model. I had to creat
 
 <a id="readme-top"></a>
 
-<!--
-*** Thanks for checking out the Best-README-Template. If you have a suggestion
-*** that would make this better, please fork the repo and create a pull request
-*** or simply open an issue with the tag "enhancement".
-*** Don't forget to give the project a star!
-*** Thanks again! Now go create something AMAZING! :D
--->
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -103,7 +95,9 @@ Creating this site to highlight the small towns that often go underrepresented. 
 
 ## Roadmap
 
-- [ ] Create things to do for each town (0/132)
+- [ ] Create things to do for each town (5/132)
+- [ ] Create Submit a Pueblo workflow
+- [ ] Create Dashboard
 - [ ] Add Additional Pueblos
 - [ ] Multi-language Support
   - [ ] Spanish
@@ -113,6 +107,8 @@ See the [open issues](https://github.com/Salgado3/Pueblos_next_js/issues) for a 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## Contact
+
+<a href="https://github.com/Salgado3/Pueblos_next_js/issues/new?template=bug_report.md">Report Bug Using this Link</a>
 
 <!-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com -->
 
