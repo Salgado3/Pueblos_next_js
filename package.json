@@ -29,7 +29,7 @@
     "lucide-react": "^0.544.0",
     "motion": "^12.23.12",
     "next": "^15.5.8",
-    "react": "^19.2.1",
+    "react": "^19.2.2",
     "react-dom": "^19.2.1",
     "react-leaflet": "^5.0.0-rc.2",
     "tailwind-merge": "^3.3.1",
